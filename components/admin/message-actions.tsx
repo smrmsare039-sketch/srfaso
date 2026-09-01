@@ -1,0 +1,84 @@
+'use client'
+
+import { useRouter } from 'next/navigation'
+import { useState, useTransition } from 'react'
+import { Trash2 } from 'lucide-react'
+import { useToast } from '@/components/toast'
+import { deleteMessage, updateMessageStatus } from '@/lib/actions/admin'
+import { MESSAGE_STATUS_LABELS, type MessageStatus } from '@/lib/types'
+import { cx } from '@/lib/utils'
+
+export function MessageActions({ id, status }: { id: string; status: MessageStatus }) {
+  const router = useRouter()
+  const [pending, startTransition] = useTransition()
+  const [confirming, setConfirming] = useState(false)
+  const toast = useToast()
+
+  return (
+    <div className="flex flex-wrap items-center gap-1.5">
+      {(Object.keys(MESSAGE_STATUS_LABELS) as MessageStatus[]).map((key) => (
+        <button
+          key={key}
+          type="button"
+          disabled={pending || key === status}
+          onClick={() =>
+            startTransition(async () => {
+              await updateMessageStatus(id, key)
+              toast.success('Message mis à jour', {
+                key: 'message-admin',
+                description: `Nouveau statut : ${MESSAGE_STATUS_LABELS[key]}.`,
+              })
+              router.refresh()
+            })
+          }
+          className={cx(
+            'rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors',
+            key === status
+              ? 'bg-ink-900 text-white'
+              : 'border border-ink-200 text-ink-600 hover:border-ink-400'
+          )}
+        >
+          {MESSAGE_STATUS_LABELS[key]}
+        </button>
+      ))}
+
+      {confirming ? (
+        <>
+          <button
+            type="button"
+            disabled={pending}
+            onClick={() =>
+              startTransition(async () => {
+                await deleteMessage(id)
+                toast.success('Message supprimé', {
+                  key: 'message-admin',
+                  description: 'Il a été retiré de la boîte de réception.',
+                })
+                router.refresh()
+              })
+            }
+            className="rounded-lg bg-brand-600 px-3 py-1.5 text-xs font-bold text-white"
+          >
+            Confirmer
+          </button>
+          <button
+            type="button"
+            onClick={() => setConfirming(false)}
+            className="rounded-lg border border-ink-200 px-3 py-1.5 text-xs font-semibold text-ink-600"
+          >
+            Annuler
+          </button>
+        </>
+      ) : (
+        <button
+          type="button"
+          onClick={() => setConfirming(true)}
+          title="Supprimer"
+          className="grid size-8 place-items-center rounded-lg border border-ink-200 text-ink-400 hover:border-brand-400 hover:text-brand-600"
+        >
+          <Trash2 className="size-3.5" />
+        </button>
+      )}
+    </div>
+  )
+}
