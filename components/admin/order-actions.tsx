@@ -77,8 +77,21 @@ export function OrderActions({
           startTransition(async () => {
             const parsedFee = Math.max(0, Number(fee) || 0)
             try {
-              await updateOrderDelivery(orderId, parsedFee)
-              await updateOrderStatus(orderId, value, note)
+              const deliveryResult = await updateOrderDelivery(orderId, parsedFee)
+              const statusResult = await updateOrderStatus(orderId, value, note)
+              const failure = !deliveryResult.ok
+                ? deliveryResult
+                : !statusResult.ok
+                  ? statusResult
+                  : null
+              if (failure) {
+                toast.error('Mise à jour impossible', {
+                  key: 'commande-admin',
+                  description: failure.error,
+                })
+                router.refresh()
+                return
+              }
             } catch {
               toast.error('Mise à jour impossible', {
                 key: 'commande-admin',
@@ -106,7 +119,14 @@ export function OrderActions({
             disabled={pending}
             onClick={() =>
               startTransition(async () => {
-                await deleteOrder(orderId)
+                const result = await deleteOrder(orderId)
+                if (!result.ok) {
+                  toast.error('Suppression impossible', {
+                    key: 'commande-admin',
+                    description: result.error,
+                  })
+                  return
+                }
                 toast.success('Commande supprimée', {
                   key: 'commande-admin',
                   description: 'Elle n’apparaît plus dans la liste des commandes.',

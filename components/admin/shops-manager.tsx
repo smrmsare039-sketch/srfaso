@@ -97,11 +97,18 @@ export function ShopsManager({ shops }: { shops: Shop[] }) {
                     disabled={pending}
                     onClick={() =>
                       startTransition(async () => {
-                        await deleteShop(shop.id)
-                        toast.success('Boutique supprimée', {
-                          key: 'boutique',
-                          description: `« ${shop.name} » n’apparaît plus sur le site.`,
-                        })
+                        const result = await deleteShop(shop.id)
+                        if (result.ok) {
+                          toast.success('Boutique supprimée', {
+                            key: 'boutique',
+                            description: `« ${shop.name} » n’apparaît plus sur le site.`,
+                          })
+                        } else {
+                          toast.error('Suppression impossible', {
+                            key: 'boutique',
+                            description: result.error,
+                          })
+                        }
                         setConfirmId(null)
                         router.refresh()
                       })

@@ -114,11 +114,18 @@ export function BrandsManager({
                     disabled={pending}
                     onClick={() =>
                       startTransition(async () => {
-                        await deletePartnerBrand(brand.id)
-                        toast.success('Marque supprimée', {
-                          key: 'marque',
-                          description: `« ${brand.name} » n’apparaît plus sur la page d’accueil.`,
-                        })
+                        const result = await deletePartnerBrand(brand.id)
+                        if (result.ok) {
+                          toast.success('Marque supprimée', {
+                            key: 'marque',
+                            description: `« ${brand.name} » n’apparaît plus sur la page d’accueil.`,
+                          })
+                        } else {
+                          toast.error('Suppression impossible', {
+                            key: 'marque',
+                            description: result.error,
+                          })
+                        }
                         setConfirmId(null)
                         router.refresh()
                       })

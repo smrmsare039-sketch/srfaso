@@ -68,12 +68,19 @@ export function ProductImagesManager({
                   disabled={pending || img.is_primary}
                   onClick={() =>
                     startTransition(async () => {
-                      await setPrimaryImage(img.id, productId)
-                      toast.success('Image principale définie', {
-                        key: 'images-produit',
-                        image: img.url,
-                        description: 'Elle est utilisée dans les listes et les partages.',
-                      })
+                      const result = await setPrimaryImage(img.id, productId)
+                      if (result.ok) {
+                        toast.success('Image principale définie', {
+                          key: 'images-produit',
+                          image: img.url,
+                          description: 'Elle est utilisée dans les listes et les partages.',
+                        })
+                      } else {
+                        toast.error('Modification impossible', {
+                          key: 'images-produit',
+                          description: result.error,
+                        })
+                      }
                       router.refresh()
                     })
                   }
@@ -87,7 +94,13 @@ export function ProductImagesManager({
                   disabled={pending || index === 0}
                   onClick={() =>
                     startTransition(async () => {
-                      await moveProductImage(img.id, productId, -1)
+                      const result = await moveProductImage(img.id, productId, -1)
+                      if (!result.ok) {
+                        toast.error('Déplacement impossible', {
+                          key: 'images-produit',
+                          description: result.error,
+                        })
+                      }
                       router.refresh()
                     })
                   }
@@ -101,7 +114,13 @@ export function ProductImagesManager({
                   disabled={pending || index === images.length - 1}
                   onClick={() =>
                     startTransition(async () => {
-                      await moveProductImage(img.id, productId, 1)
+                      const result = await moveProductImage(img.id, productId, 1)
+                      if (!result.ok) {
+                        toast.error('Déplacement impossible', {
+                          key: 'images-produit',
+                          description: result.error,
+                        })
+                      }
                       router.refresh()
                     })
                   }
@@ -115,11 +134,18 @@ export function ProductImagesManager({
                   disabled={pending}
                   onClick={() =>
                     startTransition(async () => {
-                      await deleteProductImage(img.id)
-                      toast.success('Image supprimée', {
-                        key: 'images-produit',
-                        description: 'Elle n’apparaît plus sur la fiche produit.',
-                      })
+                      const result = await deleteProductImage(img.id)
+                      if (result.ok) {
+                        toast.success('Image supprimée', {
+                          key: 'images-produit',
+                          description: 'Elle n’apparaît plus sur la fiche produit.',
+                        })
+                      } else {
+                        toast.error('Suppression impossible', {
+                          key: 'images-produit',
+                          description: result.error,
+                        })
+                      }
                       router.refresh()
                     })
                   }
@@ -140,7 +166,13 @@ export function ProductImagesManager({
           multiple
           label={images.length === 0 ? 'Ajouter des images' : 'Ajouter d’autres images'}
           onUploaded={async (url, fileName) => {
-            await addProductImage(productId, url, `${productName} — ${fileName}`)
+            const result = await addProductImage(productId, url, `${productName} — ${fileName}`)
+            if (!result.ok) {
+              toast.error('Image non enregistrée', {
+                key: 'images-produit',
+                description: result.error,
+              })
+            }
             router.refresh()
           }}
         />

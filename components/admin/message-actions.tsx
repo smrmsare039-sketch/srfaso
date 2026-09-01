@@ -23,11 +23,18 @@ export function MessageActions({ id, status }: { id: string; status: MessageStat
           disabled={pending || key === status}
           onClick={() =>
             startTransition(async () => {
-              await updateMessageStatus(id, key)
-              toast.success('Message mis à jour', {
-                key: 'message-admin',
-                description: `Nouveau statut : ${MESSAGE_STATUS_LABELS[key]}.`,
-              })
+              const result = await updateMessageStatus(id, key)
+              if (result.ok) {
+                toast.success('Message mis à jour', {
+                  key: 'message-admin',
+                  description: `Nouveau statut : ${MESSAGE_STATUS_LABELS[key]}.`,
+                })
+              } else {
+                toast.error('Mise à jour impossible', {
+                  key: 'message-admin',
+                  description: result.error,
+                })
+              }
               router.refresh()
             })
           }
@@ -49,11 +56,18 @@ export function MessageActions({ id, status }: { id: string; status: MessageStat
             disabled={pending}
             onClick={() =>
               startTransition(async () => {
-                await deleteMessage(id)
-                toast.success('Message supprimé', {
-                  key: 'message-admin',
-                  description: 'Il a été retiré de la boîte de réception.',
-                })
+                const result = await deleteMessage(id)
+                if (result.ok) {
+                  toast.success('Message supprimé', {
+                    key: 'message-admin',
+                    description: 'Il a été retiré de la boîte de réception.',
+                  })
+                } else {
+                  toast.error('Suppression impossible', {
+                    key: 'message-admin',
+                    description: result.error,
+                  })
+                }
                 router.refresh()
               })
             }

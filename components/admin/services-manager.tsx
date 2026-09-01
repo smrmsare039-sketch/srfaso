@@ -91,11 +91,18 @@ export function ServicesManager({ services }: { services: Service[] }) {
                     disabled={pending}
                     onClick={() =>
                       startTransition(async () => {
-                        await deleteService(service.id)
-                        toast.success('Prestation supprimée', {
-                          key: 'prestation',
-                          description: `« ${service.title} » n’apparaît plus sur le site.`,
-                        })
+                        const result = await deleteService(service.id)
+                        if (result.ok) {
+                          toast.success('Prestation supprimée', {
+                            key: 'prestation',
+                            description: `« ${service.title} » n’apparaît plus sur le site.`,
+                          })
+                        } else {
+                          toast.error('Suppression impossible', {
+                            key: 'prestation',
+                            description: result.error,
+                          })
+                        }
                         setConfirmId(null)
                         router.refresh()
                       })

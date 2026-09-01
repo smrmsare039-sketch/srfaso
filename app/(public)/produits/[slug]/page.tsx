@@ -7,6 +7,7 @@ import { Breadcrumbs } from '@/components/breadcrumbs'
 import { ProductCard } from '@/components/product-card'
 import { ProductGallery } from '@/components/product-gallery'
 import { ProductPurchase } from '@/components/product-purchase'
+import { ProductViewTracker } from '@/components/product-view-tracker'
 import { SectionHeading } from '@/components/section-heading'
 import { getProductBySlug, getRelatedProducts, getSettings } from '@/lib/data'
 import { discountPercent, formatPrice, truncate } from '@/lib/utils'
@@ -83,6 +84,7 @@ export default async function ProductPage(props: PageProps<'/produits/[slug]'>) 
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <ProductViewTracker slug={product.slug} />
 
       <Breadcrumbs
         items={[

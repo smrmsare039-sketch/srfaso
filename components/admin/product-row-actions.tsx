@@ -49,16 +49,23 @@ export function ProductRowActions({
         disabled={pending}
         onClick={() =>
           startTransition(async () => {
-            await toggleProductActive(id, !isActive)
-            toast.success(isActive ? 'Produit masqué' : 'Produit publié', {
-              key: `produit-${id}`,
-              description: isActive
-                ? `« ${name} » n’apparaît plus sur le site.`
-                : `« ${name} » est de nouveau visible sur le site.`,
-              actions: isActive
-                ? undefined
-                : [{ label: 'Voir la fiche', href: `/produits/${slug}`, tone: 'neutral' }],
-            })
+            const result = await toggleProductActive(id, !isActive)
+            if (result.ok) {
+              toast.success(isActive ? 'Produit masqué' : 'Produit publié', {
+                key: `produit-${id}`,
+                description: isActive
+                  ? `« ${name} » n’apparaît plus sur le site.`
+                  : `« ${name} » est de nouveau visible sur le site.`,
+                actions: isActive
+                  ? undefined
+                  : [{ label: 'Voir la fiche', href: `/produits/${slug}`, tone: 'neutral' }],
+              })
+            } else {
+              toast.error('Modification impossible', {
+                key: `produit-${id}`,
+                description: result.error,
+              })
+            }
             router.refresh()
           })
         }
@@ -101,11 +108,18 @@ export function ProductRowActions({
             disabled={pending}
             onClick={() =>
               startTransition(async () => {
-                await deleteProduct(id)
-                toast.success('Produit supprimé', {
-                  key: `produit-${id}`,
-                  description: `« ${name} » a été retiré du catalogue.`,
-                })
+                const result = await deleteProduct(id)
+                if (result.ok) {
+                  toast.success('Produit supprimé', {
+                    key: `produit-${id}`,
+                    description: `« ${name} » a été retiré du catalogue.`,
+                  })
+                } else {
+                  toast.error('Suppression impossible', {
+                    key: `produit-${id}`,
+                    description: result.error,
+                  })
+                }
                 setConfirming(false)
                 router.refresh()
               })

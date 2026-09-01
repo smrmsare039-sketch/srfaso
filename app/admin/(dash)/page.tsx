@@ -107,8 +107,8 @@ export default async function AdminDashboard() {
     supabase
       .from('products')
       .select('id,name,slug,views,sales_count,stock')
-      .order('sales_count', { ascending: false })
       .order('views', { ascending: false })
+      .order('sales_count', { ascending: false })
       .limit(6),
     // Deux périodes d'un coup : la courante et la précédente pour la comparaison.
     supabase
@@ -343,18 +343,18 @@ export default async function AdminDashboard() {
           </Link>
         </Card>
 
-        <Card title="Produits les plus vendus" description="Ventes cumulées">
+        <Card title="Produits les plus consultés" description="Vues cumulées sur les fiches">
           {(topProducts.data ?? []).length === 0 ? (
             <EmptyState title="Aucun produit." />
           ) : (
             <BarList
               bars={(topProducts.data ?? []).map((p) => ({
                 label: p.name,
-                value: Number(p.sales_count ?? 0),
-                hint: `${formatNumber(p.views)} vues${p.stock <= 0 ? ' · en rupture' : ''}`,
+                value: Number(p.views ?? 0),
+                hint: `${formatNumber(p.sales_count)} vendus${p.stock <= 0 ? ' · en rupture' : ''}`,
               }))}
               format="number"
-              suffix=" vendus"
+              suffix=" vues"
               color="#1baf7a"
             />
           )}
