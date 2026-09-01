@@ -144,7 +144,7 @@ export default async function HomePage() {
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href="/produits"
-                className={`inline-flex h-12 items-center gap-2 rounded-full px-7 text-[0.9375rem] font-bold transition-colors ${heroTheme.cta}`}
+                className={`inline-flex h-12 items-center gap-2 rounded-lg px-7 text-[0.9375rem] font-bold transition-colors ${heroTheme.cta}`}
               >
                 Voir les produits
                 <ArrowRight className="size-4" aria-hidden />
@@ -154,7 +154,7 @@ export default async function HomePage() {
                   href={whatsappLink(settings.whatsapp, settings.whatsapp_message ?? undefined)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-12 items-center gap-2 rounded-full bg-[#25D366] px-7 text-[0.9375rem] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90"
+                  className="inline-flex h-12 items-center gap-2 rounded-lg bg-[#25D366] px-7 text-[0.9375rem] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90"
                 >
                   Commander sur
                   <WhatsAppIcon className="size-5" />
