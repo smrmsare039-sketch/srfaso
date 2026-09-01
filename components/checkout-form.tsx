@@ -11,7 +11,7 @@ import { formatPrice, whatsappLink } from '@/lib/utils'
 import { WhatsAppIcon } from '@/components/whatsapp-icon'
 
 const field =
-  'h-12 w-full rounded-xl border border-ink-200 bg-white px-4 text-[0.9375rem] text-ink-900 outline-none transition-colors placeholder:text-ink-400 focus:border-brand-500'
+  'h-12 w-full rounded-xl border border-ink-200 bg-white px-4 text-base text-ink-900 outline-none transition-colors placeholder:text-ink-400 focus:border-brand-500 sm:text-[0.9375rem]'
 const label = 'mb-1.5 block text-sm font-semibold text-ink-800'
 
 export type AccountDefaults = { fullName: string; email: string; phone: string }
@@ -49,7 +49,7 @@ export function CheckoutForm({
     ].join('\n')
 
     return (
-      <div className="mx-auto max-w-xl rounded-3xl border border-green-200 bg-green-50 p-8 text-center sm:p-12">
+      <div className="mx-auto max-w-xl rounded-3xl border border-green-200 bg-green-50 p-6 text-center sm:p-12">
         <CheckCircle2 className="mx-auto size-14 text-green-600" strokeWidth={1.4} />
         <h2 className="mt-5 text-2xl font-extrabold text-green-900">Commande enregistrée !</h2>
         <p className="mt-3 text-green-800">
@@ -88,7 +88,7 @@ export function CheckoutForm({
 
   if (lines.length === 0) {
     return (
-      <div className="rounded-3xl border border-dashed border-ink-200 py-20 text-center">
+      <div className="rounded-3xl border border-dashed border-ink-200 py-14 text-center sm:py-20">
         <ShoppingBag className="mx-auto size-12 text-ink-300" strokeWidth={1.2} />
         <p className="mt-4 text-lg font-bold text-ink-900">Votre panier est vide.</p>
         <Link
@@ -126,9 +126,41 @@ export function CheckoutForm({
           }
         })
       }}
-      className="grid gap-8 lg:grid-cols-[1.5fr_1fr]"
+      className="grid gap-5 lg:grid-cols-[1.5fr_1fr] lg:gap-8"
     >
-      <div className="rounded-2xl border border-ink-100 p-6 sm:p-8">
+      {/* Mobile : récapitulatif replié en tête, pour voir le panier avant de saisir. */}
+      <details className="rounded-2xl border border-ink-100 lg:hidden">
+        <summary className="flex cursor-pointer list-none items-center justify-between gap-3 p-4">
+          <span className="text-sm font-semibold text-ink-900">
+            {lines.length} article{lines.length > 1 ? 's' : ''} — voir le détail
+          </span>
+          <span className="font-display text-lg font-extrabold whitespace-nowrap text-brand-600">
+            {formatPrice(subtotal)}
+          </span>
+        </summary>
+        <ul className="space-y-3 border-t border-ink-100 p-4">
+          {lines.map((l) => (
+            <li key={l.productId} className="flex items-center gap-3">
+              <span className="relative size-11 shrink-0 overflow-hidden rounded-lg border border-ink-100 bg-ink-50">
+                {l.image ? (
+                  <Image src={l.image} alt="" fill sizes="44px" className="object-cover" />
+                ) : null}
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="block truncate text-sm font-medium text-ink-900">{l.name}</span>
+                <span className="block text-xs text-ink-400">
+                  {l.quantity} × {formatPrice(l.price)}
+                </span>
+              </span>
+              <span className="shrink-0 text-sm font-bold text-ink-900">
+                {formatPrice(l.price * l.quantity)}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </details>
+
+      <div className="rounded-2xl border border-ink-100 p-4 sm:p-8">
         <h2 className="text-lg font-bold text-ink-900">Vos coordonnées</h2>
         <p className="mt-1.5 mb-6 text-sm text-ink-500">
           {account
@@ -146,6 +178,8 @@ export function CheckoutForm({
                 id="last_name"
                 name="last_name"
                 required
+                autoComplete="family-name"
+                enterKeyHint="next"
                 maxLength={80}
                 defaultValue={defaultLastName}
                 className={field}
@@ -159,6 +193,8 @@ export function CheckoutForm({
                 id="first_name"
                 name="first_name"
                 required
+                autoComplete="given-name"
+                enterKeyHint="next"
                 maxLength={80}
                 defaultValue={defaultFirstName}
                 className={field}
@@ -176,6 +212,8 @@ export function CheckoutForm({
               type="tel"
               required
               inputMode="tel"
+              autoComplete="tel"
+              enterKeyHint="next"
               placeholder="+226 70 00 00 00"
               defaultValue={account?.phone ?? ''}
               className={field}
@@ -194,6 +232,7 @@ export function CheckoutForm({
                 id="city"
                 name="city"
                 required
+                autoComplete="address-level2"
                 maxLength={80}
                 placeholder="Ouagadougou"
                 className={field}
@@ -203,7 +242,13 @@ export function CheckoutForm({
               <label htmlFor="district" className={label}>
                 Quartier / adresse <span className="font-normal text-ink-400">(facultatif)</span>
               </label>
-              <input id="district" name="district" maxLength={160} className={field} />
+              <input
+                id="district"
+                name="district"
+                autoComplete="address-line1"
+                maxLength={160}
+                className={field}
+              />
             </div>
           </div>
 
@@ -215,6 +260,8 @@ export function CheckoutForm({
               id="email"
               name="email"
               type="email"
+              autoComplete="email"
+              inputMode="email"
               defaultValue={account?.email ?? ''}
               className={field}
             />
@@ -237,10 +284,10 @@ export function CheckoutForm({
       </div>
 
       <aside className="lg:sticky lg:top-6 lg:self-start">
-        <div className="rounded-2xl border border-ink-100 p-6">
-          <h2 className="text-lg font-bold text-ink-900">Votre commande</h2>
+        <div className="rounded-2xl border border-ink-100 p-4 sm:p-6">
+          <h2 className="hidden text-lg font-bold text-ink-900 lg:block">Votre commande</h2>
 
-          <ul className="mt-5 space-y-3">
+          <ul className="mt-5 hidden space-y-3 lg:block">
             {lines.map((l) => (
               <li key={l.productId} className="flex items-center gap-3">
                 <span className="relative size-12 shrink-0 overflow-hidden rounded-lg border border-ink-100 bg-ink-50">
@@ -261,7 +308,7 @@ export function CheckoutForm({
             ))}
           </ul>
 
-          <div className="mt-5 flex items-baseline justify-between border-t border-ink-100 pt-5">
+          <div className="flex items-baseline justify-between border-b border-ink-100 pb-4 lg:mt-5 lg:border-t lg:border-b-0 lg:pt-5 lg:pb-0">
             <span className="font-bold text-ink-900">Total</span>
             <span className="font-display text-2xl font-extrabold text-brand-600">
               {formatPrice(subtotal)}
@@ -274,7 +321,7 @@ export function CheckoutForm({
           <button
             type="submit"
             disabled={pending}
-            className="mt-6 flex h-12 w-full items-center justify-center rounded-xl bg-brand-600 text-[0.9375rem] font-bold text-white transition-colors hover:bg-brand-700 disabled:opacity-60"
+            className="mt-5 flex h-13 w-full items-center justify-center rounded-xl bg-brand-600 text-[0.9375rem] font-bold text-white transition-colors hover:bg-brand-700 disabled:opacity-60 sm:h-12"
           >
             {pending ? 'Envoi…' : 'Valider ma commande'}
           </button>

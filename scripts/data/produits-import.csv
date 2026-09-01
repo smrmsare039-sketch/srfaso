@@ -1,0 +1,106 @@
+nom,sku,code_barres,unite,prix_achat,prix_vente,stock_min,stock_entrant,description,actif,categorie,marque
+Scooter MIO UBRIDE 2026,,,pce,,1050000,,10,"<p>Le Scooter MIO UBRIDE 2026 est un scooter urbain moderne, compact et Ã©conomique, conÃ§u pour offrir une conduite confortable et une excellente maniabilitÃ© dans les dÃ©placements quotidiens.</p>",1,Moteur et Moto,
+Honda Air Blade 160 2026,,,pce,,1600000,,10,"<p>Le Honda Air Blade 160 2026 est un scooter sportif haut de gamme alliant puissance, Ã©lÃ©gance et confort. Son moteur 160 cc performant et son design moderne en font un excellent choix pour les dÃ©placements urbains et pÃ©riurbains.</p>",1,Moteur et Moto,HONDA
+Cache tÃªte de fourche / CarÃ©nage avant moto F150,,,pce,,8000,,10,"<p>CarÃ©nage avant design sport pour moto F150, finition noir mat et noir brillant, protection et style agressif.</p>",1,Accesssoires,SR
+Compteur digital multifonction LED avec indicateur de rapport,,,pce,,50000,,10,"<p>ableau de bord numÃ©rique complet avec affichage mph/km/h, compte-tours, jauge carburant, tempÃ©rature et indicateur de vitesse engagÃ©e.</p>",1,Compteurs,SR
+Compteur digital LCD multifonction pour moto,,,pce,,50000,,10,"<p>Tableau de bord numÃ©rique haute prÃ©cision avec affichage vitesse, rÃ©gime moteur, jauge carburant et indicateur de rapport engagÃ©.</p>",1,Compteurs,Yamaha
+Arbre Ã  Cames 115 SR Motorcycle,,,pce,,7000,,10,"<p>Arbre Ã  cames pour moteur 115cc, synchronisation prÃ©cise et performance stable.</p>",1,Moteur et Moto,SR
+Arbre Ã  Cames Honda Air Blade SR Motorcycle,,,pce,,13000,,10,"<p>Arbre Ã  cames pour Honda Air Blade, synchronisation prÃ©cise et performance moteur optimisÃ©e.</p>",1,Moteur et Moto,SR
+Arbre Ã  Cames 135 SR Motorcycle,,,pce,,8000,,10,"<p>Arbre Ã  cames pour moteur 135cc, synchronisation prÃ©cise et performance fiable.</p>",1,Moteur et Moto,SR
+Arbre Ã  Cames 155 SR Motorcycle,,,pce,,12000,,10,"<p>Arbre Ã  cames pour moteur 155cc, synchronisation prÃ©cise et performance optimisÃ©e.</p>",1,Moteur et Moto,SR
+Arbre Ã  Cames Yamaha Mio SR Motorcycle,,,pce,,12000,,10,"<p>Arbre Ã  cames pour Yamaha Mio, synchronisation prÃ©cise et performance moteur optimisÃ©e.</p>",1,Moteur et Moto,SR
+Rampe de Culbuteur Moto 115 SR Motorcycle,,,pce,,5000,,10,"<p>Rampe de culbuteur pour moto 115cc, prÃ©cision et fiabilitÃ© moteur.</p>",1,Moteur et Moto,SR
+Rampe de Culbuteur Scooter 155 SR Motorcycle,,,pce,,8000,,10,"<p>Rampe de culbuteur pour scooter 155cc, transmission prÃ©cise et performance fiable.</p>",1,Moteur et Moto,SR
+Rampe de Culbuteur Moto 135 SR Motorcycle,,,pce,,6000,,10,"<p>Rampe de culbuteur pour moto 135cc, transmission prÃ©cise et fiabilitÃ© moteur.</p>",1,Moteur et Moto,SR
+Rampe de Culbuteur Yamaha Exciter 155 SR Motorcycle,,,pce,,9000,,10,"<p>Rampe de culbuteur pour Yamaha Exciter 155, transmission prÃ©cise et performance moteur optimisÃ©e.</p>",1,Moteur et Moto,SR
+Rampe de Culbuteur Honda Air Blade SR Motorcycle,,,pce,,8000,,10,"<p>Rampe de culbuteur pour Honda Air Blade, prÃ©cision et performance moteur optimales.</p>",1,Moteur et Moto,SR
+Rampe de Culbuteur Honda Winner SR Motorcycle,,,pce,,8000,,10,"<p>Rampe de culbuteur (cam rocker arm) pour Honda Winner, prÃ©cision et performance moteur optimales.</p>",1,Moteur et Moto,SR
+Jante Moto Sport Noir Rouge,,,pce,,45000,,10,"<p>Jante moto sport en alliage, finition noire avec liserÃ© rouge, rÃ©sistante et Ã©lÃ©gante.</p>",1,Pneus &amp; Roues,SR
+DÃ©marreur Honda 110 SR Motorcycle,,,pce,,10000,,10,"<p>DÃ©marreur Ã©lectrique fiable pour Honda 110, dÃ©marrage rapide et efficace.</p>",1,Electrique,SR
+DÃ©marreur Yamaha Mio SR Motorcycle,,,pce,,9000,,10,"<p>DÃ©marreur Ã©lectrique fiable compatible Yamaha Mio, dÃ©marrage rapide et performant.</p>",1,Electrique,SR
+DÃ©marreur Moto RC SR Motorcycle,,,pce,,10000,,10,"<p>DÃ©marreur Ã©lectrique haute performance pour moto RC, dÃ©marrage puissant et stable.</p>",1,Electrique,SR
+DÃ©marreur Moto Winner SR Motorcycle,,,pce,,11000,,10,"<p>DÃ©marreur Ã©lectrique performant compatible Honda Winner, dÃ©marrage rapide et fiable.</p>",1,Electrique,SR
+DÃ©marreur Moto 150 SR Motorcycle,,,pce,,7500,,10,"<p>DÃ©marreur Ã©lectrique puissant pour moto 150cc, performance fiable et durable.</p>",1,Electrique,SR
+DÃ©marreur Moto 135 SR Motorcycle,,,pce,,7500,,10,"<p>DÃ©marreur Ã©lectrique robuste pour moto 135cc, dÃ©marrage rapide et efficace.</p>",1,Electrique,SR
+DÃ©marreur Yamaha Sirius SR Motorcycle,,,pce,,7500,,10,"<p>DÃ©marreur Ã©lectrique haute performance compatible Yamaha Sirius, dÃ©marrage rapide et fiable.</p>",1,Electrique,SR
+Piston LC 135 (STD),,,pce,,8000,,10,<p>Piston standard pour Yamaha LC 135. IdÃ©al pour restauration moteur.</p>,1,Moteur et Moto,SR
+Piston 115 Finn (STD),,,pce,,8000,,10,<p>Piston standard pour Yamaha 115 Finn. IdÃ©al pour remise Ã  neuf du moteur.</p>,1,Moteur et Moto,SR
+Piston Scooter Mio 125 (STD),,,pce,,8000,,10,<p>Piston standard pour scooter Mio 125. IdÃ©al pour remplacement moteur dâorigine.</p>,1,Moteur et Moto,SR
+Piston STD Honda Winner,,,pce,,8000,,10,<p>Piston standard (STD) pour Honda Winner. Remplacement fiable pour moteur dâorigine.</p>,1,Moteur et Moto,SR
+Kit Piston Complet Aerox 155,,,pce,,8000,,10,<p>Kit piston complet pour Yamaha Aerox 155. Performance fiable et compression optimale.</p>,1,Moteur et Moto,SR
+Ventilateur de Refroidissement Moto F150 (Ventilo F150),,,pce,,15000,,10,<p>Ventilateur Ã©lectrique compatible F150. Refroidissement rapide et efficace du moteur.</p>,1,Refroidissement,SR
+Ventilateur de Refroidissement Moto Winner (Ventilo Winner),,,pce,,15000,,10,<p>Ventilateur Ã©lectrique compatible moto Winner. Refroidissement efficace et stable du moteur.</p>,1,Refroidissement,SR
+Ventilateur de Refroidissement Moto 150cc (Ventilo 150),,,pce,,15000,,10,<p>Ventilateur Ã©lectrique pour moto 150cc. Permet un refroidissement rapide et efficace du moteur.</p>,1,Refroidissement,SR
+Ventilateur de Refroidissement Moto 150cc (Ventilo 150),,,pce,,15000,,10,<p>Ventilateur Ã©lectrique pour moto 150cc. Permet un refroidissement rapide et efficace du moteur.</p>,1,Refroidissement,SR
+Ventilateur de Refroidissement Moto 135cc (Ventilo 135),,,pce,,12000,,10,<p>Ventilateur Ã©lectrique pour moto 135cc. Assure un refroidissement efficace du moteur et Ã©vite la surchauffe.</p>,1,Refroidissement,SR
+"Batterie Moto SR GTZ5S â Sealed MF 12V (Tous modÃ¨les 135, Winner, Aerox 155)",,,pce,,8000,,10,"<p>Batterie moto 12V sans entretien (Sealed MF) compatible 135, Winner et Aerox 155. DÃ©marrage puissant, longue durÃ©e de vie et performance fiable au Burkina Faso.</p>",1,Electrique,SR
+Embrayage Complet 150 King â SR Motorcycle,,,pce,,17500,,10,"<p>Embrayage complet pour moto 150 King, conÃ§u pour une transmission puissante, une excellente accroche et une durabilitÃ© renforcÃ©e.</p>",1,Embrayage,SR
+Embrayage Complet 135i â SR Motorcycle,,,pce,,17500,,10,"<p>Embrayage complet pour Yamaha 135i, conÃ§u pour une transmission puissante, un dÃ©marrage rÃ©actif et une grande rÃ©sistance Ã  lâusure.</p>",1,Embrayage,SR
+Embrayage Complet 115 Finn â SR Motorcycle,,,pce,,15000,,10,"<p>Embrayage complet pour Yamaha 115 Finn, conÃ§u pour une transmission efficace, un dÃ©marrage puissant et une excellente durabilitÃ©.</p>",1,Embrayage,SR
+Embrayage Complet Sirius Nano â SR Motorcycle,,,pce,,12000,,10,"<p>Ensemble dâembrayage complet pour Yamaha Sirius Nano, conÃ§u pour une transmission fluide, un dÃ©marrage puissant et une excellente rÃ©sistance Ã  lâusure.</p>",1,Embrayage,SR
+Kit Ampoule LED Moto avec Driver Externe â SR Motorcycle,,,pce,,6000,,10,"<p>Kit ampoule LED haute puissance avec module driver externe intÃ©grÃ©, conÃ§u pour offrir un Ã©clairage intense, stable et durable pour motos et scooters.</p>",1,Eclairage,SR
+Ampoule LED Moto H4 / HS1 â SR Motorcycle,,,pce,,2500,,10,"<p>Ampoule LED puissante pour phare moto H4 / HS1, offrant un Ã©clairage blanc intense, une meilleure visibilitÃ© nocturne et une faible consommation dâÃ©nergie.</p>",1,Eclairage,SR
+mpoule LED phare moto haute performance â SR Motorcycle,,,pce,,2000,,10,"<p>Ampoule LED puissante pour phare moto, offrant une lumiÃ¨re blanche intense, une meilleure visibilitÃ© nocturne et une longue durÃ©e de vie.</p>",1,Eclairage,SR
+Ampoule LED phare moto â SR Motorcycle Headlamp,,,pce,,2000,,10,"<p>Ampoule LED haute luminositÃ© pour phare moto, offrant un Ã©clairage puissant, stable et Ã©conomique.</p>",1,Eclairage,SR
+Contacteur Ã  clÃ© complet (Neiman) moto â SR Motorcycle,,,pce,,8000,,10,"<p>Contacteur Ã  clÃ© complet avec barillet et jeu de clÃ©s, destinÃ© au remplacement du systÃ¨me dâallumage moto.</p>",1,Electrique,SR
+Contacteur Ã  clÃ© complet (Neiman) moto â SR Motorcycle,,,pce,,9000,,10,"<p>Contacteur Ã  clÃ© complet avec barillet et jeu de clÃ©s, destinÃ© au remplacement du systÃ¨me dâallumage moto.</p>",1,Electrique,SR
+Amortisseur arriÃ¨re Honda Blade (paire),,,pce,,12000,,10,"<p>Paire dâamortisseurs arriÃ¨re compatible Honda Blade, conÃ§ue pour amÃ©liorer la stabilitÃ©, le confort et la tenue de route.</p>",1,Suspension,SR
+Amortisseur arriÃ¨re Sirius (paire),,,pce,,10000,,10,"<p>Paire dâamortisseurs arriÃ¨re compatible Yamaha Sirius, conÃ§ue pour amÃ©liorer le confort, la stabilitÃ© et la tenue de route au quotidien.</p>",1,Suspension,SR
+Amortisseur arriÃ¨re 115 Sirius (paire),,,pce,,9000,,10,"<p>Paire dâamortisseurs arriÃ¨re compatible Yamaha Sirius 115, conÃ§ue pour amÃ©liorer la stabilitÃ©, le confort et la tenue de route sur tous types de routes.</p>",1,Suspension,SR
+Amortisseur arriÃ¨re Honda Winner,,,pce,,16000,,10,"<p>Amortisseur arriÃ¨re compatible Honda Winner, conÃ§u pour offrir une excellente stabilitÃ©, une absorption optimale des chocs et une conduite plus confortable au quotidien.</p>",1,Suspension,SR
+Amortisseur arriÃ¨re 135,,,pce,,12000,,10,"<p>Amortisseur arriÃ¨re 135 renforcÃ©, conÃ§u pour offrir une excellente absorption des chocs et amÃ©liorer la stabilitÃ© de votre moto sur routes urbaines et pistes dÃ©gradÃ©es.</p>",1,Suspension,SR
+Amortisseur arriÃ¨re Exciter 155,,,pce,,15000,,10,"<p>Amortisseur arriÃ¨re compatible Yamaha Exciter 155, conÃ§u pour absorber efficacement les chocs et garantir une conduite stable et confortable sur tous types de routes.</p>",1,Suspension,SR
+Pompe Ã  eau Exciter 150,,,pce,,20000,,10,"<p>Pompe Ã  eau complÃ¨te pour Yamaha Exciter 150, conÃ§ue pour assurer une circulation optimale du liquide de refroidissement et protÃ©ger efficacement le moteur contre la surchauffe.</p>",1,Refroidissement,SR
+Pompe Ã  eau F-150,,,pce,,17000,,10,"<p>Pompe Ã  eau complÃ¨te pour moteur F-150, assurant une circulation efficace du liquide de refroidissement et une protection optimale contre la surchauffe.</p>",1,Refroidissement,SR
+Pompe Ã  eau Scooter R-C,,,pce,,21000,,10,"<p>Pompe Ã  eau complÃ¨te pour scooter R-C, conÃ§ue pour garantir un refroidissement optimal du moteur et Ã©viter toute surchauffe.</p>",1,Refroidissement,SR
+Pompe Ã  eau Yamaha Exciter 135,,,pce,,17500,,10,"<p>Pompe Ã  eau complÃ¨te pour Yamaha Exciter 135, conÃ§ue pour assurer un refroidissement efficace du moteur et prÃ©venir toute surchauffe.</p>",1,Refroidissement,Yamaha
+Pompe Ã  eau Yamaha Exciter 155,,,pce,,17500,,10,"<p>Pompe Ã  eau complÃ¨te pour Yamaha Exciter 155, conÃ§ue pour assurer une circulation efficace du liquide de refroidissement et protÃ©ger le moteur contre la surchauffe.</p>",1,Refroidissement,Yamaha
+Pompe Ã  eau Yamaha Exciter 155 New,,,pce,,17500,,10,"<p>Pompe Ã  eau complÃ¨te pour Yamaha Exciter 155 nouvelle gÃ©nÃ©ration, assurant une circulation optimale du liquide de refroidissement et une protection efficace contre la surchauffe.</p>",1,Refroidissement,SR
+Pompe Ã  eau Air Blade New,,,pce,,22000,,10,"<p>Pompe Ã  eau complÃ¨te pour Honda Air Blade nouvelle gÃ©nÃ©ration, assurant un refroidissement efficace et stable du moteur.</p>",1,Refroidissement,SR
+Pompe Ã  eau Scooter 155 Ancien ModÃ¨le,,,pce,,17000,,10,"<p>Pompe Ã  eau complÃ¨te pour scooter 155cc ancien modÃ¨le, conÃ§ue pour assurer une circulation optimale du liquide de refroidissement et Ã©viter toute surchauffe moteur.</p>",1,Refroidissement,SR
+Pompe Ã  eau Scooter 155 New,,,pce,,17000,,10,"<p>Pompe Ã  eau complÃ¨te pour scooter 155cc nouvelle gÃ©nÃ©ration, assurant une circulation efficace du liquide de refroidissement et une protection optimale du moteur.</p>",1,Refroidissement,SR
+Pompe Ã  eau Honda Air Blade (ancien modÃ¨le),,,pce,,17000,,10,"<p>Pompe Ã  eau complÃ¨te pour Honda Air Blade ancien modÃ¨le, assurant une circulation optimale du liquide de refroidissement et une protection efficace du moteur contre la surchauffe.</p>",1,Refroidissement,SR
+Cylindre MX 150 â Haute Performance,,,pce,,16000,,10,"<p>Cylindre moteur 150cc compatible MX 150, conÃ§u pour restaurer la compression et amÃ©liorer la puissance du moteur.</p>",1,Moteur et Moto,SR
+Cylindre 115 FINN / SIRIUS â Haute Compression,,,pce,,14000,,10,"<p>Cylindre moteur 115cc compatible Yamaha FINN et SIRIUS, conÃ§u pour restaurer la puissance et amÃ©liorer la performance du moteur.</p>",1,Moteur et Moto,SR
+Cylindre 115 Sirius Nano â Haute Performance,,,pce,,12000,,10,"<p>Cylindre moteur 115cc compatible Yamaha Sirius Nano, conÃ§u pour restaurer la compression et amÃ©liorer la puissance du moteur.</p>",1,Moteur et Moto,SR
+Cylindre Honda Blade 160cc â Haute Performance,,,pce,,20000,,10,"<p>Cylindre 160cc robuste pour Honda Blade, conÃ§u pour amÃ©liorer la puissance, la compression et la performance du moteur.</p>",1,Moteur et Moto,SR
+Huile Moteur Moto 4T 20W-50 API SJ â 1L (SR Motorcycle Oil),,,pce,,3000,,10,"<p>Huile moteur 4 temps entiÃ¨rement synthÃ©tique 20W-50, idÃ©ale pour protÃ©ger votre moto contre lâusure et la chaleur intense.</p>",1,Huiles &amp; Lubrifiants,SR
+Huile Moteur Moto 4T 20W-50 API SJ â 1L (Motoricjle),,,pce,,3000,,10,"<p>Huile moteur 4 temps 20W-50 haute rÃ©sistance, idÃ©ale pour protÃ©ger votre moteur contre lâusure et la chaleur.</p>",1,Huiles &amp; Lubrifiants,SR
+Huile Moteur Moto 4T 20W-50 â 1L (JASO MA / API SJ),,,pce,,3000,,10,"<p>Huile moteur 4 temps 20W-50 haute performance pour motos, protection optimale contre lâusure et les fortes tempÃ©ratures.</p>",1,Huiles &amp; Lubrifiants,SR
+Disque Embrayage 115 Fine,,,pce,,4000,,10,<p>Disque dâembrayage 115 Fine haute qualitÃ© pour une transmission fluide et une meilleure longÃ©vitÃ© moteur.</p>,1,Embrayage,SR
+Disque Embrayage Sirius,,,pce,,4000,,10,<p>Disque dâembrayage Sirius haute rÃ©sistance pour transmission fluide et performance durable.</p>,1,Embrayage,SR
+Disque Embrayage Honda Blade 110,,,pce,,4000,,10,<p>Disque dâembrayage Honda Blade 110 haute rÃ©sistance pour transmission fluide et durable.</p>,1,Embrayage,SR
+Disque Embrayage 115 Sirius New,,,pce,,4000,,10,<p>Disque dâembrayage 115 Sirius New haute rÃ©sistance pour transmission fluide et performance durable.</p>,1,Embrayage,SR
+Linteau Complet 115 Sirius New,,,pce,,9000,,10,<p>Linteau dâembrayage complet 115 Sirius New pour transmission fluide et performance durable.</p>,1,Embrayage,SR
+Linteau Complet 150 King,,,pce,,8000,,10,<p>Linteau dâembrayage complet 150 King pour transmission puissante et engagement prÃ©cis.</p>,1,Embrayage,SR
+Linteau Complet Honda Winner 150,,,pce,,9000,,10,<p>Linteau dâembrayage complet Honda Winner 150 pour transmission puissante et engagement prÃ©cis.</p>,1,Embrayage,SR
+ourroie + Galets Soul GT Mio 125  âï¸ BrÃ¨ve description :  Kit courroie et galets Soul GT / Mio 125 pour transmission CVT fluide et accÃ©lÃ©ration optimale.  ð¦ Description :  Ce kit courroie + galets SR Motorcycle est conÃ§u,,,pce,,7000,,10,<p>Kit courroie et galets Soul GT / Mio 125 pour transmission CVT fluide et accÃ©lÃ©ration optimale.</p>,1,Transmission,SR
+Courroie + Galets Air Blade 125,,,pce,,7000,,10,<p>Kit courroie et galets Air Blade 125 pour transmission CVT performante et accÃ©lÃ©ration fluide.</p>,1,Transmission,SR
+Courroie + Galets RC-SK,,,pce,,7000,,10,<p>Kit courroie et galets RC-SK pour transmission CVT fluide et performance amÃ©liorÃ©e.</p>,1,Transmission,SR
+Courroie + Galets Aerox 155,,,pce,,7000,,10,<p>Kit courroie et galets Aerox 155 pour transmission fluide et performance optimale.</p>,1,Transmission,
+Linteau Complet 115 Sirius,,,pce,,9000,,10,<p>Linteau dâembrayage complet 115 Sirius pour transmission fluide et performance renforcÃ©e.</p>,1,Embrayage,SR
+Linteau Complet 150 King,,,pce,,8000,,10,<p>Linteau dâembrayage complet 150 King pour transmission puissante et performance durable.</p>,1,Embrayage,SR
+Linteau Complet Honda Winner,,,pce,,9000,,10,<p>Linteau dâembrayage complet Honda Winner pour transmission fluide et performance optimale.</p>,1,Embrayage,SR
+Roulement Carter Honda Winner,,,pce,,7000,,10,<p>Roulement de carter haute prÃ©cision compatible Honda Winner pour performance moteur optimale.</p>,1,Moteur et Moto,SR
+Roulement Carter Aerox 155,,,pce,,6000,,10,<p>Roulement de carter haute prÃ©cision compatible Aerox 155 pour performance et longÃ©vitÃ© moteur.</p>,1,Moteur et Moto,SR
+Roulement Carter Suzuki F150,,,pce,,7000,,10,<p>Roulement de carter haute prÃ©cision compatible Suzuki F150 pour un moteur plus fluide et durable.</p>,1,Moteur et Moto,SR
+Roulement Carter 115/135/150,,,pce,,6000,,10,"<p>Roulement de carter haute rÃ©sistance compatible 115, LC135, LC150 Vegas pour performance moteur optimale.</p>",1,Moteur et Moto,SR
+Radiateur Air Blade (Nouveau),,,pce,,17500,,10,<p>Radiateur scooter Air Blade nouveau modÃ¨le pour un refroidissement performant et durable.</p>,1,Refroidissement,SR
+Radiateur Air Blade (Ancien),,,pce,,16000,,10,<p>Radiateur scooter Air Blade ancien modÃ¨le pour un refroidissement efficace et durable du moteur.</p>,1,Refroidissement,SR
+Radiateur Exciter 155,,,pce,,20000,,10,<p>Radiateur Yamaha Exciter 155 robuste pour un refroidissement efficace et une protection moteur optimale.</p>,1,Refroidissement,SR
+Radiateur 150,,,pce,,16000,,10,<p>Radiateur moto 150 haute qualitÃ© pour un refroidissement efficace et une protection moteur durable.</p>,1,Refroidissement,SR
+Radiateur Scooter 155,,,pce,,17500,,10,<p>Radiateur scooter 155 robuste pour un refroidissement optimal et une meilleure protection du moteur.</p>,1,Refroidissement,SR
+Radiateur Scooter R-C,,,pce,,17500,,10,<p>Radiateur scooter R-C haute performance pour un refroidissement rapide et une protection moteur optimale.</p>,1,Refroidissement,SR
+Radiateur 135,,,pce,,16000,,10,<p>Radiateur moto 135 haute rÃ©sistance pour un refroidissement rapide et efficace du moteur.</p>,1,Refroidissement,SR
+Radiateur F-150,,,pce,,17500,,10,<p>Radiateur moto F-150 haute qualitÃ© pour un refroidissement efficace et une protection optimale du moteur.</p>,1,Refroidissement,SR
+Radiateur Winnier X,,,pce,,17500,,10,"<p>Radiateur moto haute performance pour Winnier X, conÃ§u pour un refroidissement efficace et durable du moteur.</p>",1,Refroidissement,SR
+Porte-clÃ© Yamaha Strass Luxe,,,pce,,7000,,10,"<p>Porte-clÃ© Yamaha brillant avec pendentif dÃ©coratif en strass, Ã©lÃ©gant et tendance.</p>",1,Accesssoires,Yamaha
+Housse ClÃ© Yamaha Premium,,,pce,,7000,,10,"<p>Protection Ã©lÃ©gante en mÃ©tal pour clÃ© moto Yamaha, rÃ©sistante aux chocs et aux rayures.</p>",1,Accesssoires,Yamaha
+Porte-clÃ© Premium Honda avec Housse de Protection en Cuir,,,pce,,7000,,10,"<p>Porte-clÃ© Ã©lÃ©gant Honda en mÃ©tal et cuir, conÃ§u pour protÃ©ger votre clÃ© moto contre la poussiÃ¨re, les chocs et les rayures.</p>",1,Accesssoires,HONDA
+Injecteur carburant moto SRM â Yamaha Exciter 155,,,pce,,7000,,10,"<p>Injecteur haute performance pour Yamaha Exciter 155, assurant une injection prÃ©cise du carburant, un dÃ©marrage rapide et une performance moteur optimale.</p>",1,Injection,SR
+Injecteur carburant moto SRM â LC 150 King,,,pce,,7000,,10,"<p>Injecteur haute prÃ©cision pour Yamaha LC 150 King, garantissant une injection efficace du carburant, un dÃ©marrage rapide et des performances moteur constantes.</p>",1,Injection,SR
+Injecteur carburant moto SRM â Suzuki Raider / F150,,,pce,,8000,,10,"<p>Injecteur de carburant haute performance pour Suzuki Raider F150, offrant une injection prÃ©cise, une combustion optimale et une meilleure rÃ©activitÃ© du moteur.</p>",1,Injection,SR
+Injecteur carburant moto SRM â Honda Winner,,,pce,,7000,,10,"<p>Injecteur haute prÃ©cision pour Honda Winner, garantissant une injection efficace du carburant, un dÃ©marrage fiable et des performances moteur optimales.</p>",1,Injection,SR
+Injecteur carburant moto SRM â Yamaha Air Blade 125,,,pce,,7000,,10,"<p>Injecteur haute performance pour Yamaha Air Blade 125, assurant une injection prÃ©cise, un dÃ©marrage rapide et un fonctionnement moteur stable</p>",1,Injection,SR
+Injecteur carburant moto SRM â Yamaha Aerox 155,,,pce,,7000,,10,"<p>Injecteur haute prÃ©cision pour Yamaha Aerox 155, assurant une injection optimale du carburant, un dÃ©marrage fiable et une performance moteur stable.</p>",1,Injection,SR
+Injecteur de carburant moto SR â LC 135,,,pce,,7000.00,,10,<p>Cet injecteur de carburant SR Motorcycle pour LC 135 assure une injection prÃ©cise et rÃ©guliÃ¨re du carburant afin dâamÃ©liorer les performances du moteur et rÃ©duire la consommation.</p>,1,Injection,SR

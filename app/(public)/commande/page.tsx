@@ -26,7 +26,7 @@ export default async function CheckoutPage() {
   return (
     <div className="container-page pb-16">
       <Breadcrumbs items={[{ label: 'Panier', href: '/panier' }, { label: 'Commande' }]} />
-      <h1 className="mb-8 text-3xl font-extrabold text-ink-900 sm:text-4xl">Passer commande</h1>
+      <h1 className="mb-5 text-2xl font-extrabold text-ink-900 sm:mb-8 sm:text-4xl">Passer commande</h1>
       <CheckoutForm whatsapp={settings.whatsapp} account={account} />
     </div>
   )

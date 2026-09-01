@@ -124,16 +124,27 @@ export async function saveProduct(form: FormData): Promise<AdminResult<{ id: str
     }
   }
 
-  // Création : la photo analysée par l'IA devient l'image principale.
+  // La photo envoyée au panneau IA est rattachée au produit, à la création
+  // comme à la modification (sinon elle resterait dans le stockage sans
+  // jamais s'afficher sur le site).
   const initialImage = str(form, 'initial_image_url', 600)
-  if (!id && initialImage) {
-    await supabase.from('product_images').insert({
-      product_id: data.id,
-      url: initialImage,
-      alt: name,
-      position: 0,
-      is_primary: true,
-    })
+  if (initialImage) {
+    const { data: existing } = await supabase
+      .from('product_images')
+      .select('id,url')
+      .eq('product_id', data.id)
+
+    const already = (existing ?? []).some((img) => img.url === initialImage)
+    if (!already) {
+      const count = existing?.length ?? 0
+      await supabase.from('product_images').insert({
+        product_id: data.id,
+        url: initialImage,
+        alt: name,
+        position: count,
+        is_primary: count === 0,
+      })
+    }
   }
 
   refreshPublic(['/', '/produits', `/produits/${slug}`, '/categories'])

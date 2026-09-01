@@ -104,7 +104,7 @@ export function ProductForm({
       className="grid gap-5 xl:grid-cols-[1.7fr_1fr]"
     >
       {product && <input type="hidden" name="id" value={product.id} />}
-      {!product && aiImage && <input type="hidden" name="initial_image_url" value={aiImage} />}
+      {aiImage && <input type="hidden" name="initial_image_url" value={aiImage} />}
 
       <div className="space-y-5">
         <ProductAiPanel
