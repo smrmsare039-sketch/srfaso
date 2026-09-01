@@ -83,7 +83,7 @@ export function SearchBox({ className }: { className?: string }) {
         <label htmlFor={listId} className="sr-only">
           Rechercher des produits
         </label>
-        <div className="flex h-12 items-center overflow-hidden rounded-full border border-ink-200 bg-white transition-colors focus-within:border-brand-500">
+        <div className="flex h-12 items-center overflow-hidden rounded-lg border border-ink-200 bg-white transition-colors focus-within:border-brand-500">
           <input
             id={listId}
             value={term}
@@ -92,13 +92,13 @@ export function SearchBox({ className }: { className?: string }) {
             onKeyDown={(e) => e.key === 'Escape' && setOpen(false)}
             placeholder="Rechercher des produits"
             autoComplete="off"
-            className="h-full flex-1 bg-transparent pr-3 pl-5 text-[0.9375rem] text-ink-900 outline-none placeholder:text-ink-400"
+            className="h-full min-w-0 flex-1 bg-transparent pr-3 pl-4 text-[0.9375rem] text-ink-900 outline-none placeholder:text-ink-400"
           />
           {loading && <Loader2 className="mr-2 size-4 animate-spin text-ink-400" aria-hidden />}
           <button
             type="submit"
             aria-label="Rechercher"
-            className="grid h-full w-14 shrink-0 place-items-center bg-brand-600 text-white transition-colors hover:bg-brand-700"
+            className="grid h-full w-12 shrink-0 place-items-center bg-brand-600 text-white transition-colors hover:bg-brand-700"
           >
             <Search className="size-5" aria-hidden />
           </button>
