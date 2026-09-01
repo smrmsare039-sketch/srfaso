@@ -107,7 +107,7 @@ export default async function ProductPage(props: PageProps<'/produits/[slug]'>) 
             </Link>
           )}
 
-          <h1 className="mt-2 text-3xl leading-tight font-extrabold text-ink-900 sm:text-[38px]">
+          <h1 className="mt-2 text-3xl leading-tight font-extrabold text-ink-900 sm:text-[2.375rem]">
             {product.name}
           </h1>
 
@@ -154,7 +154,7 @@ export default async function ProductPage(props: PageProps<'/produits/[slug]'>) 
           </p>
 
           {product.short_description && (
-            <p className="mt-5 text-[15px] leading-relaxed text-ink-600">
+            <p className="mt-5 text-[0.9375rem] leading-relaxed text-ink-600">
               {product.short_description}
             </p>
           )}

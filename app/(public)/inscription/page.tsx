@@ -17,8 +17,8 @@ export default async function InscriptionPage() {
   return (
     <div className="container-page py-14">
       <div className="mx-auto max-w-md">
-        <h1 className="text-2xl font-extrabold text-ink-900 sm:text-[28px]">Créer un compte</h1>
-        <p className="mt-2 mb-8 text-[15px] text-ink-500">
+        <h1 className="text-2xl font-extrabold text-ink-900 sm:text-[1.75rem]">Créer un compte</h1>
+        <p className="mt-2 mb-8 text-[0.9375rem] text-ink-500">
           Suivez vos commandes et retrouvez vos coordonnées pré-remplies à chaque achat.
         </p>
 

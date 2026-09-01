@@ -24,7 +24,7 @@ export function Breadcrumbs({ items }: { items: Crumb[] }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <ol className="flex flex-wrap items-center gap-1 text-[13px] text-ink-500">
+      <ol className="flex flex-wrap items-center gap-1 text-[0.8125rem] text-ink-500">
         {all.map((crumb, i) => (
           <li key={`${crumb.label}-${i}`} className="flex items-center gap-1">
             {i > 0 && <ChevronRight className="size-3.5 text-ink-300" aria-hidden />}

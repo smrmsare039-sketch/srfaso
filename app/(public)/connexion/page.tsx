@@ -17,8 +17,8 @@ export default async function ConnexionPage() {
   return (
     <div className="container-page py-14">
       <div className="mx-auto max-w-md">
-        <h1 className="text-2xl font-extrabold text-ink-900 sm:text-[28px]">Connexion</h1>
-        <p className="mt-2 mb-8 text-[15px] text-ink-500">
+        <h1 className="text-2xl font-extrabold text-ink-900 sm:text-[1.75rem]">Connexion</h1>
+        <p className="mt-2 mb-8 text-[0.9375rem] text-ink-500">
           Accédez à votre compte pour retrouver l’historique de vos commandes.
         </p>
 

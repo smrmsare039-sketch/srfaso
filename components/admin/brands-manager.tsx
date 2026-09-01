@@ -74,7 +74,7 @@ export function BrandsManager({
                     className="h-10 w-auto object-contain"
                   />
                 ) : (
-                  <span className="text-[10px] font-bold text-ink-400 uppercase">Sans logo</span>
+                  <span className="text-[0.625rem] font-bold text-ink-400 uppercase">Sans logo</span>
                 )}
               </span>
 
@@ -123,7 +123,7 @@ export function BrandsManager({
                         router.refresh()
                       })
                     }
-                    className="rounded-lg bg-brand-600 px-2 py-1.5 text-[11px] font-bold text-white"
+                    className="rounded-lg bg-brand-600 px-2 py-1.5 text-[0.6875rem] font-bold text-white"
                   >
                     Confirmer
                   </button>

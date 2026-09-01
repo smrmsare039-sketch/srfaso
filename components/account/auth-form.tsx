@@ -8,7 +8,7 @@ import { useToast } from '@/components/toast'
 import { createSupabaseBrowserClient } from '@/lib/supabase/client'
 
 const field =
-  'h-12 w-full rounded-xl border border-ink-200 bg-white px-4 text-[15px] text-ink-900 outline-none transition-colors placeholder:text-ink-400 focus:border-brand-500'
+  'h-12 w-full rounded-xl border border-ink-200 bg-white px-4 text-[0.9375rem] text-ink-900 outline-none transition-colors placeholder:text-ink-400 focus:border-brand-500'
 const labelClass = 'mb-1.5 block text-sm font-semibold text-ink-800'
 
 function GoogleMark() {
@@ -185,7 +185,7 @@ export function AuthForm({ mode }: { mode: 'connexion' | 'inscription' }) {
         type="button"
         onClick={withGoogle}
         disabled={pending}
-        className="flex h-12 w-full items-center justify-center gap-3 rounded-xl border border-ink-200 bg-white text-[15px] font-semibold text-ink-900 transition-colors hover:border-ink-300 disabled:opacity-60"
+        className="flex h-12 w-full items-center justify-center gap-3 rounded-xl border border-ink-200 bg-white text-[0.9375rem] font-semibold text-ink-900 transition-colors hover:border-ink-300 disabled:opacity-60"
       >
         <GoogleMark />
         {isSignup ? 'S’inscrire avec Google' : 'Continuer avec Google'}
@@ -277,7 +277,7 @@ export function AuthForm({ mode }: { mode: 'connexion' | 'inscription' }) {
         <button
           type="submit"
           disabled={pending}
-          className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-brand-600 text-[15px] font-bold text-white transition-colors hover:bg-brand-700 disabled:opacity-60"
+          className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-brand-600 text-[0.9375rem] font-bold text-white transition-colors hover:bg-brand-700 disabled:opacity-60"
         >
           {isSignup ? (
             <UserPlus className="size-4" aria-hidden />

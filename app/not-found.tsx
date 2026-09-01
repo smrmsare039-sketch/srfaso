@@ -13,13 +13,13 @@ export default function NotFound() {
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link
             href="/"
-            className="rounded-xl bg-brand-600 px-6 py-3 text-[15px] font-bold text-white hover:bg-brand-700"
+            className="rounded-xl bg-brand-600 px-6 py-3 text-[0.9375rem] font-bold text-white hover:bg-brand-700"
           >
             Retour à l’accueil
           </Link>
           <Link
             href="/produits"
-            className="rounded-xl border border-ink-200 px-6 py-3 text-[15px] font-semibold text-ink-800 hover:border-ink-900"
+            className="rounded-xl border border-ink-200 px-6 py-3 text-[0.9375rem] font-semibold text-ink-800 hover:border-ink-900"
           >
             Voir les produits
           </Link>

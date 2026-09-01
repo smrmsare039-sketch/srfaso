@@ -6,16 +6,10 @@ import { BrandLogo } from '@/components/brand-logo'
 import { CartButton } from '@/components/cart-button'
 import { MainNav, MobileNav } from '@/components/main-nav'
 import { SearchBox } from '@/components/search-box'
-import type { Category, SiteSettings } from '@/lib/types'
+import type { SiteSettings } from '@/lib/types'
 import { telLink } from '@/lib/utils'
 
-export function SiteHeader({
-  settings,
-  categories,
-}: {
-  settings: SiteSettings
-  categories: Category[]
-}) {
+export function SiteHeader({ settings }: { settings: SiteSettings }) {
   const phone = settings.phone_primary
   const whatsapp = settings.whatsapp ?? settings.phone_primary
 
@@ -23,7 +17,7 @@ export function SiteHeader({
     <header className="bg-white">
       {/* Bandeau de contact */}
       <div className="hidden bg-ink-900 text-ink-100 lg:block">
-        <div className="container-header flex h-9 items-center justify-between text-[13px]">
+        <div className="container-header flex h-9 items-center justify-between text-[0.8125rem]">
           <div className="flex items-center gap-5">
             {settings.address && (
               <span className="flex items-center gap-1.5">
@@ -76,7 +70,7 @@ export function SiteHeader({
             ) : (
               <>
                 <BrandLogo priority className="h-14" />
-                <span className="mt-0.5 hidden font-display text-[11px] leading-none font-medium tracking-[0.18em] text-ink-400 uppercase lg:block">
+                <span className="mt-0.5 hidden font-display text-[0.6875rem] leading-none font-medium tracking-[0.18em] text-ink-400 uppercase lg:block">
                   Pièces moto
                   <br />
                   Burkina Faso
@@ -90,7 +84,7 @@ export function SiteHeader({
           <div className="ml-auto flex items-center gap-2">
             <CartButton />
             <AccountButton />
-            <MobileNav phone={phone} whatsapp={whatsapp} categories={categories} />
+            <MobileNav phone={phone} whatsapp={whatsapp} />
           </div>
         </div>
       </div>

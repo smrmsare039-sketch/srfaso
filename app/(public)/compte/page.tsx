@@ -25,7 +25,7 @@ export default async function ComptePage() {
           <p className="mb-1 text-xs font-bold tracking-[0.16em] text-brand-600 uppercase">
             Mon espace
           </p>
-          <h1 className="text-2xl font-extrabold text-ink-900 sm:text-[28px]">
+          <h1 className="text-2xl font-extrabold text-ink-900 sm:text-[1.75rem]">
             Bonjour {accountName(user)}
           </h1>
         </div>

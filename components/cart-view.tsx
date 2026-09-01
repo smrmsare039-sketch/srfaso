@@ -24,7 +24,7 @@ export function CartView({ whatsapp }: { whatsapp: string | null }) {
         </p>
         <Link
           href="/produits"
-          className="mt-7 inline-block rounded-xl bg-brand-600 px-7 py-3 text-[15px] font-bold text-white hover:bg-brand-700"
+          className="mt-7 inline-block rounded-xl bg-brand-600 px-7 py-3 text-[0.9375rem] font-bold text-white hover:bg-brand-700"
         >
           Voir les produits
         </Link>
@@ -65,7 +65,7 @@ export function CartView({ whatsapp }: { whatsapp: string | null }) {
               <div className="flex min-w-0 flex-1 flex-col">
                 <Link
                   href={`/produits/${line.slug}`}
-                  className="text-[15px] leading-snug font-semibold text-ink-900 hover:text-brand-600"
+                  className="text-[0.9375rem] leading-snug font-semibold text-ink-900 hover:text-brand-600"
                 >
                   {line.name}
                 </Link>
@@ -154,7 +154,7 @@ export function CartView({ whatsapp }: { whatsapp: string | null }) {
 
           <Link
             href="/commande"
-            className="mt-6 flex h-12 items-center justify-center rounded-xl bg-brand-600 text-[15px] font-bold text-white hover:bg-brand-700"
+            className="mt-6 flex h-12 items-center justify-center rounded-xl bg-brand-600 text-[0.9375rem] font-bold text-white hover:bg-brand-700"
           >
             Passer la commande
           </Link>
@@ -164,7 +164,7 @@ export function CartView({ whatsapp }: { whatsapp: string | null }) {
               href={whatsappLink(whatsapp, waMessage)}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-2.5 flex h-12 items-center justify-center gap-2 rounded-xl bg-[#25D366] text-[15px] font-bold text-white"
+              className="mt-2.5 flex h-12 items-center justify-center gap-2 rounded-xl bg-[#25D366] text-[0.9375rem] font-bold text-white"
             >
               <WhatsAppIcon className="size-5" />
               Commander via WhatsApp

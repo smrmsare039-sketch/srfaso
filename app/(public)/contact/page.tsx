@@ -102,7 +102,7 @@ export default async function ContactPage() {
                 href={whatsappLink(settings.whatsapp, settings.whatsapp_message ?? undefined)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-6 flex items-center justify-center gap-2 rounded-xl bg-[#25D366] py-3.5 text-[15px] font-bold text-white"
+                className="mt-6 flex items-center justify-center gap-2 rounded-xl bg-[#25D366] py-3.5 text-[0.9375rem] font-bold text-white"
               >
                 <WhatsAppIcon className="size-5" />
                 Discuter avec nous

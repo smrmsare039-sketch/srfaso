@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { Menu, X } from 'lucide-react'
 import { CategoryIcon } from '@/components/category-icon'
 import type { Category } from '@/lib/types'
@@ -57,15 +57,32 @@ export function CategoryRail({ categories }: { categories: Category[] }) {
         />
       )}
 
+      {/* Mobile : pas de rail permanent, seulement son bouton burger. */}
+      {!pinned && (
+        <button
+          type="button"
+          onClick={() => setPinned(true)}
+          aria-label="Toutes les catégories"
+          aria-expanded={false}
+          className="fixed bottom-5 left-4 z-40 flex items-center gap-2 rounded-full bg-brand-600 py-3 pr-5 pl-3 font-semibold text-white shadow-pop transition-transform hover:scale-105 lg:hidden"
+        >
+          <Menu className="size-6 shrink-0" />
+          <span className="text-sm">Catégories</span>
+        </button>
+      )}
+
       <nav
         aria-label="Catégories de produits"
         onMouseEnter={openNow}
         onMouseLeave={closeSoon}
-        style={{ width: open ? 'var(--rail-expanded)' : 'var(--rail-width)' }}
+        style={{ '--rail-w': open ? 'var(--rail-expanded)' : 'var(--rail-width)' } as CSSProperties}
         className={cx(
-          // Masqué sur mobile : les catégories y sont accessibles depuis le menu burger.
-          'fixed top-0 bottom-0 left-0 z-40 hidden flex-col border-r border-ink-100 bg-white lg:flex',
-          'transition-[width] duration-200 ease-out',
+          'fixed top-0 bottom-0 left-0 z-40 flex flex-col border-r border-ink-100 bg-white',
+          // Mobile : tiroir hors écran tant que le burger n'a pas été touché.
+          'w-[min(20rem,86vw)] transition-transform duration-200 ease-out',
+          pinned ? 'translate-x-0' : '-translate-x-full',
+          // Desktop : rail permanent qui s'élargit au survol.
+          'lg:w-[var(--rail-w)] lg:translate-x-0 lg:transition-[width]',
           open && 'shadow-pop'
         )}
       >
@@ -109,11 +126,11 @@ export function CategoryRail({ categories }: { categories: Category[] }) {
                     active ? 'bg-brand-50' : 'group-hover:bg-ink-50'
                   )}
                 >
-                  <CategoryIcon name={category.icon} className="size-[22px]" />
+                  <CategoryIcon name={category.icon} className="size-[1.375rem]" />
                 </span>
                 <span
                   className={cx(
-                    'truncate text-[15px] font-medium whitespace-nowrap',
+                    'truncate text-[0.9375rem] font-medium whitespace-nowrap',
                     !open && 'pointer-events-none opacity-0'
                   )}
                 >

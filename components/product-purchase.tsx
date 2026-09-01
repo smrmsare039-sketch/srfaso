@@ -106,7 +106,7 @@ export function ProductPurchase({
           disabled={!inStock}
           onClick={() => add(line, quantity)}
           className={cx(
-            'flex items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-[15px] font-bold transition-colors',
+            'flex items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-[0.9375rem] font-bold transition-colors',
             inStock
               ? 'border-2 border-ink-900 text-ink-900 hover:bg-ink-900 hover:text-white'
               : 'cursor-not-allowed bg-ink-100 text-ink-400'
@@ -124,7 +124,7 @@ export function ProductPurchase({
             router.push('/commande')
           }}
           className={cx(
-            'flex items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-[15px] font-bold transition-colors',
+            'flex items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-[0.9375rem] font-bold transition-colors',
             inStock
               ? 'bg-brand-600 text-white hover:bg-brand-700'
               : 'cursor-not-allowed bg-ink-100 text-ink-400'
@@ -140,7 +140,7 @@ export function ProductPurchase({
             href={whatsappLink(whatsapp, waMessage)}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-5 py-3.5 text-[15px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90"
+            className="flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-5 py-3.5 text-[0.9375rem] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90"
           >
             Commander sur
             <WhatsAppIcon className="size-5" />
@@ -150,7 +150,7 @@ export function ProductPurchase({
         <button
           type="button"
           onClick={share}
-          className="flex items-center justify-center gap-2 rounded-xl border border-ink-200 px-5 py-3.5 text-[15px] font-semibold text-ink-700 transition-colors hover:border-ink-900 hover:text-ink-900"
+          className="flex items-center justify-center gap-2 rounded-xl border border-ink-200 px-5 py-3.5 text-[0.9375rem] font-semibold text-ink-700 transition-colors hover:border-ink-900 hover:text-ink-900"
         >
           {shared ? <Check className="size-5 text-green-600" /> : <Share2 className="size-5" />}
           {shared ? 'Lien copié' : 'Partager'}

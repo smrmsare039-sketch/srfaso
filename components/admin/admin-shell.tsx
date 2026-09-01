@@ -183,12 +183,12 @@ export function AdminShell({
                     collapsed && 'justify-center px-0'
                   )}
                 >
-                  <Icon className="size-[18px] shrink-0" strokeWidth={1.8} aria-hidden />
+                  <Icon className="size-[1.125rem] shrink-0" strokeWidth={1.8} aria-hidden />
                   {!collapsed && <span className="truncate">{item.label}</span>}
                   {badge > 0 && !collapsed && (
                     <span
                       className={cx(
-                        'ml-auto grid min-w-5 place-items-center rounded-full bg-brand-500 px-1 text-[11px] font-bold text-white',
+                        'ml-auto grid min-w-5 place-items-center rounded-full bg-brand-500 px-1 text-[0.6875rem] font-bold text-white',
                         active && 'bg-white text-brand-700'
                       )}
                     >
@@ -290,7 +290,7 @@ export function AdminShell({
                   onClick={() => setMenuOpen(false)}
                   className="flex h-11 items-center gap-3 rounded-xl px-3 text-sm font-medium text-ink-700 transition-colors hover:bg-ink-50 hover:text-ink-900"
                 >
-                  <ExternalLink className="size-[18px] shrink-0" strokeWidth={1.8} aria-hidden />
+                  <ExternalLink className="size-[1.125rem] shrink-0" strokeWidth={1.8} aria-hidden />
                   Voir le site
                 </Link>
 
@@ -301,7 +301,7 @@ export function AdminShell({
                   disabled={signingOut}
                   className="flex h-11 w-full items-center gap-3 rounded-xl px-3 text-sm font-medium text-brand-600 transition-colors hover:bg-brand-50 disabled:opacity-60"
                 >
-                  <LogOut className="size-[18px] shrink-0" strokeWidth={1.8} aria-hidden />
+                  <LogOut className="size-[1.125rem] shrink-0" strokeWidth={1.8} aria-hidden />
                   {signingOut ? 'Déconnexion…' : 'Déconnexion'}
                 </button>
               </div>

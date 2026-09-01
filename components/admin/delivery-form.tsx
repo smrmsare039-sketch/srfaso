@@ -55,7 +55,7 @@ export function DeliveryForm({ content }: { content: DeliveryContent | null }) {
               rows={14}
               value={deliveryBody}
               onChange={(e) => setDeliveryBody(e.target.value)}
-              className={`${textareaClass} font-mono text-[13px]`}
+              className={`${textareaClass} font-mono text-[0.8125rem]`}
             />
           </Field>
           {deliveryBody && (
@@ -84,7 +84,7 @@ export function DeliveryForm({ content }: { content: DeliveryContent | null }) {
               rows={14}
               value={returnBody}
               onChange={(e) => setReturnBody(e.target.value)}
-              className={`${textareaClass} font-mono text-[13px]`}
+              className={`${textareaClass} font-mono text-[0.8125rem]`}
             />
           </Field>
           {returnBody && (

@@ -11,7 +11,7 @@ import { formatPrice, whatsappLink } from '@/lib/utils'
 import { WhatsAppIcon } from '@/components/whatsapp-icon'
 
 const field =
-  'h-12 w-full rounded-xl border border-ink-200 bg-white px-4 text-[15px] text-ink-900 outline-none transition-colors placeholder:text-ink-400 focus:border-brand-500'
+  'h-12 w-full rounded-xl border border-ink-200 bg-white px-4 text-[0.9375rem] text-ink-900 outline-none transition-colors placeholder:text-ink-400 focus:border-brand-500'
 const label = 'mb-1.5 block text-sm font-semibold text-ink-800'
 
 export type AccountDefaults = { fullName: string; email: string; phone: string }
@@ -67,7 +67,7 @@ export function CheckoutForm({
               href={whatsappLink(whatsapp, waMessage)}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 py-3 text-[15px] font-bold text-white"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-6 py-3 text-[0.9375rem] font-bold text-white"
             >
               <WhatsAppIcon className="size-5" />
               Envoyer sur WhatsApp
@@ -75,7 +75,7 @@ export function CheckoutForm({
           )}
           <Link
             href="/produits"
-            className="rounded-xl border border-green-300 px-6 py-3 text-[15px] font-semibold text-green-900"
+            className="rounded-xl border border-green-300 px-6 py-3 text-[0.9375rem] font-semibold text-green-900"
           >
             Continuer mes achats
           </Link>
@@ -93,7 +93,7 @@ export function CheckoutForm({
         <p className="mt-4 text-lg font-bold text-ink-900">Votre panier est vide.</p>
         <Link
           href="/produits"
-          className="mt-7 inline-block rounded-xl bg-brand-600 px-7 py-3 text-[15px] font-bold text-white hover:bg-brand-700"
+          className="mt-7 inline-block rounded-xl bg-brand-600 px-7 py-3 text-[0.9375rem] font-bold text-white hover:bg-brand-700"
         >
           Voir les produits
         </Link>
@@ -230,7 +230,7 @@ export function CheckoutForm({
               rows={4}
               maxLength={1000}
               placeholder="Modèle de moto, précisions sur la pièce, point de repère pour la livraison…"
-              className="w-full rounded-xl border border-ink-200 bg-white px-4 py-3 text-[15px] outline-none focus:border-brand-500"
+              className="w-full rounded-xl border border-ink-200 bg-white px-4 py-3 text-[0.9375rem] outline-none focus:border-brand-500"
             />
           </div>
         </div>
@@ -274,7 +274,7 @@ export function CheckoutForm({
           <button
             type="submit"
             disabled={pending}
-            className="mt-6 flex h-12 w-full items-center justify-center rounded-xl bg-brand-600 text-[15px] font-bold text-white transition-colors hover:bg-brand-700 disabled:opacity-60"
+            className="mt-6 flex h-12 w-full items-center justify-center rounded-xl bg-brand-600 text-[0.9375rem] font-bold text-white transition-colors hover:bg-brand-700 disabled:opacity-60"
           >
             {pending ? 'Envoi…' : 'Valider ma commande'}
           </button>

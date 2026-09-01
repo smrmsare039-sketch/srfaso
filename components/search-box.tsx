@@ -92,7 +92,7 @@ export function SearchBox({ className }: { className?: string }) {
             onKeyDown={(e) => e.key === 'Escape' && setOpen(false)}
             placeholder="Rechercher des produits"
             autoComplete="off"
-            className="h-full flex-1 bg-transparent pr-3 pl-5 text-[15px] text-ink-900 outline-none placeholder:text-ink-400"
+            className="h-full flex-1 bg-transparent pr-3 pl-5 text-[0.9375rem] text-ink-900 outline-none placeholder:text-ink-400"
           />
           {loading && <Loader2 className="mr-2 size-4 animate-spin text-ink-400" aria-hidden />}
           <button
@@ -115,7 +115,7 @@ export function SearchBox({ className }: { className?: string }) {
 
           {categories.length > 0 && (
             <div className="mb-1">
-              <p className="px-3 pt-2 pb-1 text-[11px] font-semibold tracking-wider text-ink-400 uppercase">
+              <p className="px-3 pt-2 pb-1 text-[0.6875rem] font-semibold tracking-wider text-ink-400 uppercase">
                 Catégories
               </p>
               {categories.map((c) => (
@@ -134,7 +134,7 @@ export function SearchBox({ className }: { className?: string }) {
 
           {products.length > 0 && (
             <div>
-              <p className="px-3 pt-2 pb-1 text-[11px] font-semibold tracking-wider text-ink-400 uppercase">
+              <p className="px-3 pt-2 pb-1 text-[0.6875rem] font-semibold tracking-wider text-ink-400 uppercase">
                 Produits
               </p>
               {products.map((p) => (

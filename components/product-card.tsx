@@ -32,19 +32,19 @@ export function ProductCard({ product }: { product: ProductWithRelations }) {
 
         <span className="absolute top-2.5 left-2.5 flex flex-col items-start gap-1.5">
           {discount !== null && (
-            <span className="rounded-full bg-brand-600 px-2 py-0.5 text-[11px] font-bold text-white">
+            <span className="rounded-full bg-brand-600 px-2 py-0.5 text-[0.6875rem] font-bold text-white">
               -{discount}%
             </span>
           )}
           {product.is_new && (
-            <span className="rounded-full bg-ink-900 px-2 py-0.5 text-[11px] font-bold text-white">
+            <span className="rounded-full bg-ink-900 px-2 py-0.5 text-[0.6875rem] font-bold text-white">
               Nouveau
             </span>
           )}
         </span>
 
         {!inStock && (
-          <span className="absolute inset-x-0 bottom-0 bg-ink-900/85 py-1.5 text-center text-[11px] font-bold tracking-wide text-white uppercase">
+          <span className="absolute inset-x-0 bottom-0 bg-ink-900/85 py-1.5 text-center text-[0.6875rem] font-bold tracking-wide text-white uppercase">
             Rupture de stock
           </span>
         )}
@@ -54,13 +54,13 @@ export function ProductCard({ product }: { product: ProductWithRelations }) {
         {product.category && (
           <Link
             href={`/categories/${product.category.slug}`}
-            className="text-[11px] font-semibold tracking-wide text-ink-400 uppercase transition-colors hover:text-brand-600"
+            className="text-[0.6875rem] font-semibold tracking-wide text-ink-400 uppercase transition-colors hover:text-brand-600"
           >
             {product.category.name}
           </Link>
         )}
 
-        <h3 className="mt-1 text-[15px] leading-snug font-semibold text-ink-900">
+        <h3 className="mt-1 text-[0.9375rem] leading-snug font-semibold text-ink-900">
           <Link href={`/produits/${product.slug}`} className="line-clamp-2-safe hover:text-brand-600">
             {product.name}
           </Link>

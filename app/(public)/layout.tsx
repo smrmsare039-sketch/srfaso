@@ -42,7 +42,7 @@ export default async function PublicLayout({ children }: LayoutProps<'/'>) {
       />
       <CategoryRail categories={categories} />
       <div className="flex min-h-screen flex-col lg:pl-[var(--rail-width)]">
-        <SiteHeader settings={settings} categories={categories} />
+        <SiteHeader settings={settings} />
         <main className="flex-1">{children}</main>
         <SiteFooter settings={settings} categories={categories} />
       </div>

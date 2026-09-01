@@ -23,10 +23,10 @@ export default async function HistoriqueCommandesPage() {
         Mon compte
       </Link>
 
-      <h1 className="text-2xl font-extrabold text-ink-900 sm:text-[28px]">
+      <h1 className="text-2xl font-extrabold text-ink-900 sm:text-[1.75rem]">
         Historique de mes commandes
       </h1>
-      <p className="mt-2 mb-8 text-[15px] text-ink-500">
+      <p className="mt-2 mb-8 text-[0.9375rem] text-ink-500">
         {orders.length > 0
           ? `${orders.length} commande${orders.length > 1 ? 's' : ''} passée${orders.length > 1 ? 's' : ''} avec ce compte.`
           : 'Vos commandes apparaîtront ici.'}

@@ -110,7 +110,7 @@ export default async function MechanicPage() {
           {settings.phone_primary && (
             <a
               href={telLink(settings.phone_primary)}
-              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-[15px] font-bold text-ink-900"
+              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-[0.9375rem] font-bold text-ink-900"
             >
               <Phone className="size-4" aria-hidden />
               {settings.phone_primary}
@@ -121,7 +121,7 @@ export default async function MechanicPage() {
               href={whatsappLink(settings.whatsapp, settings.whatsapp_message ?? undefined)}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-6 py-3 text-[15px] font-bold text-white"
+              className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-6 py-3 text-[0.9375rem] font-bold text-white"
             >
               <WhatsAppIcon className="size-4" />
               Écrire sur WhatsApp

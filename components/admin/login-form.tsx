@@ -48,7 +48,7 @@ export function LoginForm() {
   }
 
   const field =
-    'h-12 w-full rounded-xl border border-ink-200 bg-white px-4 text-[15px] text-ink-900 outline-none transition-colors focus:border-brand-500'
+    'h-12 w-full rounded-xl border border-ink-200 bg-white px-4 text-[0.9375rem] text-ink-900 outline-none transition-colors focus:border-brand-500'
 
   return (
     <form onSubmit={submit} className="space-y-4">
@@ -95,7 +95,7 @@ export function LoginForm() {
       <button
         type="submit"
         disabled={pending}
-        className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-brand-600 text-[15px] font-bold text-white transition-colors hover:bg-brand-700 disabled:opacity-60"
+        className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-brand-600 text-[0.9375rem] font-bold text-white transition-colors hover:bg-brand-700 disabled:opacity-60"
       >
         <LogIn className="size-4" aria-hidden />
         {pending ? 'Connexion…' : 'Se connecter'}

@@ -135,16 +135,16 @@ export default async function HomePage() {
       <section className={heroTheme.section}>
         <div className="container-page grid items-center gap-10 py-14 lg:grid-cols-[1.05fr_0.95fr] lg:py-20">
           <div>
-            <h1 className="font-display text-4xl leading-[1.08] font-extrabold sm:text-5xl lg:text-[56px]">
+            <h1 className="font-display text-4xl leading-[1.08] font-extrabold sm:text-5xl lg:text-[3.5rem]">
               {settings.home_hero_title ?? 'Toutes les pièces de votre moto, au même endroit'}
             </h1>
-            <p className={`mt-5 max-w-xl text-[17px] leading-relaxed ${heroTheme.subtitle}`}>
+            <p className={`mt-5 max-w-xl text-[1.0625rem] leading-relaxed ${heroTheme.subtitle}`}>
               {settings.home_hero_subtitle}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href="/produits"
-                className={`inline-flex h-12 items-center gap-2 rounded-full px-7 text-[15px] font-bold transition-colors ${heroTheme.cta}`}
+                className={`inline-flex h-12 items-center gap-2 rounded-full px-7 text-[0.9375rem] font-bold transition-colors ${heroTheme.cta}`}
               >
                 Voir les produits
                 <ArrowRight className="size-4" aria-hidden />
@@ -154,7 +154,7 @@ export default async function HomePage() {
                   href={whatsappLink(settings.whatsapp, settings.whatsapp_message ?? undefined)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-12 items-center gap-2 rounded-full bg-[#25D366] px-7 text-[15px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90"
+                  className="inline-flex h-12 items-center gap-2 rounded-full bg-[#25D366] px-7 text-[0.9375rem] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90"
                 >
                   Commander sur
                   <WhatsAppIcon className="size-5" />
@@ -346,7 +346,7 @@ export default async function HomePage() {
                   <Icon className="size-5" strokeWidth={1.8} aria-hidden />
                 </span>
                 <span>
-                  <span className="block text-[15px] font-bold text-ink-900">{title}</span>
+                  <span className="block text-[0.9375rem] font-bold text-ink-900">{title}</span>
                   <span className="mt-1 block text-sm leading-relaxed text-ink-500">{text}</span>
                 </span>
               </li>
@@ -410,7 +410,7 @@ export default async function HomePage() {
                 <p className="mb-1 text-xs font-bold tracking-[0.16em] text-brand-500 uppercase">
                   Atelier
                 </p>
-                <h2 className="text-2xl font-extrabold sm:text-[28px]">Services de mécanique</h2>
+                <h2 className="text-2xl font-extrabold sm:text-[1.75rem]">Services de mécanique</h2>
               </div>
               <Link
                 href="/mecanique"
@@ -427,7 +427,7 @@ export default async function HomePage() {
                     className="flex h-full flex-col gap-2 rounded-2xl border border-white/10 bg-white/5 p-5 transition-colors hover:border-brand-500"
                   >
                     <CategoryIcon name={s.icon} className="size-6 text-brand-500" />
-                    <span className="text-[15px] font-bold">{s.title}</span>
+                    <span className="text-[0.9375rem] font-bold">{s.title}</span>
                     <span className="text-sm leading-relaxed text-ink-400">{s.description}</span>
                   </Link>
                 </li>
@@ -442,12 +442,12 @@ export default async function HomePage() {
         <section className="border-t border-ink-100 py-14">
           <div className="container-page">
             {settings.home_brands_title && (
-              <h2 className="text-2xl font-extrabold text-ink-900 sm:text-[28px]">
+              <h2 className="text-2xl font-extrabold text-ink-900 sm:text-[1.75rem]">
                 {settings.home_brands_title}
               </h2>
             )}
             {settings.home_brands_intro && (
-              <p className="mt-4 max-w-3xl text-[15px] leading-relaxed text-ink-500">
+              <p className="mt-4 max-w-3xl text-[0.9375rem] leading-relaxed text-ink-500">
                 {settings.home_brands_intro}
               </p>
             )}

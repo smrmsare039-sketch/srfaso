@@ -56,7 +56,7 @@ export function ProductImagesManager({
               />
 
               {img.is_primary && (
-                <span className="absolute top-2 left-2 rounded-full bg-brand-600 px-2 py-0.5 text-[11px] font-bold text-white">
+                <span className="absolute top-2 left-2 rounded-full bg-brand-600 px-2 py-0.5 text-[0.6875rem] font-bold text-white">
                   Principale
                 </span>
               )}
