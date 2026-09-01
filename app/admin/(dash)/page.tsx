@@ -12,13 +12,6 @@ export const dynamic = 'force-dynamic'
 const PERIOD_DAYS = 30
 const DAY_MS = 86_400_000
 
-/** Montant abrégé pour les axes : 1 250 000 → « 1,3 M ». */
-function compactPrice(value: number): string {
-  if (value >= 1_000_000) return `${(value / 1_000_000).toFixed(1).replace('.', ',')} M`
-  if (value >= 1_000) return `${Math.round(value / 1_000)} k`
-  return String(Math.round(value))
-}
-
 /** Variation en % entre deux périodes ; null quand la précédente est vide. */
 function delta(current: number, previous: number): number | null {
   if (previous <= 0) return null
@@ -269,7 +262,7 @@ export default async function AdminDashboard() {
           title="Chiffre d’affaires par jour"
           description={`${formatPrice(revenue)} sur ${PERIOD_DAYS} jours`}
         >
-          <TrendChart points={series.revenue} formatValue={compactPrice} />
+          <TrendChart points={series.revenue} format="compact-price" />
         </Card>
         <Card
           title="Commandes par jour"
@@ -278,7 +271,7 @@ export default async function AdminDashboard() {
           <TrendChart
             points={series.count}
             color="#2a78d6"
-            formatValue={(v) => String(Math.round(v))}
+            format="number"
           />
         </Card>
       </div>
@@ -286,14 +279,10 @@ export default async function AdminDashboard() {
       {/* Répartitions */}
       <div className="mt-4 grid gap-4 xl:grid-cols-2">
         <Card title="Commandes par statut" description="Où en est le traitement">
-          <DonutChart
-            slices={statusSlices}
-            formatValue={(v) => formatNumber(v)}
-            centerLabel="commandes"
-          />
+          <DonutChart slices={statusSlices} format="number" centerLabel="commandes" />
         </Card>
         <Card title="Chiffre d’affaires par ville" description="Top 5 sur la période">
-          <BarList bars={cityBars} formatValue={formatPrice} />
+          <BarList bars={cityBars} format="price" />
         </Card>
       </div>
 
@@ -364,7 +353,8 @@ export default async function AdminDashboard() {
                 value: Number(p.sales_count ?? 0),
                 hint: `${formatNumber(p.views)} vues${p.stock <= 0 ? ' · en rupture' : ''}`,
               }))}
-              formatValue={(v) => `${formatNumber(v)} vendus`}
+              format="number"
+              suffix=" vendus"
               color="#1baf7a"
             />
           )}

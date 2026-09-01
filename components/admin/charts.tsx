@@ -1,7 +1,7 @@
 'use client'
 
 import { useId, useState } from 'react'
-import { cx } from '@/lib/utils'
+import { cx, formatNumber, formatPrice } from '@/lib/utils'
 
 /**
  * Graphiques du tableau de bord : SVG pur, sans dépendance externe.
@@ -24,6 +24,30 @@ const AXIS = '#a8a8a3'
 const GRID = '#ececea'
 const INK = '#16161a'
 
+/**
+ * Format des valeurs affichées. C'est une chaîne, pas une fonction : les
+ * graphiques sont des Client Components et une fonction ne traverse pas la
+ * frontière serveur → client.
+ */
+export type ValueFormat = 'number' | 'price' | 'compact-price'
+
+/** Montant abrégé pour les axes : 1 250 000 → « 1,3 M ». */
+function compactPrice(value: number): string {
+  if (value >= 1_000_000) return `${(value / 1_000_000).toFixed(1).replace('.', ',')} M`
+  if (value >= 1_000) return `${Math.round(value / 1_000)} k`
+  return String(Math.round(value))
+}
+
+function formatValueAs(value: number, format: ValueFormat, suffix?: string): string {
+  const text =
+    format === 'price'
+      ? formatPrice(value)
+      : format === 'compact-price'
+        ? compactPrice(value)
+        : formatNumber(Math.round(value))
+  return suffix ? `${text}${suffix}` : text
+}
+
 export type TrendPoint = { label: string; value: number }
 
 /**
@@ -33,14 +57,17 @@ export type TrendPoint = { label: string; value: number }
 export function TrendChart({
   points,
   color = '#e60d12',
-  formatValue,
+  format = 'number',
+  suffix,
   height = 220,
 }: {
   points: TrendPoint[]
   color?: string
-  formatValue: (value: number) => string
+  format?: ValueFormat
+  suffix?: string
   height?: number
 }) {
+  const formatValue = (value: number) => formatValueAs(value, format, suffix)
   const gradientId = useId()
   const [hover, setHover] = useState<number | null>(null)
 
@@ -159,13 +186,16 @@ export type Slice = { label: string; value: number }
 /** Camembert (anneau) : identité par couleur + légende chiffrée, jamais la couleur seule. */
 export function DonutChart({
   slices,
-  formatValue,
+  format = 'number',
+  suffix,
   centerLabel,
 }: {
   slices: Slice[]
-  formatValue: (value: number) => string
+  format?: ValueFormat
+  suffix?: string
   centerLabel?: string
 }) {
+  const formatValue = (value: number) => formatValueAs(value, format, suffix)
   const [hover, setHover] = useState<number | null>(null)
   const data = slices.filter((s) => s.value > 0)
   const total = data.reduce((sum, s) => sum + s.value, 0)
@@ -268,13 +298,16 @@ export type Bar = { label: string; value: number; hint?: string }
 /** Barres horizontales, une seule mesure : extrémités arrondies, valeurs affichées. */
 export function BarList({
   bars,
-  formatValue,
+  format = 'number',
+  suffix,
   color = SERIES_COLORS[0],
 }: {
   bars: Bar[]
-  formatValue: (value: number) => string
+  format?: ValueFormat
+  suffix?: string
   color?: string
 }) {
+  const formatValue = (value: number) => formatValueAs(value, format, suffix)
   if (bars.length === 0) {
     return <p className="py-10 text-center text-sm text-ink-400">Aucune donnée sur la période.</p>
   }
