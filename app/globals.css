@@ -53,9 +53,9 @@
 html {
   -webkit-text-size-adjust: 100%;
   /* Échelle globale de l'interface. Toutes les tailles étant exprimées en rem,
-     cette valeur suffit à agrandir ou réduire l'ensemble du site.
-     Mobile : 16 px (lisibilité et zones tactiles). Tablette/desktop : 14 px. */
-  font-size: 100%;
+     ces deux valeurs suffisent à agrandir ou réduire l'ensemble du site.
+     Mobile : 13,6 px. Tablette/desktop : 14 px. */
+  font-size: 85%;
 }
 
 @media (min-width: 768px) {
