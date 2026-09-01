@@ -41,8 +41,8 @@ export default async function PublicLayout({ children }: LayoutProps<'/'>) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <CategoryRail categories={categories} />
-      <div className="flex min-h-screen flex-col pl-[var(--rail-width)]">
-        <SiteHeader settings={settings} />
+      <div className="flex min-h-screen flex-col lg:pl-[var(--rail-width)]">
+        <SiteHeader settings={settings} categories={categories} />
         <main className="flex-1">{children}</main>
         <SiteFooter settings={settings} categories={categories} />
       </div>

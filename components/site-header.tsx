@@ -6,10 +6,16 @@ import { BrandLogo } from '@/components/brand-logo'
 import { CartButton } from '@/components/cart-button'
 import { MainNav, MobileNav } from '@/components/main-nav'
 import { SearchBox } from '@/components/search-box'
-import type { SiteSettings } from '@/lib/types'
+import type { Category, SiteSettings } from '@/lib/types'
 import { telLink } from '@/lib/utils'
 
-export function SiteHeader({ settings }: { settings: SiteSettings }) {
+export function SiteHeader({
+  settings,
+  categories,
+}: {
+  settings: SiteSettings
+  categories: Category[]
+}) {
   const phone = settings.phone_primary
   const whatsapp = settings.whatsapp ?? settings.phone_primary
 
@@ -84,7 +90,7 @@ export function SiteHeader({ settings }: { settings: SiteSettings }) {
           <div className="ml-auto flex items-center gap-2">
             <CartButton />
             <AccountButton />
-            <MobileNav phone={phone} whatsapp={whatsapp} />
+            <MobileNav phone={phone} whatsapp={whatsapp} categories={categories} />
           </div>
         </div>
       </div>

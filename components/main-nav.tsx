@@ -4,7 +4,9 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { ChevronRight, Menu, X } from 'lucide-react'
+import { CategoryIcon } from '@/components/category-icon'
 import { MAIN_NAV } from '@/lib/nav'
+import type { Category } from '@/lib/types'
 import { cx, telLink, whatsappLink } from '@/lib/utils'
 import { WhatsAppIcon } from '@/components/whatsapp-icon'
 
@@ -40,9 +42,12 @@ export function MainNav() {
 export function MobileNav({
   phone,
   whatsapp,
+  categories = [],
 }: {
   phone: string | null
   whatsapp: string | null
+  /** Le rail latéral étant masqué sur mobile, les catégories vivent ici. */
+  categories?: Category[]
 }) {
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
@@ -116,6 +121,43 @@ export function MobileNav({
                   <ChevronRight className="size-4 text-ink-300" />
                 </Link>
               </li>
+
+              {categories.length > 0 && (
+                <li className="mt-2 border-t border-ink-100 pt-3">
+                  <p className="px-4 pb-1 text-xs font-bold tracking-wider text-ink-400 uppercase">
+                    Catégories
+                  </p>
+                  <ul>
+                    {categories.map((category) => {
+                      const href = `/categories/${category.slug}`
+                      const active = pathname === href
+                      return (
+                        <li key={category.id}>
+                          <Link
+                            href={href}
+                            className={cx(
+                              'flex items-center gap-3 rounded-xl px-4 py-3 text-[15px] font-medium hover:bg-ink-50',
+                              active ? 'text-brand-600' : 'text-ink-800'
+                            )}
+                          >
+                            <CategoryIcon name={category.icon} className="size-5 shrink-0" />
+                            <span className="truncate">{category.name}</span>
+                          </Link>
+                        </li>
+                      )
+                    })}
+                    <li>
+                      <Link
+                        href="/categories"
+                        className="flex items-center justify-between rounded-xl px-4 py-3 text-[15px] font-semibold text-brand-600 hover:bg-brand-50"
+                      >
+                        Voir toutes les catégories
+                        <ChevronRight className="size-4" />
+                      </Link>
+                    </li>
+                  </ul>
+                </li>
+              )}
             </ul>
 
             <div className="space-y-2 border-t border-ink-100 p-4">

@@ -63,7 +63,8 @@ export function CategoryRail({ categories }: { categories: Category[] }) {
         onMouseLeave={closeSoon}
         style={{ width: open ? 'var(--rail-expanded)' : 'var(--rail-width)' }}
         className={cx(
-          'fixed top-0 bottom-0 left-0 z-40 flex flex-col border-r border-ink-100 bg-white',
+          // Masqué sur mobile : les catégories y sont accessibles depuis le menu burger.
+          'fixed top-0 bottom-0 left-0 z-40 hidden flex-col border-r border-ink-100 bg-white lg:flex',
           'transition-[width] duration-200 ease-out',
           open && 'shadow-pop'
         )}
