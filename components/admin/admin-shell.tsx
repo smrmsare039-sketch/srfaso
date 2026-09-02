@@ -139,7 +139,7 @@ export function AdminShell({
           </span>
           {!collapsed && (
             <span className="truncate font-display text-sm font-extrabold text-white">
-              SR FASO — Admin
+              SR Motorcycle
             </span>
           )}
         </Link>
@@ -147,7 +147,7 @@ export function AdminShell({
           type="button"
           onClick={toggle}
           aria-label={collapsed ? 'Déployer le menu' : 'Réduire le menu'}
-          className="ml-auto hidden size-8 shrink-0 place-items-center rounded-lg text-ink-400 transition-colors hover:bg-white/10 hover:text-white lg:grid"
+          className="ml-auto hidden size-8 shrink-0 place-items-center rounded-lg bg-brand-600/15 text-brand-500 transition-colors hover:bg-brand-600 hover:text-white lg:grid"
         >
           <ChevronLeft className={cx('size-4 transition-transform', collapsed && 'rotate-180')} />
         </button>
