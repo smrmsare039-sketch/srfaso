@@ -52,6 +52,10 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  /* iOS : pas de flash gris au toucher, et pas de temporisation de 300 ms
+     avant qu'un appui soit traité (le double-tap zoom est neutralisé sur les
+     seuls éléments interactifs, le zoom pincé reste possible). */
+  -webkit-tap-highlight-color: transparent;
   /* Échelle globale de l'interface. Toutes les tailles étant exprimées en rem,
      ces deux valeurs suffisent à agrandir ou réduire l'ensemble du site.
      Mobile : 13,6 px. Tablette/desktop : 14 px. */
@@ -62,6 +66,17 @@ html {
   html {
     font-size: 87.5%;
   }
+}
+
+a,
+button,
+label,
+input,
+select,
+textarea,
+summary,
+[role='button'] {
+  touch-action: manipulation;
 }
 
 body {
@@ -145,11 +160,11 @@ h4 {
   animation: sr-fade-up 0.24s ease-out both;
 }
 
-/* Notifications : entrée depuis le bas sur mobile, depuis la droite dès sm. */
+/* Notifications : entrée par le haut sur mobile, depuis la droite dès sm. */
 @keyframes sr-toast-in {
   from {
     opacity: 0;
-    transform: translateY(14px) scale(0.97);
+    transform: translateY(-14px) scale(0.97);
   }
   to {
     opacity: 1;
@@ -164,7 +179,7 @@ h4 {
   }
   to {
     opacity: 0;
-    transform: translateY(8px) scale(0.97);
+    transform: translateY(-8px) scale(0.97);
   }
 }
 
@@ -199,6 +214,64 @@ h4 {
       transform: translateX(24px) scale(0.97);
     }
   }
+}
+
+/* Correctif iOS du « 100vh » : sur Safari mobile, 1vh se mesure barre d'outils
+   masquée. Une page en min-height:100vh dépasse donc l'écran au chargement.
+   `svh` (small viewport height) est la hauteur toujours visible. */
+@supports (height: 100svh) {
+  .min-h-screen {
+    min-height: 100svh;
+  }
+}
+
+/* Marge basse sûre : barre de gestes iOS / Android sous les actions des
+   feuilles de dialogue. Sans encoche, on retombe sur 1rem. */
+@utility pb-safe {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+}
+
+/* Boîtes de dialogue du back-office */
+@keyframes sr-modal-backdrop {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes sr-modal-panel {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Téléphone : la feuille monte depuis le bas de l'écran. */
+@keyframes sr-modal-sheet {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@utility animate-modal-sheet {
+  animation: sr-modal-sheet 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-modal-backdrop {
+  animation: sr-modal-backdrop 0.18s ease-out both;
+}
+
+@utility animate-modal-panel {
+  animation: sr-modal-panel 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 @media (prefers-reduced-motion: reduce) {

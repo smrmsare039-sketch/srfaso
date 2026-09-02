@@ -130,6 +130,25 @@ export type Service = {
   is_active: boolean
 }
 
+/** Photo de l'atelier affichée dans la galerie de la page /mecanique. */
+export type WorkshopPhoto = {
+  id: string
+  title: string | null
+  caption: string | null
+  image_url: string
+  /** Photo « avant » facultative : la fiche devient un comparatif avant / après. */
+  before_url: string | null
+  service_id: string | null
+  position: number
+  is_active: boolean
+  created_at?: string
+  updated_at?: string
+}
+
+export type WorkshopPhotoWithService = WorkshopPhoto & {
+  service: Pick<Service, 'id' | 'title' | 'slug'> | null
+}
+
 export type Customer = {
   id: string
   first_name: string | null
@@ -224,6 +243,23 @@ export type SiteSettings = {
   home_brands_intro: string | null
   home_seo_content: string | null
 }
+
+/** Section « offre du moment » de la page d'accueil (ligne unique). */
+export type HomePromo = {
+  id: number
+  is_active: boolean
+  eyebrow: string | null
+  title: string | null
+  description: string | null
+  image_url: string | null
+  cta_label: string | null
+  cta_href: string | null
+  ends_at: string | null
+  product_ids: string[]
+}
+
+/** Nombre de produits affichés sous la bannière promotionnelle. */
+export const HOME_PROMO_PRODUCTS_MAX = 6
 
 export type DeliveryContent = {
   id: number

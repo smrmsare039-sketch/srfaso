@@ -17,6 +17,7 @@ export const ADMIN_NAV = [
   { href: '/admin/boutiques', label: 'Boutiques', icon: 'store' },
   { href: '/admin/mecanique', label: 'Mécanique', icon: 'wrench' },
   { href: '/admin/marques', label: 'Marques', icon: 'badge-check' },
+  { href: '/admin/promotion', label: 'Promotion', icon: 'megaphone' },
   { href: '/admin/livraison', label: 'Livraison & Retour', icon: 'truck' },
   { href: '/admin/parametres', label: 'Paramètres', icon: 'settings' },
   { href: '/admin/utilisateurs', label: 'Utilisateurs', icon: 'shield' },

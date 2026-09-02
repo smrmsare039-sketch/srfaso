@@ -3,10 +3,11 @@
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState, useTransition } from 'react'
-import { Pencil, Plus, Save, Trash2, X } from 'lucide-react'
+import { Pencil, Plus, Save, Trash2 } from 'lucide-react'
 import { CategoryIcon, ICON_NAMES } from '@/components/category-icon'
 import { ImageUploader } from '@/components/admin/image-uploader'
-import { Badge, Card, Field, inputClass, textareaClass } from '@/components/admin/ui'
+import { Badge, Field, inputClass, textareaClass } from '@/components/admin/ui'
+import { ConfirmModal, Modal } from '@/components/admin/modal'
 import { useToast } from '@/components/toast'
 import { deleteCategory, saveCategory } from '@/lib/actions/admin'
 import type { Category } from '@/lib/types'
@@ -29,6 +30,7 @@ export function CategoriesManager({
 
   const open = creating || editing !== null
   const current = editing
+  const confirmTarget = categories.find((c) => c.id === confirmId) ?? null
 
   function startCreate() {
     setEditing(null)
@@ -48,12 +50,18 @@ export function CategoriesManager({
   }
 
   return (
-    <div className="grid gap-5 xl:grid-cols-[1.5fr_1fr]">
+    <div className="space-y-5">
       <div className="overflow-hidden rounded-2xl border border-ink-200 bg-white">
-        <div className="flex items-center justify-between border-b border-ink-100 px-5 py-4">
-          <h3 className="font-bold text-ink-900">
-            {categories.length} catégorie{categories.length > 1 ? 's' : ''}
-          </h3>
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-ink-100 px-5 py-4">
+          <div>
+            <h3 className="font-bold text-ink-900">
+              {categories.length} catégorie{categories.length > 1 ? 's' : ''}
+            </h3>
+            <p className="mt-0.5 text-sm text-ink-500">
+              L’ordre d’affichage sur le site suit la valeur « Position », du plus petit au plus
+              grand.
+            </p>
+          </div>
           <button
             type="button"
             onClick={startCreate}
@@ -114,51 +122,14 @@ export function CategoriesManager({
                   >
                     <Pencil className="size-4" />
                   </button>
-                  {confirmId === category.id ? (
-                    <>
-                      <button
-                        type="button"
-                        disabled={pending}
-                        onClick={() =>
-                          startTransition(async () => {
-                            const result = await deleteCategory(category.id)
-                            if (result.ok) {
-                              toast.success('Catégorie supprimée', {
-                                key: 'categorie',
-                                description: `« ${category.name} » n’apparaît plus sur le site.`,
-                              })
-                            } else {
-                              toast.error('Suppression impossible', {
-                                key: 'categorie',
-                                description: result.error,
-                              })
-                            }
-                            setConfirmId(null)
-                            router.refresh()
-                          })
-                        }
-                        className="rounded-lg bg-brand-600 px-3 py-2 text-xs font-bold text-white"
-                      >
-                        Confirmer
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setConfirmId(null)}
-                        className="rounded-lg border border-ink-200 px-3 py-2 text-xs font-semibold text-ink-600"
-                      >
-                        Annuler
-                      </button>
-                    </>
-                  ) : (
-                    <button
-                      type="button"
-                      onClick={() => setConfirmId(category.id)}
-                      title="Supprimer"
-                      className="grid size-9 place-items-center rounded-lg border border-ink-200 text-ink-500 hover:border-brand-400 hover:text-brand-600"
-                    >
-                      <Trash2 className="size-4" />
-                    </button>
-                  )}
+                  <button
+                    type="button"
+                    onClick={() => setConfirmId(category.id)}
+                    title="Supprimer"
+                    className="grid size-9 place-items-center rounded-lg border border-ink-200 text-ink-500 hover:border-brand-400 hover:text-brand-600"
+                  >
+                    <Trash2 className="size-4" />
+                  </button>
                 </span>
               </li>
             ))}
@@ -166,7 +137,15 @@ export function CategoriesManager({
         )}
       </div>
 
-      {open ? (
+      <Modal
+        open={open}
+        size="lg"
+        title={current ? 'Modifier la catégorie' : 'Nouvelle catégorie'}
+        description={
+          current ? `« ${current.name} » — visible immédiatement sur le site.` : undefined
+        }
+        onClose={close}
+      >
         <CategoryForm
           key={current?.id ?? 'new'}
           category={current}
@@ -195,14 +174,35 @@ export function CategoriesManager({
             })
           }}
         />
-      ) : (
-        <Card title="Gestion des catégories">
-          <p className="text-sm leading-relaxed text-ink-500">
-            Sélectionnez une catégorie pour la modifier, ou créez-en une nouvelle. L’ordre
-            d’affichage sur le site suit la valeur « Position » (du plus petit au plus grand).
-          </p>
-        </Card>
-      )}
+      </Modal>
+
+      <ConfirmModal
+        open={confirmTarget !== null}
+        pending={pending}
+        title="Supprimer cette catégorie ?"
+        description={`« ${confirmTarget?.name ?? ''} » sera retirée du site. Les produits rattachés ne sont pas supprimés, mais perdent cette catégorie.`}
+        onClose={() => setConfirmId(null)}
+        onConfirm={() => {
+          const target = confirmTarget
+          if (!target) return
+          startTransition(async () => {
+            const result = await deleteCategory(target.id)
+            if (result.ok) {
+              toast.success('Catégorie supprimée', {
+                key: 'categorie',
+                description: `« ${target.name} » n’apparaît plus sur le site.`,
+              })
+            } else {
+              toast.error('Suppression impossible', {
+                key: 'categorie',
+                description: result.error,
+              })
+            }
+            setConfirmId(null)
+            router.refresh()
+          })
+        }}
+      />
     </div>
   )
 }
@@ -228,23 +228,8 @@ function CategoryForm({
   const [slug, setSlug] = useState(category?.slug ?? '')
 
   return (
-    <form action={onSubmit} className="xl:sticky xl:top-24 xl:self-start">
-      <div className="rounded-2xl border border-ink-200 bg-white">
-        <header className="flex items-center justify-between border-b border-ink-100 px-5 py-4">
-          <h3 className="font-bold text-ink-900">
-            {category ? 'Modifier la catégorie' : 'Nouvelle catégorie'}
-          </h3>
-          <button
-            type="button"
-            onClick={onCancel}
-            aria-label="Fermer"
-            className="grid size-9 place-items-center rounded-lg text-ink-400 hover:bg-ink-50"
-          >
-            <X className="size-4" />
-          </button>
-        </header>
-
-        <div className="space-y-4 p-5">
+    <form action={onSubmit}>
+      <div className="space-y-4 p-4 sm:p-5">
           {category && <input type="hidden" name="id" value={category.id} />}
           <input type="hidden" name="image_url" value={imageUrl} />
 
@@ -264,6 +249,9 @@ function CategoryForm({
           <Field label="Slug (URL)">
             <input
               name="slug"
+              autoCapitalize="none"
+              autoCorrect="off"
+              spellCheck={false}
               value={slug}
               onChange={(e) => setSlug(e.target.value)}
               className={inputClass}
@@ -372,10 +360,18 @@ function CategoryForm({
             Catégorie active
           </label>
 
+        <div className="pb-safe sticky bottom-0 -mx-4 -mb-4 flex flex-col-reverse gap-2 border-t border-ink-100 bg-white px-4 py-3 sm:-mx-5 sm:-mb-5 sm:flex-row sm:justify-end sm:px-5 sm:py-4 sm:pb-4">
+          <button
+            type="button"
+            onClick={onCancel}
+            className="h-12 rounded-xl border border-ink-200 px-5 text-sm font-semibold text-ink-700 transition-colors hover:border-ink-900 sm:h-11"
+          >
+            Annuler
+          </button>
           <button
             type="submit"
             disabled={pending}
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-brand-600 text-sm font-bold text-white hover:bg-brand-700 disabled:opacity-60"
+            className="flex h-12 items-center justify-center gap-2 rounded-xl bg-brand-600 px-6 text-sm font-bold text-white hover:bg-brand-700 disabled:opacity-60 sm:h-11"
           >
             <Save className="size-4" />
             {pending ? 'Enregistrement…' : 'Enregistrer'}

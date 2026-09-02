@@ -16,7 +16,7 @@ export function WhatsAppFloat({
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Discuter avec nous sur WhatsApp"
-      className="fixed right-4 bottom-5 z-40 flex items-center gap-2.5 rounded-full bg-[#25D366] py-3 pr-5 pl-3 font-semibold text-white shadow-pop transition-transform hover:scale-105"
+      className="fixed right-4 bottom-[max(1.25rem,env(safe-area-inset-bottom))] z-40 flex items-center gap-2.5 rounded-full bg-[#25D366] py-3 pr-5 pl-3 font-semibold text-white shadow-pop transition-transform hover:scale-105"
     >
       <WhatsAppIcon className="size-6 shrink-0" />
       <span className="hidden text-sm sm:inline">Discuter avec nous</span>

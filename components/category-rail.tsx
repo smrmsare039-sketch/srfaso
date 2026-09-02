@@ -64,7 +64,7 @@ export function CategoryRail({ categories }: { categories: Category[] }) {
           onClick={() => setPinned(true)}
           aria-label="Toutes les catégories"
           aria-expanded={false}
-          className="fixed bottom-5 left-4 z-40 flex items-center gap-2 rounded-full bg-brand-600 py-3 pr-5 pl-3 font-semibold text-white shadow-pop transition-transform hover:scale-105 lg:hidden"
+          className="fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] left-4 z-40 flex items-center gap-2 rounded-full bg-brand-600 py-3 pr-5 pl-3 font-semibold text-white shadow-pop transition-transform hover:scale-105 lg:hidden"
         >
           <Menu className="size-6 shrink-0" />
           <span className="text-sm">Catégories</span>

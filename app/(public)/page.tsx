@@ -13,11 +13,14 @@ import {
 } from 'lucide-react'
 import { BrandStrip } from '@/components/brand-strip'
 import { CategoryIcon } from '@/components/category-icon'
+import { HomePromoSection } from '@/components/home-promo'
 import { ProductCard } from '@/components/product-card'
 import { SectionHeading } from '@/components/section-heading'
 import {
   getCategoryCounts,
   getFeaturedProducts,
+  getHomePromo,
+  getHomePromoProducts,
   getNewProducts,
   getPartnerBrands,
   getPopularProducts,
@@ -81,19 +84,33 @@ const ADVANTAGES = [
 ]
 
 export default async function HomePage() {
-  const [settings, categories, counts, featured, news, promos, popular, shops, services, brands] =
-    await Promise.all([
-      getSettings(),
-      getRootCategories(),
-      getCategoryCounts(),
-      getFeaturedProducts(10),
-      getNewProducts(10),
-      getPromoProducts(10),
-      getPopularProducts(10),
-      getShops(),
-      getServices(),
-      getPartnerBrands(),
-    ])
+  const [
+    settings,
+    categories,
+    counts,
+    featured,
+    news,
+    promos,
+    popular,
+    shops,
+    services,
+    brands,
+    promo,
+  ] = await Promise.all([
+    getSettings(),
+    getRootCategories(),
+    getCategoryCounts(),
+    getFeaturedProducts(10),
+    getNewProducts(10),
+    getPromoProducts(10),
+    getPopularProducts(10),
+    getShops(),
+    getServices(),
+    getPartnerBrands(),
+    getHomePromo(),
+  ])
+
+  const promoProducts = await getHomePromoProducts(promo?.product_ids ?? [])
 
   // Mosaïque de la bannière : visuels gérés au back-office, sinon les produits populaires.
   const heroProducts = popular.length ? popular : featured
@@ -316,6 +333,11 @@ export default async function HomePage() {
         </section>
       )}
 
+      {/* Offre du moment (gérée au back-office) */}
+      {promo?.is_active && (promo.title || promo.image_url) && (
+        <HomePromoSection promo={promo} products={promoProducts} />
+      )}
+
       {/* Sélection de la boutique */}
       {featured.length > 0 && (
         <section className="container-page py-14">
@@ -390,7 +412,7 @@ export default async function HomePage() {
                   )}
                   <Link
                     href="/boutiques"
-                    className="rounded-full bg-ink-900 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-600"
+                    className="rounded-full bg-gradient-to-br from-brand-600 to-brand-800 transition-[background-image] hover:from-brand-500 hover:to-brand-700 px-4 py-2 text-sm font-semibold text-white"
                   >
                     Itinéraire
                   </Link>

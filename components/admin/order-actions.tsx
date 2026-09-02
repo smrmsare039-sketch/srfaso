@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useState, useTransition } from 'react'
 import { Save, Trash2 } from 'lucide-react'
 import { inputClass, textareaClass } from '@/components/admin/ui'
+import { ConfirmModal } from '@/components/admin/modal'
 import { useToast } from '@/components/toast'
 import { deleteOrder, updateOrderDelivery, updateOrderStatus } from '@/lib/actions/admin'
 import { ORDER_STATUS_LABELS, type OrderStatus } from '@/lib/types'
@@ -112,50 +113,40 @@ export function OrderActions({
         {pending ? 'Enregistrement…' : 'Enregistrer'}
       </button>
 
-      {confirming ? (
-        <div className="flex gap-2">
-          <button
-            type="button"
-            disabled={pending}
-            onClick={() =>
-              startTransition(async () => {
-                const result = await deleteOrder(orderId)
-                if (!result.ok) {
-                  toast.error('Suppression impossible', {
-                    key: 'commande-admin',
-                    description: result.error,
-                  })
-                  return
-                }
-                toast.success('Commande supprimée', {
-                  key: 'commande-admin',
-                  description: 'Elle n’apparaît plus dans la liste des commandes.',
-                })
-                router.push('/admin/commandes')
+      <button
+        type="button"
+        onClick={() => setConfirming(true)}
+        className="flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-ink-200 text-sm font-semibold text-ink-500 hover:border-brand-400 hover:text-brand-600"
+      >
+        <Trash2 className="size-4" />
+        Supprimer la commande
+      </button>
+
+      <ConfirmModal
+        open={confirming}
+        pending={pending}
+        title="Supprimer cette commande ?"
+        description="La commande et son détail seront définitivement effacés. Cette action est irréversible."
+        confirmLabel="Supprimer définitivement"
+        onClose={() => setConfirming(false)}
+        onConfirm={() =>
+          startTransition(async () => {
+            const result = await deleteOrder(orderId)
+            if (!result.ok) {
+              toast.error('Suppression impossible', {
+                key: 'commande-admin',
+                description: result.error,
               })
+              return
             }
-            className="h-11 flex-1 rounded-xl bg-brand-600 text-sm font-bold text-white"
-          >
-            Supprimer définitivement
-          </button>
-          <button
-            type="button"
-            onClick={() => setConfirming(false)}
-            className="h-11 rounded-xl border border-ink-200 px-4 text-sm font-semibold text-ink-600"
-          >
-            Annuler
-          </button>
-        </div>
-      ) : (
-        <button
-          type="button"
-          onClick={() => setConfirming(true)}
-          className="flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-ink-200 text-sm font-semibold text-ink-500 hover:border-brand-400 hover:text-brand-600"
-        >
-          <Trash2 className="size-4" />
-          Supprimer la commande
-        </button>
-      )}
+            toast.success('Commande supprimée', {
+              key: 'commande-admin',
+              description: 'Elle n’apparaît plus dans la liste des commandes.',
+            })
+            router.push('/admin/commandes')
+          })
+        }
+      />
     </div>
   )
 }

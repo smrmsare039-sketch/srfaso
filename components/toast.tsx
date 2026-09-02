@@ -316,7 +316,7 @@ function ToastViewport({
     <div
       role="region"
       aria-label="Notifications"
-      className="pointer-events-none fixed inset-x-0 bottom-0 z-[100] flex flex-col items-center gap-2.5 p-3 sm:inset-x-auto sm:right-4 sm:bottom-4 sm:items-end sm:p-0"
+      className="pointer-events-none fixed inset-x-0 top-0 z-[100] flex flex-col items-center gap-2.5 p-3 sm:inset-x-auto sm:top-4 sm:right-4 sm:items-end sm:p-0"
     >
       {toasts.map((toast) => (
         <ToastCard key={toast.id} toast={toast} onDismiss={() => onDismiss(toast.id)} />
@@ -406,7 +406,7 @@ function ToastCard({ toast, onDismiss }: { toast: ToastItem; onDismiss: () => vo
         touchAction: 'pan-y',
       }}
       className={cx(
-        'pointer-events-auto relative w-[min(24rem,calc(100vw-1.5rem))] overflow-hidden rounded-2xl border bg-white shadow-pop',
+        'pointer-events-auto relative w-[min(24rem,calc(100vw-1.5rem))] overflow-hidden rounded-2xl border bg-white shadow-pop select-none',
         style.ring,
         toast.closing ? 'animate-toast-out' : 'animate-toast-in'
       )}

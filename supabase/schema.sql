@@ -250,6 +250,27 @@ create trigger partner_brands_updated_at before update on public.partner_brands
   for each row execute function public.set_updated_at();
 
 -- ---------------------------------------------------------------------
+-- workshop_gallery (photos de l'atelier, page /mecanique)
+-- ---------------------------------------------------------------------
+create table if not exists public.workshop_gallery (
+  id         uuid primary key default gen_random_uuid(),
+  title      text,
+  caption    text,
+  image_url  text not null,
+  before_url text,
+  service_id uuid references public.services(id) on delete set null,
+  position   integer not null default 0,
+  is_active  boolean not null default true,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+create index if not exists workshop_gallery_position_idx
+  on public.workshop_gallery (position, created_at);
+drop trigger if exists workshop_gallery_updated_at on public.workshop_gallery;
+create trigger workshop_gallery_updated_at before update on public.workshop_gallery
+  for each row execute function public.set_updated_at();
+
+-- ---------------------------------------------------------------------
 -- customers
 -- ---------------------------------------------------------------------
 create table if not exists public.customers (
@@ -377,6 +398,26 @@ create trigger site_settings_updated_at before update on public.site_settings
   for each row execute function public.set_updated_at();
 
 -- ---------------------------------------------------------------------
+-- home_promo (ligne unique) — section « offre du moment » de l'accueil
+-- ---------------------------------------------------------------------
+create table if not exists public.home_promo (
+  id           smallint primary key default 1 check (id = 1),
+  is_active    boolean not null default false,
+  eyebrow      text,
+  title        text,
+  description  text,
+  image_url    text,
+  cta_label    text,
+  cta_href     text,
+  ends_at      timestamptz,
+  product_ids  jsonb not null default '[]'::jsonb,
+  updated_at   timestamptz not null default now()
+);
+drop trigger if exists home_promo_updated_at on public.home_promo;
+create trigger home_promo_updated_at before update on public.home_promo
+  for each row execute function public.set_updated_at();
+
+-- ---------------------------------------------------------------------
 -- delivery_content (ligne unique)
 -- ---------------------------------------------------------------------
 create table if not exists public.delivery_content (
@@ -403,12 +444,14 @@ alter table public.product_images   enable row level security;
 alter table public.shops            enable row level security;
 alter table public.services         enable row level security;
 alter table public.partner_brands   enable row level security;
+alter table public.workshop_gallery enable row level security;
 alter table public.customers        enable row level security;
 alter table public.orders           enable row level security;
 alter table public.order_items      enable row level security;
 alter table public.contact_messages enable row level security;
 alter table public.site_settings    enable row level security;
 alter table public.delivery_content enable row level security;
+alter table public.home_promo       enable row level security;
 
 -- profiles : chacun voit son profil, les admins voient tout
 drop policy if exists profiles_self_read on public.profiles;
@@ -461,11 +504,25 @@ drop policy if exists partner_brands_admin_all on public.partner_brands;
 create policy partner_brands_admin_all on public.partner_brands
   for all using (public.is_admin()) with check (public.is_admin());
 
+drop policy if exists workshop_gallery_public_read on public.workshop_gallery;
+create policy workshop_gallery_public_read on public.workshop_gallery
+  for select using (is_active or public.is_admin());
+drop policy if exists workshop_gallery_admin_all on public.workshop_gallery;
+create policy workshop_gallery_admin_all on public.workshop_gallery
+  for all using (public.is_admin()) with check (public.is_admin());
+
 drop policy if exists site_settings_public_read on public.site_settings;
 create policy site_settings_public_read on public.site_settings
   for select using (true);
 drop policy if exists site_settings_admin_all on public.site_settings;
 create policy site_settings_admin_all on public.site_settings
+  for all using (public.is_admin()) with check (public.is_admin());
+
+drop policy if exists home_promo_public_read on public.home_promo;
+create policy home_promo_public_read on public.home_promo
+  for select using (true);
+drop policy if exists home_promo_admin_all on public.home_promo;
+create policy home_promo_admin_all on public.home_promo
   for all using (public.is_admin()) with check (public.is_admin());
 
 drop policy if exists delivery_content_public_read on public.delivery_content;

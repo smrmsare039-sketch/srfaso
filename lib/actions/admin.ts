@@ -5,7 +5,7 @@ import { createSupabaseAdminClient } from '@/lib/supabase/admin'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { getCurrentProfile } from '@/lib/auth'
 import { slugify } from '@/lib/utils'
-import { HERO_TILES_MAX } from '@/lib/types'
+import { HERO_TILES_MAX, HOME_PROMO_PRODUCTS_MAX } from '@/lib/types'
 import type { HeroTile, MessageStatus, OrderStatus, Spec } from '@/lib/types'
 
 export type AdminResult<T = undefined> =
@@ -479,6 +479,101 @@ export async function deleteService(id: string): Promise<AdminResult> {
 }
 
 // =====================================================================
+// Galerie de l'atelier (page /mecanique)
+// =====================================================================
+/** Ajout groupé après téléversement : une ligne par photo, en fin de galerie. */
+export async function addWorkshopPhotos(urls: string[]): Promise<AdminResult> {
+  await guard()
+  if (urls.length === 0) return { ok: true }
+  const supabase = await createSupabaseServerClient()
+
+  const { data: last } = await supabase
+    .from('workshop_gallery')
+    .select('position')
+    .order('position', { ascending: false })
+    .limit(1)
+    .maybeSingle()
+
+  const start = (last?.position ?? -10) + 10
+  const rows = urls.slice(0, 20).map((url, i) => ({
+    image_url: url.slice(0, 600),
+    position: start + i * 10,
+    is_active: true,
+  }))
+
+  const { error } = await supabase.from('workshop_gallery').insert(rows)
+  if (error) return { ok: false, error: error.message }
+
+  refreshPublic(['/mecanique'])
+  revalidatePath('/admin/mecanique')
+  return { ok: true }
+}
+
+export async function saveWorkshopPhoto(form: FormData): Promise<AdminResult> {
+  await guard()
+  const supabase = await createSupabaseServerClient()
+
+  const id = str(form, 'id', 40)
+  const imageUrl = str(form, 'image_url', 600)
+  if (!imageUrl) return { ok: false, error: 'La photo est obligatoire.' }
+
+  const payload = {
+    title: str(form, 'title', 120) || null,
+    caption: str(form, 'caption', 400) || null,
+    image_url: imageUrl,
+    before_url: str(form, 'before_url', 600) || null,
+    service_id: str(form, 'service_id', 40) || null,
+    position: Math.floor(num(form, 'position') ?? 0),
+    is_active: bool(form, 'is_active'),
+  }
+
+  const { error } = id
+    ? await supabase.from('workshop_gallery').update(payload).eq('id', id)
+    : await supabase.from('workshop_gallery').insert(payload)
+  if (error) return { ok: false, error: error.message }
+
+  refreshPublic(['/mecanique'])
+  revalidatePath('/admin/mecanique')
+  return { ok: true }
+}
+
+export async function deleteWorkshopPhoto(id: string): Promise<AdminResult> {
+  await guard()
+  const supabase = await createSupabaseServerClient()
+  const { error } = await supabase.from('workshop_gallery').delete().eq('id', id)
+  if (error) return { ok: false, error: error.message }
+  refreshPublic(['/mecanique'])
+  revalidatePath('/admin/mecanique')
+  return { ok: true }
+}
+
+/** Déplacement d'une photo d'un cran : les positions des deux voisines sont échangées. */
+export async function moveWorkshopPhoto(id: string, direction: -1 | 1): Promise<AdminResult> {
+  await guard()
+  const supabase = await createSupabaseServerClient()
+
+  const { data: photos } = await supabase
+    .from('workshop_gallery')
+    .select('id,position')
+    .order('position')
+    .order('created_at')
+
+  const list = photos ?? []
+  const index = list.findIndex((p) => p.id === id)
+  const target = index + direction
+  if (index === -1 || target < 0 || target >= list.length) return { ok: true }
+
+  const a = list[index]
+  const b = list[target]
+  await supabase.from('workshop_gallery').update({ position: b.position }).eq('id', a.id)
+  await supabase.from('workshop_gallery').update({ position: a.position }).eq('id', b.id)
+
+  refreshPublic(['/mecanique'])
+  revalidatePath('/admin/mecanique')
+  return { ok: true }
+}
+
+// =====================================================================
 // Marques partenaires
 // =====================================================================
 export async function savePartnerBrand(form: FormData): Promise<AdminResult> {
@@ -624,6 +719,45 @@ export async function saveDeliveryContent(form: FormData): Promise<AdminResult> 
 
   refreshPublic(['/livraison-retour'])
   revalidatePath('/admin/livraison')
+  return { ok: true }
+}
+
+export async function saveHomePromo(form: FormData): Promise<AdminResult> {
+  await guard()
+  const supabase = await createSupabaseServerClient()
+
+  // Liste d'identifiants produits, séparés par des virgules, ordre conservé.
+  const productIds = [
+    ...new Set(
+      str(form, 'product_ids', 2000)
+        .split(',')
+        .map((id) => id.trim())
+        .filter(Boolean)
+    ),
+  ].slice(0, HOME_PROMO_PRODUCTS_MAX)
+
+  const rawEnd = str(form, 'ends_at', 40)
+  const endsAt = rawEnd ? new Date(rawEnd) : null
+  if (endsAt && Number.isNaN(endsAt.getTime())) {
+    return { ok: false, error: 'La date de fin n’est pas valide.' }
+  }
+
+  const { error } = await supabase.from('home_promo').upsert({
+    id: 1,
+    is_active: bool(form, 'is_active'),
+    eyebrow: str(form, 'eyebrow', 80) || null,
+    title: str(form, 'title', 200) || null,
+    description: str(form, 'description', 800) || null,
+    image_url: str(form, 'image_url', 600) || null,
+    cta_label: str(form, 'cta_label', 60) || null,
+    cta_href: str(form, 'cta_href', 300) || null,
+    ends_at: endsAt ? endsAt.toISOString() : null,
+    product_ids: productIds,
+  })
+  if (error) return { ok: false, error: error.message }
+
+  refreshPublic(['/'])
+  revalidatePath('/admin/promotion')
   return { ok: true }
 }
 

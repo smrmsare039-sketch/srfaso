@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { useState, useTransition } from 'react'
 import { Trash2 } from 'lucide-react'
+import { ConfirmModal } from '@/components/admin/modal'
 import { useToast } from '@/components/toast'
 import { deleteMessage, updateMessageStatus } from '@/lib/actions/admin'
 import { MESSAGE_STATUS_LABELS, type MessageStatus } from '@/lib/types'
@@ -49,50 +50,40 @@ export function MessageActions({ id, status }: { id: string; status: MessageStat
         </button>
       ))}
 
-      {confirming ? (
-        <>
-          <button
-            type="button"
-            disabled={pending}
-            onClick={() =>
-              startTransition(async () => {
-                const result = await deleteMessage(id)
-                if (result.ok) {
-                  toast.success('Message supprimé', {
-                    key: 'message-admin',
-                    description: 'Il a été retiré de la boîte de réception.',
-                  })
-                } else {
-                  toast.error('Suppression impossible', {
-                    key: 'message-admin',
-                    description: result.error,
-                  })
-                }
-                router.refresh()
+      <button
+        type="button"
+        onClick={() => setConfirming(true)}
+        title="Supprimer"
+        className="grid size-8 place-items-center rounded-lg border border-ink-200 text-ink-400 hover:border-brand-400 hover:text-brand-600"
+      >
+        <Trash2 className="size-3.5" />
+      </button>
+
+      <ConfirmModal
+        open={confirming}
+        pending={pending}
+        title="Supprimer ce message ?"
+        description="Le message sera définitivement retiré de la boîte de réception."
+        onClose={() => setConfirming(false)}
+        onConfirm={() =>
+          startTransition(async () => {
+            const result = await deleteMessage(id)
+            if (result.ok) {
+              toast.success('Message supprimé', {
+                key: 'message-admin',
+                description: 'Il a été retiré de la boîte de réception.',
+              })
+            } else {
+              toast.error('Suppression impossible', {
+                key: 'message-admin',
+                description: result.error,
               })
             }
-            className="rounded-lg bg-brand-600 px-3 py-1.5 text-xs font-bold text-white"
-          >
-            Confirmer
-          </button>
-          <button
-            type="button"
-            onClick={() => setConfirming(false)}
-            className="rounded-lg border border-ink-200 px-3 py-1.5 text-xs font-semibold text-ink-600"
-          >
-            Annuler
-          </button>
-        </>
-      ) : (
-        <button
-          type="button"
-          onClick={() => setConfirming(true)}
-          title="Supprimer"
-          className="grid size-8 place-items-center rounded-lg border border-ink-200 text-ink-400 hover:border-brand-400 hover:text-brand-600"
-        >
-          <Trash2 className="size-3.5" />
-        </button>
-      )}
+            setConfirming(false)
+            router.refresh()
+          })
+        }
+      />
     </div>
   )
 }

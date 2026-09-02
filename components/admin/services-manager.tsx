@@ -3,10 +3,11 @@
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState, useTransition } from 'react'
-import { Pencil, Plus, Save, Trash2, X } from 'lucide-react'
+import { Pencil, Plus, Save, Trash2 } from 'lucide-react'
 import { CategoryIcon, ICON_NAMES } from '@/components/category-icon'
 import { ImageUploader } from '@/components/admin/image-uploader'
 import { Badge, Card, Field, inputClass, textareaClass } from '@/components/admin/ui'
+import { ConfirmModal, Modal } from '@/components/admin/modal'
 import { useToast } from '@/components/toast'
 import { deleteService, saveService } from '@/lib/actions/admin'
 import type { Service } from '@/lib/types'
@@ -22,6 +23,7 @@ export function ServicesManager({ services }: { services: Service[] }) {
   const toast = useToast()
 
   const open = creating || editing !== null
+  const confirmTarget = services.find((x) => x.id === confirmId) ?? null
 
   function close() {
     setCreating(false)
@@ -29,7 +31,7 @@ export function ServicesManager({ services }: { services: Service[] }) {
   }
 
   return (
-    <div className="grid gap-5 xl:grid-cols-[1.3fr_1fr]">
+    <div className="space-y-5">
       <div className="space-y-3">
         <button
           type="button"
@@ -85,49 +87,27 @@ export function ServicesManager({ services }: { services: Service[] }) {
                 >
                   <Pencil className="size-4" />
                 </button>
-                {confirmId === service.id ? (
-                  <button
-                    type="button"
-                    disabled={pending}
-                    onClick={() =>
-                      startTransition(async () => {
-                        const result = await deleteService(service.id)
-                        if (result.ok) {
-                          toast.success('Prestation supprimée', {
-                            key: 'prestation',
-                            description: `« ${service.title} » n’apparaît plus sur le site.`,
-                          })
-                        } else {
-                          toast.error('Suppression impossible', {
-                            key: 'prestation',
-                            description: result.error,
-                          })
-                        }
-                        setConfirmId(null)
-                        router.refresh()
-                      })
-                    }
-                    className="rounded-lg bg-brand-600 px-2 py-1.5 text-[0.6875rem] font-bold text-white"
-                  >
-                    Confirmer
-                  </button>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() => setConfirmId(service.id)}
-                    title="Supprimer"
-                    className="grid size-9 place-items-center rounded-lg border border-ink-200 text-ink-500 hover:border-brand-400 hover:text-brand-600"
-                  >
-                    <Trash2 className="size-4" />
-                  </button>
-                )}
+                <button
+                  type="button"
+                  onClick={() => setConfirmId(service.id)}
+                  title="Supprimer"
+                  className="grid size-9 place-items-center rounded-lg border border-ink-200 text-ink-500 hover:border-brand-400 hover:text-brand-600"
+                >
+                  <Trash2 className="size-4" />
+                </button>
               </div>
             </article>
           ))
         )}
       </div>
 
-      {open ? (
+      <Modal
+        open={open}
+        size="lg"
+        title={editing ? 'Modifier la prestation' : 'Nouvelle prestation'}
+        description={editing ? `« ${editing.title} » — visible immédiatement sur le site.` : undefined}
+        onClose={close}
+      >
         <ServiceForm
           key={editing?.id ?? 'new'}
           service={editing}
@@ -155,14 +135,42 @@ export function ServicesManager({ services }: { services: Service[] }) {
             })
           }}
         />
-      ) : (
-        <Card title="Gestion de la mécanique">
-          <p className="text-sm leading-relaxed text-ink-500">
-            Décrivez les prestations réellement proposées par l’atelier. L’ordre d’affichage sur la
-            page /mecanique suit la valeur « Position ».
-          </p>
-        </Card>
-      )}
+      </Modal>
+
+      <ConfirmModal
+        open={confirmTarget !== null}
+        pending={pending}
+        title="Supprimer cette prestation ?"
+        description={`« ${confirmTarget?.title ?? ''} » sera retirée de la page Mécanique et de la page d’accueil.`}
+        onClose={() => setConfirmId(null)}
+        onConfirm={() => {
+          const target = confirmTarget
+          if (!target) return
+          startTransition(async () => {
+            const result = await deleteService(target.id)
+            if (result.ok) {
+              toast.success('Prestation supprimée', {
+                key: 'prestation',
+                description: `« ${target.title} » n’apparaît plus sur le site.`,
+              })
+            } else {
+              toast.error('Suppression impossible', {
+                key: 'prestation',
+                description: result.error,
+              })
+            }
+            setConfirmId(null)
+            router.refresh()
+          })
+        }}
+      />
+
+      <Card title="Gestion de la mécanique">
+        <p className="text-sm leading-relaxed text-ink-500">
+          Décrivez les prestations réellement proposées par l’atelier. L’ordre d’affichage sur la
+          page /mecanique suit la valeur « Position ».
+        </p>
+      </Card>
     </div>
   )
 }
@@ -186,23 +194,8 @@ function ServiceForm({
   const [slug, setSlug] = useState(service?.slug ?? '')
 
   return (
-    <form action={onSubmit} className="xl:sticky xl:top-24 xl:self-start">
-      <div className="rounded-2xl border border-ink-200 bg-white">
-        <header className="flex items-center justify-between border-b border-ink-100 px-5 py-4">
-          <h3 className="font-bold text-ink-900">
-            {service ? 'Modifier la prestation' : 'Nouvelle prestation'}
-          </h3>
-          <button
-            type="button"
-            onClick={onCancel}
-            aria-label="Fermer"
-            className="grid size-9 place-items-center rounded-lg text-ink-400 hover:bg-ink-50"
-          >
-            <X className="size-4" />
-          </button>
-        </header>
-
-        <div className="space-y-4 p-5">
+    <form action={onSubmit}>
+      <div className="space-y-4 p-4 sm:p-5">
           {service && <input type="hidden" name="id" value={service.id} />}
           <input type="hidden" name="image_url" value={imageUrl} />
 
@@ -222,6 +215,9 @@ function ServiceForm({
           <Field label="Slug">
             <input
               name="slug"
+              autoCapitalize="none"
+              autoCorrect="off"
+              spellCheck={false}
               value={slug}
               onChange={(e) => setSlug(e.target.value)}
               className={inputClass}
@@ -308,10 +304,18 @@ function ServiceForm({
             </label>
           </div>
 
+        <div className="pb-safe sticky bottom-0 -mx-4 -mb-4 flex flex-col-reverse gap-2 border-t border-ink-100 bg-white px-4 py-3 sm:-mx-5 sm:-mb-5 sm:flex-row sm:justify-end sm:px-5 sm:py-4 sm:pb-4">
+          <button
+            type="button"
+            onClick={onCancel}
+            className="h-12 rounded-xl border border-ink-200 px-5 text-sm font-semibold text-ink-700 transition-colors hover:border-ink-900 sm:h-11"
+          >
+            Annuler
+          </button>
           <button
             type="submit"
             disabled={pending}
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-brand-600 text-sm font-bold text-white hover:bg-brand-700 disabled:opacity-60"
+            className="flex h-12 items-center justify-center gap-2 rounded-xl bg-brand-600 px-6 text-sm font-bold text-white hover:bg-brand-700 disabled:opacity-60 sm:h-11"
           >
             <Save className="size-4" />
             {pending ? 'Enregistrement…' : 'Enregistrer'}

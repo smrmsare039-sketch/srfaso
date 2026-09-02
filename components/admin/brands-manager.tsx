@@ -3,9 +3,10 @@
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState, useTransition } from 'react'
-import { Pencil, Plus, Save, Star, Trash2, X } from 'lucide-react'
+import { Pencil, Plus, Save, Star, Trash2 } from 'lucide-react'
 import { ImageUploader } from '@/components/admin/image-uploader'
 import { Badge, Card, Field, inputClass, textareaClass } from '@/components/admin/ui'
+import { ConfirmModal, Modal } from '@/components/admin/modal'
 import { useToast } from '@/components/toast'
 import { deletePartnerBrand, saveBrandsSection, savePartnerBrand } from '@/lib/actions/admin'
 import type { PartnerBrand, SiteSettings } from '@/lib/types'
@@ -67,6 +68,7 @@ export function BrandsManager({
   const toast = useToast()
 
   const open = creating || editing !== null
+  const confirmTarget = brands.find((b) => b.id === confirmId) ?? null
 
   function close() {
     setCreating(false)
@@ -74,7 +76,7 @@ export function BrandsManager({
   }
 
   return (
-    <div className="grid gap-5 xl:grid-cols-[1.3fr_1fr]">
+    <div className="space-y-5">
       <div className="space-y-3">
         <SectionForm settings={settings} />
 
@@ -148,49 +150,29 @@ export function BrandsManager({
                 >
                   <Pencil className="size-4" />
                 </button>
-                {confirmId === brand.id ? (
-                  <button
-                    type="button"
-                    disabled={pending}
-                    onClick={() =>
-                      startTransition(async () => {
-                        const result = await deletePartnerBrand(brand.id)
-                        if (result.ok) {
-                          toast.success('Marque supprimée', {
-                            key: 'marque',
-                            description: `« ${brand.name} » n’apparaît plus sur la page d’accueil.`,
-                          })
-                        } else {
-                          toast.error('Suppression impossible', {
-                            key: 'marque',
-                            description: result.error,
-                          })
-                        }
-                        setConfirmId(null)
-                        router.refresh()
-                      })
-                    }
-                    className="rounded-lg bg-brand-600 px-2 py-1.5 text-[0.6875rem] font-bold text-white"
-                  >
-                    Confirmer
-                  </button>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() => setConfirmId(brand.id)}
-                    title="Supprimer"
-                    className="grid size-9 place-items-center rounded-lg border border-ink-200 text-ink-500 hover:border-brand-400 hover:text-brand-600"
-                  >
-                    <Trash2 className="size-4" />
-                  </button>
-                )}
+                <button
+                  type="button"
+                  onClick={() => setConfirmId(brand.id)}
+                  title="Supprimer"
+                  className="grid size-9 place-items-center rounded-lg border border-ink-200 text-ink-500 hover:border-brand-400 hover:text-brand-600"
+                >
+                  <Trash2 className="size-4" />
+                </button>
               </div>
             </article>
           ))
         )}
       </div>
 
-      {open ? (
+      <Modal
+        open={open}
+        size="lg"
+        title={editing ? 'Modifier la marque' : 'Nouvelle marque'}
+        description={
+          editing ? `« ${editing.name} » — visible sur la page d’accueil.` : undefined
+        }
+        onClose={close}
+      >
         <BrandForm
           key={editing?.id ?? 'new'}
           brand={editing}
@@ -218,15 +200,43 @@ export function BrandsManager({
             })
           }}
         />
-      ) : (
-        <Card title="Marques partenaires">
-          <p className="text-sm leading-relaxed text-ink-500">
-            Les marques actives s’affichent sur la page d’accueil, dans l’ordre de la valeur
-            « Position ». Déposez un logo à fond transparent (PNG ou SVG, hauteur ~160 px) ; sans
-            logo, le nom de la marque s’affiche à la place.
-          </p>
-        </Card>
-      )}
+      </Modal>
+
+      <ConfirmModal
+        open={confirmTarget !== null}
+        pending={pending}
+        title="Supprimer cette marque ?"
+        description={`« ${confirmTarget?.name ?? ''} » sera retirée de la section « Nos marques partenaires » de la page d’accueil.`}
+        onClose={() => setConfirmId(null)}
+        onConfirm={() => {
+          const target = confirmTarget
+          if (!target) return
+          startTransition(async () => {
+            const result = await deletePartnerBrand(target.id)
+            if (result.ok) {
+              toast.success('Marque supprimée', {
+                key: 'marque',
+                description: `« ${target.name} » n’apparaît plus sur la page d’accueil.`,
+              })
+            } else {
+              toast.error('Suppression impossible', {
+                key: 'marque',
+                description: result.error,
+              })
+            }
+            setConfirmId(null)
+            router.refresh()
+          })
+        }}
+      />
+
+      <Card title="Marques partenaires">
+        <p className="text-sm leading-relaxed text-ink-500">
+          Les marques actives s’affichent sur la page d’accueil, dans l’ordre de la valeur
+          « Position ». Déposez un logo à fond transparent (PNG ou SVG, hauteur ~160 px) ; sans
+          logo, le nom de la marque s’affiche à la place.
+        </p>
+      </Card>
     </div>
   )
 }
@@ -311,23 +321,8 @@ function BrandForm({
   const [slug, setSlug] = useState(brand?.slug ?? '')
 
   return (
-    <form action={onSubmit} className="xl:sticky xl:top-24 xl:self-start">
-      <div className="rounded-2xl border border-ink-200 bg-white">
-        <header className="flex items-center justify-between border-b border-ink-100 px-5 py-4">
-          <h3 className="font-bold text-ink-900">
-            {brand ? 'Modifier la marque' : 'Nouvelle marque'}
-          </h3>
-          <button
-            type="button"
-            onClick={onCancel}
-            aria-label="Fermer"
-            className="grid size-9 place-items-center rounded-lg text-ink-400 hover:bg-ink-50"
-          >
-            <X className="size-4" />
-          </button>
-        </header>
-
-        <div className="space-y-4 p-5">
+    <form action={onSubmit}>
+      <div className="space-y-4 p-4 sm:p-5">
           {brand && <input type="hidden" name="id" value={brand.id} />}
           <input type="hidden" name="logo_url" value={logoUrl} />
 
@@ -347,6 +342,9 @@ function BrandForm({
           <Field label="Slug">
             <input
               name="slug"
+              autoCapitalize="none"
+              autoCorrect="off"
+              spellCheck={false}
               value={slug}
               onChange={(e) => setSlug(e.target.value)}
               className={inputClass}
@@ -425,10 +423,18 @@ function BrandForm({
             </div>
           </div>
 
+        <div className="pb-safe sticky bottom-0 -mx-4 -mb-4 flex flex-col-reverse gap-2 border-t border-ink-100 bg-white px-4 py-3 sm:-mx-5 sm:-mb-5 sm:flex-row sm:justify-end sm:px-5 sm:py-4 sm:pb-4">
+          <button
+            type="button"
+            onClick={onCancel}
+            className="h-12 rounded-xl border border-ink-200 px-5 text-sm font-semibold text-ink-700 transition-colors hover:border-ink-900 sm:h-11"
+          >
+            Annuler
+          </button>
           <button
             type="submit"
             disabled={pending}
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-brand-600 text-sm font-bold text-white hover:bg-brand-700 disabled:opacity-60"
+            className="flex h-12 items-center justify-center gap-2 rounded-xl bg-brand-600 px-6 text-sm font-bold text-white hover:bg-brand-700 disabled:opacity-60 sm:h-11"
           >
             <Save className="size-4" />
             {pending ? 'Enregistrement…' : 'Enregistrer'}

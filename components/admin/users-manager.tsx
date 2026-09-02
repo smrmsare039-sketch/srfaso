@@ -3,7 +3,8 @@
 import { useRouter } from 'next/navigation'
 import { useState, useTransition } from 'react'
 import { Plus, Trash2, UserCheck, UserX } from 'lucide-react'
-import { Badge, Card, Field, inputClass } from '@/components/admin/ui'
+import { Badge, Field, inputClass } from '@/components/admin/ui'
+import { ConfirmModal, Modal } from '@/components/admin/modal'
 import { useToast } from '@/components/toast'
 import { createAdminUser, deleteAdminUser, setAdminUserActive } from '@/lib/actions/admin'
 import type { Profile } from '@/lib/types'
@@ -19,15 +20,26 @@ export function UsersManager({
   const router = useRouter()
   const [pending, startTransition] = useTransition()
   const [confirmId, setConfirmId] = useState<string | null>(null)
+  const [creating, setCreating] = useState(false)
   const toast = useToast()
 
+  const confirmTarget = users.find((u) => u.id === confirmId) ?? null
+
   return (
-    <div className="grid gap-5 xl:grid-cols-[1.4fr_1fr]">
+    <div className="space-y-5">
       <div className="overflow-hidden rounded-2xl border border-ink-200 bg-white">
-        <header className="border-b border-ink-100 px-5 py-4">
+        <header className="flex flex-wrap items-center justify-between gap-3 border-b border-ink-100 px-5 py-4">
           <h3 className="font-bold text-ink-900">
             {users.length} compte{users.length > 1 ? 's' : ''}
           </h3>
+          <button
+            type="button"
+            onClick={() => setCreating(true)}
+            className="inline-flex h-10 items-center gap-2 rounded-xl bg-brand-600 px-4 text-sm font-bold text-white hover:bg-brand-700"
+          >
+            <Plus className="size-4" />
+            Nouvel administrateur
+          </button>
         </header>
         <ul>
           {users.map((user) => (
@@ -82,51 +94,14 @@ export function UsersManager({
                   >
                     {user.is_active ? <UserX className="size-4" /> : <UserCheck className="size-4" />}
                   </button>
-                  {confirmId === user.id ? (
-                    <>
-                      <button
-                        type="button"
-                        disabled={pending}
-                        onClick={() =>
-                          startTransition(async () => {
-                            const result = await deleteAdminUser(user.id)
-                            if (result.ok) {
-                              toast.success('Compte supprimé', {
-                                key: 'utilisateur',
-                                description: `${user.full_name ?? user.email} n’a plus accès au back-office.`,
-                              })
-                            } else {
-                              toast.error('Suppression impossible', {
-                                key: 'utilisateur',
-                                description: result.error,
-                              })
-                            }
-                            setConfirmId(null)
-                            router.refresh()
-                          })
-                        }
-                        className="rounded-lg bg-brand-600 px-3 py-2 text-xs font-bold text-white"
-                      >
-                        Confirmer
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setConfirmId(null)}
-                        className="rounded-lg border border-ink-200 px-3 py-2 text-xs font-semibold text-ink-600"
-                      >
-                        Annuler
-                      </button>
-                    </>
-                  ) : (
-                    <button
-                      type="button"
-                      onClick={() => setConfirmId(user.id)}
-                      title="Supprimer"
-                      className="grid size-9 place-items-center rounded-lg border border-ink-200 text-ink-500 hover:border-brand-400 hover:text-brand-600"
-                    >
-                      <Trash2 className="size-4" />
-                    </button>
-                  )}
+                  <button
+                    type="button"
+                    onClick={() => setConfirmId(user.id)}
+                    title="Supprimer"
+                    className="grid size-9 place-items-center rounded-lg border border-ink-200 text-ink-500 hover:border-brand-400 hover:text-brand-600"
+                  >
+                    <Trash2 className="size-4" />
+                  </button>
                 </span>
               )}
             </li>
@@ -134,27 +109,63 @@ export function UsersManager({
         </ul>
       </div>
 
-      <form
-        action={(formData) => {
-          const email = String(formData.get('email') ?? '')
+      <ConfirmModal
+        open={confirmTarget !== null}
+        pending={pending}
+        title="Supprimer ce compte ?"
+        description={`${confirmTarget?.full_name ?? confirmTarget?.email ?? ''} perdra définitivement l’accès au back-office.`}
+        onClose={() => setConfirmId(null)}
+        onConfirm={() => {
+          const target = confirmTarget
+          if (!target) return
           startTransition(async () => {
-            const result = await createAdminUser(formData)
+            const result = await deleteAdminUser(target.id)
             if (result.ok) {
-              toast.success('Compte administrateur créé', {
+              toast.success('Compte supprimé', {
                 key: 'utilisateur',
-                duration: 9000,
-                description: `${email} peut se connecter dès maintenant sur /admin/login.`,
+                description: `${target.full_name ?? target.email} n’a plus accès au back-office.`,
               })
-              router.refresh()
             } else {
-              toast.error('Création impossible', { key: 'utilisateur', description: result.error })
+              toast.error('Suppression impossible', {
+                key: 'utilisateur',
+                description: result.error,
+              })
             }
+            setConfirmId(null)
+            router.refresh()
           })
         }}
-        className="xl:sticky xl:top-24 xl:self-start"
+      />
+
+      <Modal
+        open={creating}
+        title="Nouvel administrateur"
+        description="Le compte donne accès à l’ensemble du back-office."
+        onClose={() => setCreating(false)}
       >
-        <Card title="Ajouter un administrateur">
-          <div className="space-y-4">
+        <form
+          action={(formData) => {
+            const email = String(formData.get('email') ?? '')
+            startTransition(async () => {
+              const result = await createAdminUser(formData)
+              if (result.ok) {
+                toast.success('Compte administrateur créé', {
+                  key: 'utilisateur',
+                  duration: 9000,
+                  description: `${email} peut se connecter dès maintenant sur /admin/login.`,
+                })
+                setCreating(false)
+                router.refresh()
+              } else {
+                toast.error('Création impossible', {
+                  key: 'utilisateur',
+                  description: result.error,
+                })
+              }
+            })
+          }}
+        >
+          <div className="space-y-4 p-4 sm:p-5">
             <Field label="Nom complet">
               <input name="full_name" className={inputClass} />
             </Field>
@@ -165,17 +176,26 @@ export function UsersManager({
               <input name="password" type="password" required minLength={8} className={inputClass} />
             </Field>
 
-            <button
-              type="submit"
-              disabled={pending}
-              className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-brand-600 text-sm font-bold text-white hover:bg-brand-700 disabled:opacity-60"
-            >
-              <Plus className="size-4" />
-              {pending ? 'Création…' : 'Créer le compte'}
-            </button>
+            <div className="pb-safe sticky bottom-0 -mx-4 -mb-4 flex flex-col-reverse gap-2 border-t border-ink-100 bg-white px-4 py-3 sm:-mx-5 sm:-mb-5 sm:flex-row sm:justify-end sm:px-5 sm:py-4 sm:pb-4">
+              <button
+                type="button"
+                onClick={() => setCreating(false)}
+                className="h-12 rounded-xl border border-ink-200 px-5 text-sm font-semibold text-ink-700 transition-colors hover:border-ink-900 sm:h-11"
+              >
+                Annuler
+              </button>
+              <button
+                type="submit"
+                disabled={pending}
+                className="flex h-12 items-center justify-center gap-2 rounded-xl bg-brand-600 px-6 text-sm font-bold text-white hover:bg-brand-700 disabled:opacity-60 sm:h-11"
+              >
+                <Plus className="size-4" />
+                {pending ? 'Création…' : 'Créer le compte'}
+              </button>
+            </div>
           </div>
-        </Card>
-      </form>
+        </form>
+      </Modal>
     </div>
   )
 }

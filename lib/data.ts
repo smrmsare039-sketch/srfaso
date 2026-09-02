@@ -2,16 +2,18 @@ import 'server-only'
 
 import { cache } from 'react'
 import { createSupabasePublicClient } from '@/lib/supabase/public'
-import { HERO_TILES_MAX } from '@/lib/types'
+import { HERO_TILES_MAX, HOME_PROMO_PRODUCTS_MAX } from '@/lib/types'
 import type {
   Category,
   DeliveryContent,
   HeroTile,
+  HomePromo,
   PartnerBrand,
   ProductWithRelations,
   Service,
   Shop,
   SiteSettings,
+  WorkshopPhotoWithService,
 } from '@/lib/types'
 
 const PRODUCT_SELECT =
@@ -364,6 +366,60 @@ export const getPartnerBrands = cache(async (): Promise<PartnerBrand[]> => {
       .order('position', { ascending: true })
       .order('name', { ascending: true })
     return (data as PartnerBrand[]) ?? []
+  } catch {
+    return []
+  }
+})
+
+export const getHomePromo = cache(async (): Promise<HomePromo | null> => {
+  try {
+    const supabase = createSupabasePublicClient()
+    const { data } = await supabase.from('home_promo').select('*').eq('id', 1).maybeSingle()
+    if (!data) return null
+    const row = data as HomePromo & { product_ids: unknown }
+    return {
+      ...row,
+      product_ids: Array.isArray(row.product_ids)
+        ? row.product_ids.filter((id): id is string => typeof id === 'string')
+        : [],
+    }
+  } catch {
+    return null
+  }
+})
+
+/** Produits de la section promo, dans l'ordre choisi au back-office. */
+export const getHomePromoProducts = cache(
+  async (ids: string[]): Promise<ProductWithRelations[]> => {
+    if (ids.length === 0) return []
+    try {
+      const supabase = createSupabasePublicClient()
+      const { data } = await supabase
+        .from('products')
+        .select(PRODUCT_SELECT)
+        .in('id', ids.slice(0, HOME_PROMO_PRODUCTS_MAX))
+        .eq('is_active', true)
+      const rows = ((data as ProductWithRelations[]) ?? []).map(sortImages)
+      // L'ordre du back-office fait foi, pas celui renvoyé par la base.
+      return ids
+        .map((id) => rows.find((p) => p.id === id))
+        .filter((p): p is ProductWithRelations => Boolean(p))
+    } catch {
+      return []
+    }
+  }
+)
+
+export const getWorkshopGallery = cache(async (): Promise<WorkshopPhotoWithService[]> => {
+  try {
+    const supabase = createSupabasePublicClient()
+    const { data } = await supabase
+      .from('workshop_gallery')
+      .select('*, service:services(id,title,slug)')
+      .eq('is_active', true)
+      .order('position', { ascending: true })
+      .order('created_at', { ascending: true })
+    return (data as WorkshopPhotoWithService[]) ?? []
   } catch {
     return []
   }

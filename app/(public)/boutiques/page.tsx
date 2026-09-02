@@ -232,7 +232,7 @@ export default async function ShopsPage() {
                       href={mapsUrl(shop)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 rounded-xl bg-ink-900 px-4 py-2.5 text-sm font-bold text-white hover:bg-brand-600"
+                      className="flex items-center gap-2 rounded-xl bg-gradient-to-br from-brand-600 to-brand-800 transition-[background-image] hover:from-brand-500 hover:to-brand-700 px-4 py-2.5 text-sm font-bold text-white"
                     >
                       <Navigation className="size-4" aria-hidden />
                       Itinéraire

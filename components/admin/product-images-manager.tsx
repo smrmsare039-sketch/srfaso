@@ -61,7 +61,7 @@ export function ProductImagesManager({
                 </span>
               )}
 
-              <div className="absolute inset-x-2 bottom-2 flex justify-center gap-1.5 opacity-0 transition-opacity group-hover:opacity-100 focus-within:opacity-100">
+              <div className="absolute inset-x-2 bottom-2 flex justify-center gap-1.5 transition-opacity lg:opacity-0 lg:group-hover:opacity-100 lg:focus-within:opacity-100">
                 <button
                   type="button"
                   title="Définir comme image principale"

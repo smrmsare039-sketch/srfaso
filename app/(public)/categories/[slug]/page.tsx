@@ -5,9 +5,8 @@ import { Suspense } from 'react'
 import { PackageSearch } from 'lucide-react'
 import { Breadcrumbs } from '@/components/breadcrumbs'
 import { CategoryIcon } from '@/components/category-icon'
-import { Pagination } from '@/components/pagination'
-import { ProductCard } from '@/components/product-card'
 import { ProductFilters } from '@/components/product-filters'
+import { ProductGridInfinite } from '@/components/product-grid-infinite'
 import { SortSelect } from '@/components/sort-select'
 import {
   getBrands,
@@ -87,11 +86,6 @@ export default async function CategoryPage(props: PageProps<'/categories/[slug]'
 
   const { products, total, page, pages } = await getProducts(filters)
 
-  const plainParams: Record<string, string | undefined> = {}
-  for (const [key, value] of Object.entries(sp)) {
-    plainParams[key] = Array.isArray(value) ? value[0] : value
-  }
-
   return (
     <div className="container-page pb-16">
       <Breadcrumbs
@@ -159,7 +153,7 @@ export default async function CategoryPage(props: PageProps<'/categories/[slug]'
         <div className="min-w-0 flex-1">
           <div className="mb-5 flex items-center justify-between gap-3">
             <span className="hidden text-sm text-ink-500 lg:block">
-              Page {page} sur {pages}
+              {formatNumber(total)} produit{total > 1 ? 's' : ''}
             </span>
             <Suspense fallback={null}>
               <SortSelect />
@@ -174,19 +168,14 @@ export default async function CategoryPage(props: PageProps<'/categories/[slug]'
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
-              {products.map((p) => (
-                <ProductCard key={p.id} product={p} />
-              ))}
-            </div>
+            <ProductGridInfinite
+              key={`${page}-${JSON.stringify(filters)}`}
+              initialProducts={products}
+              total={total}
+              pages={pages}
+              filters={filters}
+            />
           )}
-
-          <Pagination
-            page={page}
-            pages={pages}
-            basePath={`/categories/${category.slug}`}
-            searchParams={plainParams}
-          />
         </div>
       </div>
 

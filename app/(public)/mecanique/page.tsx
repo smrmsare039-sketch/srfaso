@@ -4,9 +4,10 @@ import Link from 'next/link'
 import { Phone } from 'lucide-react'
 import { Breadcrumbs } from '@/components/breadcrumbs'
 import { CategoryIcon } from '@/components/category-icon'
-import { getServices, getSettings } from '@/lib/data'
+import { getServices, getSettings, getWorkshopGallery } from '@/lib/data'
 import { telLink, whatsappLink } from '@/lib/utils'
 import { WhatsAppIcon } from '@/components/whatsapp-icon'
+import { WorkshopGallery } from '@/components/workshop-gallery'
 
 export const revalidate = 600
 
@@ -18,7 +19,11 @@ export const metadata: Metadata = {
 }
 
 export default async function MechanicPage() {
-  const [services, settings] = await Promise.all([getServices(), getSettings()])
+  const [services, settings, gallery] = await Promise.all([
+    getServices(),
+    getSettings(),
+    getWorkshopGallery(),
+  ])
 
   return (
     <div className="container-page pb-16">
@@ -34,6 +39,20 @@ export default async function MechanicPage() {
           qui doit l’être.
         </p>
       </header>
+
+      {gallery.length > 0 && (
+        <div className="mb-14">
+          <WorkshopGallery
+            photos={gallery}
+            whatsapp={settings.whatsapp}
+            phone={settings.phone_primary}
+          />
+        </div>
+      )}
+
+      <h2 className="mb-5 text-2xl font-extrabold text-ink-900 sm:text-3xl">
+        Ce que nous prenons en charge
+      </h2>
 
       {services.length === 0 ? (
         <p className="rounded-2xl border border-dashed border-ink-200 py-16 text-center text-ink-500">

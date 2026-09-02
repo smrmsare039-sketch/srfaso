@@ -106,7 +106,7 @@ export function SearchBox({ className }: { className?: string }) {
       </form>
 
       {open && term.trim().length >= 2 && (
-        <div className="scroll-thin absolute inset-x-0 top-[calc(100%+0.5rem)] z-50 max-h-[70vh] overflow-y-auto rounded-2xl border border-ink-100 bg-white p-2 shadow-pop">
+        <div className="scroll-thin absolute inset-x-0 top-[calc(100%+0.5rem)] z-50 max-h-[70dvh] overflow-y-auto rounded-2xl border border-ink-100 bg-white p-2 shadow-pop">
           {!hasResults && !loading && (
             <p className="px-3 py-6 text-center text-sm text-ink-500">
               Aucun résultat pour « {term.trim()} ».

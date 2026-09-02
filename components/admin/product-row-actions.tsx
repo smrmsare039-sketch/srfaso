@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useState, useTransition } from 'react'
 import { Copy, Eye, EyeOff, Loader2, Pencil, Trash2 } from 'lucide-react'
 import Link from 'next/link'
+import { ConfirmModal } from '@/components/admin/modal'
 import { useToast } from '@/components/toast'
 import { deleteProduct, duplicateProduct, toggleProductActive } from '@/lib/actions/admin'
 
@@ -101,51 +102,40 @@ export function ProductRowActions({
         <Copy className="size-4" />
       </button>
 
-      {confirming ? (
-        <span className="flex items-center gap-1.5">
-          <button
-            type="button"
-            disabled={pending}
-            onClick={() =>
-              startTransition(async () => {
-                const result = await deleteProduct(id)
-                if (result.ok) {
-                  toast.success('Produit supprimé', {
-                    key: `produit-${id}`,
-                    description: `« ${name} » a été retiré du catalogue.`,
-                  })
-                } else {
-                  toast.error('Suppression impossible', {
-                    key: `produit-${id}`,
-                    description: result.error,
-                  })
-                }
-                setConfirming(false)
-                router.refresh()
+      <button
+        type="button"
+        title="Supprimer"
+        onClick={() => setConfirming(true)}
+        className="grid size-9 place-items-center rounded-lg border border-ink-200 text-ink-500 transition-colors hover:border-brand-400 hover:text-brand-600"
+      >
+        <Trash2 className="size-4" />
+      </button>
+
+      <ConfirmModal
+        open={confirming}
+        pending={pending}
+        title="Supprimer ce produit ?"
+        description={`« ${name} » sera retiré du catalogue, avec ses images et ses caractéristiques. Cette action est irréversible.`}
+        onClose={() => setConfirming(false)}
+        onConfirm={() =>
+          startTransition(async () => {
+            const result = await deleteProduct(id)
+            if (result.ok) {
+              toast.success('Produit supprimé', {
+                key: `produit-${id}`,
+                description: `« ${name} » a été retiré du catalogue.`,
+              })
+            } else {
+              toast.error('Suppression impossible', {
+                key: `produit-${id}`,
+                description: result.error,
               })
             }
-            className="rounded-lg bg-brand-600 px-3 py-2 text-xs font-bold text-white"
-          >
-            Confirmer
-          </button>
-          <button
-            type="button"
-            onClick={() => setConfirming(false)}
-            className="rounded-lg border border-ink-200 px-3 py-2 text-xs font-semibold text-ink-600"
-          >
-            Annuler
-          </button>
-        </span>
-      ) : (
-        <button
-          type="button"
-          title="Supprimer"
-          onClick={() => setConfirming(true)}
-          className="grid size-9 place-items-center rounded-lg border border-ink-200 text-ink-500 transition-colors hover:border-brand-400 hover:text-brand-600"
-        >
-          <Trash2 className="size-4" />
-        </button>
-      )}
+            setConfirming(false)
+            router.refresh()
+          })
+        }
+      />
     </div>
   )
 }

@@ -134,6 +134,9 @@ export function ProductForm({
               <Field label="Slug (URL)" hint="Utilisé dans l’adresse : /produits/mon-slug">
                 <input
                   name="slug"
+              autoCapitalize="none"
+              autoCorrect="off"
+              spellCheck={false}
                   value={slug}
                   onChange={(e) => setSlug(e.target.value)}
                   className={inputClass}

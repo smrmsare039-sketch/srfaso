@@ -122,11 +122,13 @@ export function Badge({
   )
 }
 
+/* text-[16px] sur mobile : en dessous de 16 px reels, iOS Safari zoome sur le
+   champ au focus et casse la mise en page. */
 export const inputClass =
-  'h-11 w-full rounded-xl border border-ink-200 bg-white px-3.5 text-sm text-ink-900 outline-none transition-colors placeholder:text-ink-400 focus:border-brand-500'
+  'h-12 w-full rounded-xl border border-ink-200 bg-white px-3.5 text-[16px] text-ink-900 outline-none transition-colors placeholder:text-ink-400 focus:border-brand-500 sm:h-11 sm:text-sm'
 
 export const textareaClass =
-  'w-full rounded-xl border border-ink-200 bg-white px-3.5 py-3 text-sm text-ink-900 outline-none transition-colors placeholder:text-ink-400 focus:border-brand-500'
+  'w-full rounded-xl border border-ink-200 bg-white px-3.5 py-3 text-[16px] text-ink-900 outline-none transition-colors placeholder:text-ink-400 focus:border-brand-500 sm:text-sm'
 
 export const labelClass = 'mb-1.5 block text-sm font-semibold text-ink-800'
 
