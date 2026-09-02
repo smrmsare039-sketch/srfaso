@@ -1,9 +1,11 @@
 import Link from 'next/link'
 import { Suspense } from 'react'
 import { AdminFilterSelect, AdminSearch } from '@/components/admin/admin-search'
+import { OrderRowActions } from '@/components/admin/order-row-actions'
 import { Badge, Card, EmptyState, PageHeader } from '@/components/admin/ui'
 import { Pagination } from '@/components/pagination'
 import { requireAdmin } from '@/lib/auth'
+import { getSettings } from '@/lib/data'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { ORDER_STATUS_LABELS, ORDER_STATUS_TONES, type OrderStatus } from '@/lib/types'
 import { formatDateTime, formatNumber, formatPrice } from '@/lib/utils'
@@ -21,6 +23,7 @@ export default async function AdminOrdersPage(props: PageProps<'/admin/commandes
   }
 
   const supabase = await createSupabaseServerClient()
+  const settings = await getSettings()
   const page = Math.max(1, Number(get('page') ?? 1) || 1)
   const search = get('q')?.trim()
   const status = get('statut')
@@ -84,6 +87,7 @@ export default async function AdminOrdersPage(props: PageProps<'/admin/commandes
                   <th className="px-4 py-3 font-semibold">Ville</th>
                   <th className="px-4 py-3 text-right font-semibold">Montant</th>
                   <th className="px-4 py-3 font-semibold">Statut</th>
+                  <th className="px-4 py-3 text-right font-semibold">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -117,6 +121,12 @@ export default async function AdminOrdersPage(props: PageProps<'/admin/commandes
                       <Badge tone={ORDER_STATUS_TONES[order.status as OrderStatus]}>
                         {ORDER_STATUS_LABELS[order.status as OrderStatus]}
                       </Badge>
+                    </td>
+                    <td className="px-4 py-3">
+                      <OrderRowActions
+                        order={{ ...order, status: order.status as OrderStatus }}
+                        companyName={settings.company_name}
+                      />
                     </td>
                   </tr>
                 ))}

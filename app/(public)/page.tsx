@@ -118,6 +118,7 @@ export default async function HomePage() {
     ? settings.home_hero_tiles.map((tile, i) => ({
         key: `tile-${i}`,
         image: tile.url,
+        video: tile.video,
         alt: tile.label ?? settings.company_name,
         label: tile.label,
         href: tile.href,
@@ -125,6 +126,7 @@ export default async function HomePage() {
     : heroProducts.slice(0, 4).map((p) => ({
         key: p.id,
         image: p.images?.[0]?.url ?? null,
+        video: null,
         alt: p.images?.[0]?.alt ?? p.name,
         label: p.name,
         href: `/produits/${p.slug}`,
@@ -209,7 +211,19 @@ export default async function HomePage() {
                   const content = (
                     <>
                       <span className="relative block aspect-square bg-white">
-                        {tile.image ? (
+                        {tile.video ? (
+                          <video
+                            src={tile.video}
+                            poster={tile.image ?? undefined}
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                            preload="metadata"
+                            aria-label={tile.alt}
+                            className="size-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          />
+                        ) : tile.image ? (
                           <Image
                             src={tile.image}
                             alt={tile.alt}
@@ -483,7 +497,7 @@ export default async function HomePage() {
       {/* Bloc SEO rédactionnel */}
       {settings.home_seo_content && (
         <section className="container-page py-14">
-          <div className="mx-auto max-w-3xl">
+          <div className="max-w-4xl">
             <h2 className="text-2xl font-extrabold text-ink-900">
               Pièces détachées moto au Burkina Faso
             </h2>

@@ -37,10 +37,11 @@ function normalizeHeroTiles(value: unknown): HeroTile[] {
     .filter((t): t is Record<string, unknown> => typeof t === 'object' && t !== null)
     .map((t) => ({
       url: typeof t.url === 'string' ? t.url : '',
+      video: typeof t.video === 'string' && t.video ? t.video : null,
       label: typeof t.label === 'string' && t.label ? t.label : null,
       href: typeof t.href === 'string' && t.href ? t.href : null,
     }))
-    .filter((t) => t.url)
+    .filter((t) => t.url || t.video)
     .slice(0, HERO_TILES_MAX)
 }
 

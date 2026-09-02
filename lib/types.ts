@@ -11,7 +11,14 @@ export type MessageStatus = 'nouveau' | 'lu' | 'traite'
 export type Spec = { label: string; value: string }
 
 /** Visuel de la mosaïque affichée dans la bannière d'accueil. */
-export type HeroTile = { url: string; label: string | null; href: string | null }
+export type HeroTile = {
+  /** Image de la tuile ; sert aussi d'image d'attente quand une vidéo est définie. */
+  url: string
+  /** Vidéo MP4/WebM affichée à la place de l'image. */
+  video: string | null
+  label: string | null
+  href: string | null
+}
 
 /** Nombre de visuels gérables dans la mosaïque de la bannière. */
 export const HERO_TILES_MAX = 4

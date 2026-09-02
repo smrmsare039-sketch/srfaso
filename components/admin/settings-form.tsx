@@ -114,7 +114,7 @@ function VideoField({
   )
 }
 
-const EMPTY_TILE: HeroTile = { url: '', label: null, href: null }
+const EMPTY_TILE: HeroTile = { url: '', video: null, label: null, href: null }
 
 function HeroTilesField({
   tiles,
@@ -131,8 +131,8 @@ function HeroTilesField({
     <div>
       <p className="mb-1.5 text-sm font-semibold text-ink-800">Mosaïque de la bannière</p>
       <p className="mb-3 text-xs text-ink-400">
-        Jusqu’à {HERO_TILES_MAX} visuels affichés à droite de la bannière. Laissez tout vide pour
-        afficher automatiquement les produits populaires.
+        Jusqu’à {HERO_TILES_MAX} visuels affichés à droite de la bannière : une image ou une vidéo
+        pour chacun. Laissez tout vide pour afficher automatiquement les produits populaires.
       </p>
       <div className="grid gap-3 sm:grid-cols-2">
         {tiles.map((tile, index) => (
@@ -141,21 +141,39 @@ function HeroTilesField({
               Visuel {index + 1}
             </p>
             <input type="hidden" name={`hero_tile_${index + 1}_image`} value={tile.url} />
+            <input type="hidden" name={`hero_tile_${index + 1}_video`} value={tile.video ?? ''} />
             <div className="relative mb-3 grid aspect-square place-items-center overflow-hidden rounded-xl border border-ink-100 bg-ink-50">
-              {tile.url ? (
+              {tile.video ? (
+                <video
+                  src={tile.video}
+                  poster={tile.url || undefined}
+                  muted
+                  loop
+                  playsInline
+                  controls
+                  className="size-full bg-ink-900 object-cover"
+                />
+              ) : tile.url ? (
                 <Image src={tile.url} alt="" fill sizes="200px" className="object-cover" />
               ) : (
-                <span className="text-xs text-ink-400">Aucune image</span>
+                <span className="text-xs text-ink-400">Aucun visuel</span>
               )}
             </div>
             <div className="flex flex-wrap items-center gap-2">
               <ImageUploader
                 folder="accueil"
                 baseName={`banniere-${index + 1}`}
-                label={tile.url ? 'Remplacer' : 'Envoyer une image'}
+                label={tile.url ? 'Remplacer l’image' : 'Image'}
                 onUploaded={(url) => update(index, { url })}
               />
-              {tile.url && (
+              <ImageUploader
+                folder="accueil"
+                baseName={`banniere-${index + 1}-video`}
+                kind="video"
+                label={tile.video ? 'Remplacer la vidéo' : 'Vidéo'}
+                onUploaded={(video) => update(index, { video })}
+              />
+              {(tile.url || tile.video) && (
                 <button
                   type="button"
                   onClick={() => update(index, { ...EMPTY_TILE })}
@@ -165,6 +183,11 @@ function HeroTilesField({
                 </button>
               )}
             </div>
+            {tile.video && (
+              <p className="mt-2 text-xs text-ink-400">
+                La vidéo est affichée à la place de l’image ; l’image sert d’attente au chargement.
+              </p>
+            )}
             <div className="mt-3 space-y-2">
               <input
                 name={`hero_tile_${index + 1}_label`}

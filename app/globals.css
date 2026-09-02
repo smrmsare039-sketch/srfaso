@@ -322,3 +322,163 @@ h4 {
   color: var(--color-ink-900);
   font-weight: 600;
 }
+
+/* ------------------------------------------------------------------ */
+/* Ticket de caisse thermique 80 mm (largeur utile 72 mm).             */
+/* Les tailles sont en millimètres pour rester fidèles à l'impression. */
+/* ------------------------------------------------------------------ */
+.receipt {
+  width: 72mm;
+  margin-inline: auto;
+  padding: 4mm 3mm 6mm;
+  background: #ffffff;
+  color: #000000;
+  font-family: ui-monospace, "Cascadia Mono", "Segoe UI Mono", Menlo, monospace;
+  font-size: 3.1mm;
+  line-height: 1.45;
+}
+.receipt-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2mm;
+}
+.receipt-logo-img {
+  display: block;
+  width: 26mm;
+  height: auto;
+  object-fit: contain;
+}
+.receipt-title {
+  margin: 0;
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  font-size: 6mm;
+  font-weight: 800;
+  line-height: 1.1;
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+.receipt-meta {
+  margin: 1mm 0 0;
+  font-size: 2.6mm;
+  line-height: 1.35;
+  text-align: center;
+}
+.receipt-rule {
+  margin: 2.5mm 0;
+  border-top: 0.3mm solid #000000;
+}
+.receipt-section {
+  margin: 0 0 1.5mm;
+  font-size: 2.6mm;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.receipt-kv > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 3mm;
+}
+.receipt-kv dt {
+  flex: none;
+}
+.receipt-kv dd {
+  margin: 0;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+.receipt-items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.receipt-items li + li {
+  margin-top: 1.8mm;
+}
+.receipt-item-name {
+  display: block;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.receipt-item-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 3mm;
+}
+.receipt-total {
+  display: flex;
+  justify-content: space-between;
+  gap: 3mm;
+  margin: 2.5mm 0;
+  padding: 1.8mm 2mm;
+  background: #000000;
+  color: #ffffff;
+  font-size: 4mm;
+  font-weight: 800;
+  /* Sans cela, les navigateurs suppriment les aplats à l'impression. */
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+.receipt-qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 3mm 0 2mm;
+  text-align: center;
+}
+.receipt-qr-img {
+  display: block;
+  width: 26mm;
+  height: 26mm;
+  margin-inline: auto;
+  image-rendering: pixelated;
+}
+.receipt-thanks {
+  margin: 2mm 0 0;
+  font-size: 3.4mm;
+  font-weight: 700;
+  text-align: center;
+}
+.receipt-footer {
+  margin: 1.5mm 0 0;
+  font-size: 2.4mm;
+  text-align: center;
+}
+
+/* Impression : seul le ticket sort, sur une bande de 80 mm sans marges.
+   Le ticket peut être imbriqué dans une boîte de dialogue : on masque toute
+   la page par `visibility` (qui n'affecte pas la mise en page des parents)
+   plutôt que par `display`, puis on repositionne le ticket en haut à gauche. */
+@media print {
+  @page {
+    size: 80mm auto;
+    margin: 0;
+  }
+  html,
+  body {
+    width: 80mm;
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+  }
+  .no-print {
+    display: none !important;
+  }
+  body:has(.receipt) * {
+    visibility: hidden;
+    box-shadow: none !important;
+    background-image: none !important;
+    backdrop-filter: none !important;
+  }
+  body:has(.receipt) .receipt,
+  body:has(.receipt) .receipt * {
+    visibility: visible;
+  }
+  .receipt {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80mm;
+    padding: 3mm 4mm 8mm;
+  }
+}

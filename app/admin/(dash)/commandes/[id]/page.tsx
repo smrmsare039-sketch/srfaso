@@ -1,10 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowLeft, Mail, MapPin, Phone } from 'lucide-react'
+import { ArrowLeft, Mail, MapPin, Phone, Receipt } from 'lucide-react'
 import { OrderActions } from '@/components/admin/order-actions'
 import { Badge, Card, PageHeader } from '@/components/admin/ui'
 import { requireAdmin } from '@/lib/auth'
+import { canIssueReceipt } from '@/lib/orders'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import {
   ORDER_STATUS_LABELS,
@@ -162,6 +163,16 @@ export default async function AdminOrderPage(props: PageProps<'/admin/commandes/
               <WhatsAppIcon className="size-4" />
               Contacter sur WhatsApp
             </a>
+
+            {canIssueReceipt(order.status as OrderStatus) && (
+              <Link
+                href={`/admin/recu/${order.id}`}
+                className="mt-2.5 flex h-11 items-center justify-center gap-2 rounded-xl border border-ink-200 text-sm font-semibold text-ink-800 transition-colors hover:border-ink-900"
+              >
+                <Receipt className="size-4" aria-hidden />
+                Reçu thermique 80 mm
+              </Link>
+            )}
           </Card>
 
           <Card title="Traitement">

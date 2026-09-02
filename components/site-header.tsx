@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Mail, MapPin, Phone } from 'lucide-react'
 import { AccountButton } from '@/components/account/account-button'
+import { AutoHideHeader } from '@/components/auto-hide-header'
 import { BrandLogo } from '@/components/brand-logo'
 import { CartButton } from '@/components/cart-button'
 import { MainNav, MobileNav } from '@/components/main-nav'
@@ -14,7 +15,7 @@ export function SiteHeader({ settings }: { settings: SiteSettings }) {
   const whatsapp = settings.whatsapp ?? settings.phone_primary
 
   return (
-    <header className="bg-white">
+    <AutoHideHeader>
       {/* Bandeau de contact */}
       <div className="hidden bg-ink-900 text-ink-100 lg:block">
         <div className="container-header flex h-9 items-center justify-between text-[0.8125rem]">
@@ -96,6 +97,6 @@ export function SiteHeader({ settings }: { settings: SiteSettings }) {
           <SearchBox className="w-full md:hidden" />
         </div>
       </div>
-    </header>
+    </AutoHideHeader>
   )
 }

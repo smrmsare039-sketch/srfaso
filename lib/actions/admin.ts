@@ -60,9 +60,11 @@ function heroTiles(form: FormData): HeroTile[] {
   const tiles: HeroTile[] = []
   for (let i = 1; i <= HERO_TILES_MAX; i++) {
     const url = str(form, `hero_tile_${i}_image`, 600)
-    if (!url) continue
+    const video = str(form, `hero_tile_${i}_video`, 600)
+    if (!url && !video) continue
     tiles.push({
       url,
+      video: video || null,
       label: str(form, `hero_tile_${i}_label`, 80) || null,
       href: str(form, `hero_tile_${i}_href`, 300) || null,
     })
