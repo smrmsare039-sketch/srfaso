@@ -11,6 +11,46 @@ import { deletePartnerBrand, saveBrandsSection, savePartnerBrand } from '@/lib/a
 import type { PartnerBrand, SiteSettings } from '@/lib/types'
 import { cx, slugify } from '@/lib/utils'
 
+/**
+ * Aperçu d'un logo qui ne casse jamais : une URL absente — ou un fichier
+ * introuvable (logo livré avec le site puis supprimé) — devient un état lisible
+ * qui invite à en envoyer un. Monté avec `key={url}` pour repartir de zéro
+ * quand le logo change.
+ */
+function BrandLogoPreview({
+  url,
+  name,
+  className = 'h-10 w-auto object-contain',
+}: {
+  url: string | null
+  name: string
+  className?: string
+}) {
+  const [failed, setFailed] = useState(false)
+
+  if (!url) {
+    return <span className="text-[10px] font-bold text-ink-400 uppercase">Sans logo</span>
+  }
+  if (failed) {
+    return (
+      <span className="px-1 text-center text-[10px] leading-tight font-bold text-brand-600 uppercase">
+        Logo introuvable
+      </span>
+    )
+  }
+
+  return (
+    <Image
+      src={url}
+      alt={name}
+      width={240}
+      height={120}
+      onError={() => setFailed(true)}
+      className={className}
+    />
+  )
+}
+
 export function BrandsManager({
   brands,
   settings,
@@ -330,11 +370,10 @@ function BrandForm({
             <p className="mb-1.5 text-sm font-semibold text-ink-800">Logo</p>
             {logoUrl && (
               <div className="mb-3 flex flex-col items-center gap-2 rounded-xl border border-ink-100 bg-white p-3">
-                <Image
-                  src={logoUrl}
-                  alt=""
-                  width={240}
-                  height={120}
+                <BrandLogoPreview
+                  key={logoUrl}
+                  url={logoUrl}
+                  name={name}
                   className="h-16 w-auto object-contain"
                 />
                 <button

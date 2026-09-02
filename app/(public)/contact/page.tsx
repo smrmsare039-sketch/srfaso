@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Clock, Mail, MapPin, Phone, Store } from 'lucide-react'
 import { Breadcrumbs } from '@/components/breadcrumbs'
 import { ContactForm } from '@/components/contact-form'
+import { MapEmbed } from '@/components/map-embed'
 import { getSettings, getShops } from '@/lib/data'
 import { telLink, whatsappLink } from '@/lib/utils'
 import { WhatsAppIcon } from '@/components/whatsapp-icon'
@@ -16,8 +17,50 @@ export const metadata: Metadata = {
   alternates: { canonical: '/contact' },
 }
 
+type MapPlace = {
+  name: string
+  address: string | null
+  city: string | null
+  latitude: number | null
+  longitude: number | null
+  mapUrl: string | null
+}
+
+/** Lien « Itinéraire » : le lien Google Maps saisi au back-office prime. */
+function directionsUrl(place: MapPlace): string {
+  if (place.mapUrl) return place.mapUrl
+  const query =
+    place.latitude != null && place.longitude != null
+      ? `${place.latitude},${place.longitude}`
+      : [place.name, place.address, place.city].filter(Boolean).join(', ')
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`
+}
+
 export default async function ContactPage() {
   const [settings, shops] = await Promise.all([getSettings(), getShops()])
+
+  // Une carte par boutique ; à défaut, l'adresse du site.
+  const mapPlaces = shops.length
+    ? shops.map((shop) => ({
+        name: shop.name,
+        address: shop.address,
+        city: shop.city,
+        latitude: shop.latitude,
+        longitude: shop.longitude,
+        mapUrl: shop.map_url,
+      }))
+    : settings.address
+      ? [
+          {
+            name: settings.company_name,
+            address: settings.address,
+            city: 'Ouagadougou',
+            latitude: null,
+            longitude: null,
+            mapUrl: null,
+          },
+        ]
+      : []
 
   const socials = [
     { href: settings.facebook_url, label: 'Facebook' },
@@ -161,6 +204,41 @@ export default async function ContactPage() {
           <ContactForm />
         </section>
       </div>
+
+      {/* Carte */}
+      <section className="mt-12">
+        <h2 className="text-lg font-bold text-ink-900">Nous trouver</h2>
+        <p className="mt-1.5 text-sm text-ink-500">
+          {mapPlaces.length > 1
+            ? 'Nos points de vente à Ouagadougou.'
+            : 'Notre adresse à Ouagadougou.'}
+        </p>
+        <div
+          className={`mt-5 grid gap-4 ${mapPlaces.length > 1 ? 'md:grid-cols-2' : ''}`}
+        >
+          {mapPlaces.map((place) => (
+            <figure key={place.name}>
+              <MapEmbed place={place} className="aspect-[16/10]" />
+              <figcaption className="mt-3 flex flex-wrap items-baseline justify-between gap-2">
+                <span>
+                  <span className="block text-sm font-bold text-ink-900">{place.name}</span>
+                  {place.address && (
+                    <span className="block text-sm text-ink-500">{place.address}</span>
+                  )}
+                </span>
+                <a
+                  href={directionsUrl(place)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-semibold text-brand-600 hover:underline"
+                >
+                  Itinéraire →
+                </a>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
     </div>
   )
 }
