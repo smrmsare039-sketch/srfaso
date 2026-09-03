@@ -76,7 +76,7 @@ export function ReceiptModal({
                   order={payload.order}
                   settings={payload.settings}
                   qrDataUrl={payload.qrDataUrl}
-                  qrCaption="Scannez pour nous écrire sur WhatsApp"
+                  qrCaption="Scannez pour suivre cette commande"
                 />
               </div>
             </div>

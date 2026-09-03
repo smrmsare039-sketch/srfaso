@@ -639,6 +639,35 @@ export async function saveBrandsSection(form: FormData): Promise<AdminResult> {
 // =====================================================================
 // Commandes & messages
 // =====================================================================
+/**
+ * Rend au stock les articles d'une commande, une seule fois : `stock_applied`
+ * empêche une double remise (annulation puis suppression, par exemple).
+ */
+async function restockOrder(
+  supabase: Awaited<ReturnType<typeof createSupabaseServerClient>>,
+  id: string
+): Promise<void> {
+  const { data: order } = await supabase
+    .from('orders')
+    .select('stock_applied, items:order_items(product_id,quantity)')
+    .eq('id', id)
+    .maybeSingle()
+
+  const row = order as {
+    stock_applied: boolean | null
+    items: { product_id: string | null; quantity: number }[] | null
+  } | null
+  if (!row?.stock_applied) return
+
+  const items = (row.items ?? []).filter((i) => i.product_id)
+  if (items.length > 0) {
+    await supabase.rpc('increment_stock', {
+      p_items: items.map((i) => ({ product_id: i.product_id, quantity: i.quantity })),
+    })
+  }
+  await supabase.from('orders').update({ stock_applied: false }).eq('id', id)
+}
+
 export async function updateOrderStatus(
   id: string,
   status: OrderStatus,
@@ -651,6 +680,11 @@ export async function updateOrderStatus(
     .update({ status, ...(adminNote !== undefined ? { admin_note: adminNote || null } : {}) })
     .eq('id', id)
   if (error) return { ok: false, error: error.message }
+
+  // Une commande annulée rend ses articles au stock.
+  if (status === 'annulee') await restockOrder(supabase, id)
+
+  refreshPublic(['/', '/produits'])
   revalidatePath('/admin/commandes')
   revalidatePath(`/admin/commandes/${id}`)
   return { ok: true }
@@ -674,8 +708,13 @@ export async function updateOrderDelivery(id: string, fee: number): Promise<Admi
 export async function deleteOrder(id: string): Promise<AdminResult> {
   await guard()
   const supabase = await createSupabaseServerClient()
+
+  // Avant l'effacement : les lignes disparaissent en cascade.
+  await restockOrder(supabase, id)
+
   const { error } = await supabase.from('orders').delete().eq('id', id)
   if (error) return { ok: false, error: error.message }
+  refreshPublic(['/', '/produits'])
   revalidatePath('/admin/commandes')
   return { ok: true }
 }

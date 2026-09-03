@@ -74,6 +74,12 @@ export function CheckoutForm({
             </a>
           )}
           <Link
+            href={`/suivi?ref=${encodeURIComponent(reference)}`}
+            className="inline-flex items-center justify-center rounded-xl border border-green-300 px-6 py-3 text-[0.9375rem] font-bold text-green-800 transition-colors hover:border-green-600"
+          >
+            Suivre ma commande
+          </Link>
+          <Link
             href="/produits"
             className="rounded-xl border border-green-300 px-6 py-3 text-[0.9375rem] font-semibold text-green-900"
           >

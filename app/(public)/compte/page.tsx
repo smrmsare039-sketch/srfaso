@@ -60,6 +60,13 @@ export default async function ComptePage() {
               </dd>
             </div>
           </dl>
+
+          <Link
+            href="/compte/mot-de-passe"
+            className="mt-6 flex h-11 items-center justify-center rounded-xl border border-ink-200 text-sm font-semibold text-ink-800 transition-colors hover:border-ink-900"
+          >
+            Changer mon mot de passe
+          </Link>
         </section>
 
         <section>

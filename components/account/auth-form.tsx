@@ -271,7 +271,18 @@ export function AuthForm({ mode }: { mode: 'connexion' | 'inscription' }) {
               {show ? <EyeOff className="size-5" /> : <Eye className="size-5" />}
             </button>
           </div>
-          {isSignup && <p className="mt-1.5 text-xs text-ink-400">6 caractères minimum.</p>}
+          {isSignup ? (
+            <p className="mt-1.5 text-xs text-ink-400">6 caractères minimum.</p>
+          ) : (
+            <p className="mt-1.5 text-right">
+              <Link
+                href="/mot-de-passe-oublie"
+                className="text-xs font-semibold text-ink-500 hover:text-brand-600"
+              >
+                Mot de passe oublié ?
+              </Link>
+            </p>
+          )}
         </div>
 
         <button

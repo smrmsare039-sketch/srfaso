@@ -59,6 +59,11 @@ export function SiteFooter({
                 </Link>
               </li>
             ))}
+            <li>
+              <Link href="/suivi" className="transition-colors hover:text-brand-400">
+                Suivre ma commande
+              </Link>
+            </li>
           </ul>
         </div>
 

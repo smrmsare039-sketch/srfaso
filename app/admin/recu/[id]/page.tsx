@@ -9,6 +9,7 @@ import { canIssueReceipt, orderConfirmationMessage } from '@/lib/orders'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import type { OrderStatus, OrderWithItems } from '@/lib/types'
 import { whatsappLink } from '@/lib/utils'
+import { SITE_URL } from '@/app/layout'
 
 export const dynamic = 'force-dynamic'
 
@@ -36,26 +37,20 @@ export default async function ReceiptPage(props: PageProps<'/admin/recu/[id]'>) 
   }
 
   const message = orderConfirmationMessage(order, order.items ?? [], settings.company_name)
-  const shopWhatsApp = settings.whatsapp ?? settings.phone_primary
-
-  // Le QR renvoie vers la conversation WhatsApp de la boutique, avec la
-  // référence pré-remplie : utile collé sur le colis.
-  const qrTarget = shopWhatsApp
-    ? whatsappLink(shopWhatsApp, `Bonjour, au sujet de ma commande ${order.reference}.`)
-    : null
-
+  // Le QR mène au suivi public de la commande : utile collé sur le colis.
   let qrDataUrl: string | null = null
-  if (qrTarget) {
-    try {
-      qrDataUrl = await QRCode.toDataURL(qrTarget, {
+  try {
+    qrDataUrl = await QRCode.toDataURL(
+      `${SITE_URL}/suivi?ref=${encodeURIComponent(order.reference)}`,
+      {
         margin: 0,
         width: 240,
         errorCorrectionLevel: 'M',
         color: { dark: '#000000', light: '#ffffff' },
-      })
-    } catch {
-      qrDataUrl = null
-    }
+      }
+    )
+  } catch {
+    qrDataUrl = null
   }
 
   return (
@@ -75,7 +70,7 @@ export default async function ReceiptPage(props: PageProps<'/admin/recu/[id]'>) 
           order={order}
           settings={settings}
           qrDataUrl={qrDataUrl}
-          qrCaption="Scannez pour nous écrire sur WhatsApp"
+          qrCaption="Scannez pour suivre cette commande"
         />
       </div>
 

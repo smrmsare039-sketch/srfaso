@@ -2,7 +2,25 @@
 
 import { getCurrentUser } from '@/lib/account'
 import { createSupabaseAdminClient } from '@/lib/supabase/admin'
-import type { CartLine } from '@/lib/types'
+import type { CartLine, OrderItem, OrderStatus } from '@/lib/types'
+
+/** Commande telle qu'elle est renvoyée au client par le suivi public. */
+export type TrackedOrder = {
+  reference: string
+  status: OrderStatus
+  created_at: string
+  updated_at: string
+  city: string
+  district: string | null
+  first_name: string
+  subtotal: number
+  delivery_fee: number
+  total: number
+  items: Pick<
+    OrderItem,
+    'id' | 'product_name' | 'product_slug' | 'image_url' | 'quantity' | 'unit_price' | 'total'
+  >[]
+}
 
 export type ActionResult<T = undefined> =
   | { ok: true; data?: T }
@@ -66,11 +84,19 @@ export async function createOrder(
   }
   const byId = new Map((products as Row[] | null)?.map((p) => [p.id, p]) ?? [])
 
+  const outOfStock: string[] = []
   const items = lines
     .map((line) => {
       const product = byId.get(line.productId)
       if (!product || !product.is_active) return null
-      const quantity = Math.max(1, Math.min(999, Math.floor(line.quantity)))
+
+      // Le stock fait foi : le panier du navigateur peut dater.
+      const available = Math.max(0, Math.floor(Number(product.stock) || 0))
+      if (available === 0) {
+        outOfStock.push(product.name)
+        return null
+      }
+      const quantity = Math.max(1, Math.min(available, Math.floor(line.quantity)))
       const unitPrice = Number(product.price)
       const image = [...(product.product_images ?? [])].sort(
         (a, b) => Number(b.is_primary) - Number(a.is_primary) || a.position - b.position
@@ -87,6 +113,12 @@ export async function createOrder(
     })
     .filter((i): i is NonNullable<typeof i> => i !== null)
 
+  if (outOfStock.length > 0) {
+    return {
+      ok: false,
+      error: `Rupture de stock : ${outOfStock.join(', ')}. Retirez ${outOfStock.length > 1 ? 'ces articles' : 'cet article'} du panier ou contactez-nous.`,
+    }
+  }
   if (items.length === 0) {
     return { ok: false, error: 'Les produits du panier ne sont plus disponibles.' }
   }
@@ -154,6 +186,14 @@ export async function createOrder(
     return { ok: false, error: 'La commande n’a pas pu être enregistrée. Réessayez.' }
   }
 
+  // Le stock n'est décompté qu'une fois la commande complète en base.
+  const { error: stockError } = await supabase.rpc('decrement_stock', {
+    p_items: items.map((i) => ({ product_id: i.product_id, quantity: i.quantity })),
+  })
+  if (!stockError) {
+    await supabase.from('orders').update({ stock_applied: true }).eq('id', order.id)
+  }
+
   if (customer) {
     await supabase
       .from('customers')
@@ -165,6 +205,53 @@ export async function createOrder(
   }
 
   return { ok: true, data: { reference: order.reference } }
+}
+
+/**
+ * Suivi d'une commande sans compte : la référence seule ne suffit pas, le
+ * téléphone de la commande doit correspondre. Cela évite qu'une référence
+ * devinée ou lue sur un colis n'expose les coordonnées d'un client.
+ */
+export async function trackOrder(
+  reference: string,
+  phone: string
+): Promise<ActionResult<TrackedOrder>> {
+  const ref = reference.trim().toUpperCase().slice(0, 40)
+  const digits = phone.replace(/\D/g, '')
+
+  if (!ref) return { ok: false, error: 'Saisissez le numéro de votre commande.' }
+  if (digits.length < 6) {
+    return { ok: false, error: 'Saisissez le numéro de téléphone utilisé pour la commande.' }
+  }
+
+  const supabase = createSupabaseAdminClient()
+  const { data, error } = await supabase
+    .from('orders')
+    .select(
+      'reference,status,created_at,updated_at,city,district,first_name,phone,subtotal,delivery_fee,total,items:order_items(id,product_name,product_slug,image_url,quantity,unit_price,total)'
+    )
+    .eq('reference', ref)
+    .maybeSingle()
+
+  const order = data as (TrackedOrder & { phone: string }) | null
+
+  // Message identique dans les deux cas : on ne révèle pas qu'une référence existe.
+  const notFound = {
+    ok: false as const,
+    error: 'Aucune commande ne correspond à ce numéro et à ce téléphone.',
+  }
+  if (error || !order) return notFound
+
+  // Comparaison sur les 8 derniers chiffres : le client peut saisir son
+  // numéro avec ou sans l'indicatif du pays.
+  const stored = order.phone.replace(/\D/g, '')
+  const tail = (value: string) => value.slice(-8)
+  if (!stored || tail(stored) !== tail(digits)) return notFound
+
+  // Le téléphone stocké ne repart jamais vers le navigateur.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { phone: _phone, ...tracked } = order
+  return { ok: true, data: tracked }
 }
 
 /** Formulaire de contact public. */
