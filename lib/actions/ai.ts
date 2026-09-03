@@ -1,11 +1,14 @@
 'use server'
 
-import Anthropic from '@anthropic-ai/sdk'
-import { zodOutputFormat } from '@anthropic-ai/sdk/helpers/zod'
+import OpenAI from 'openai'
+import { zodTextFormat } from 'openai/helpers/zod'
 import { z } from 'zod'
 import { requireAdmin } from '@/lib/auth'
 
 export type AiResult<T> = { ok: true; data: T } | { ok: false; error: string }
+
+/** Modèle de vision utilisé pour lire la photo produit. */
+const MODEL = process.env.OPENAI_MODEL || 'gpt-4o'
 
 const SuggestionSchema = z.object({
   name: z.string().describe('Nom commercial court et vendeur, optimisé pour la recherche.'),
@@ -63,10 +66,10 @@ export async function analyzeProductImage(
 ): Promise<AiResult<ProductSuggestion>> {
   await requireAdmin()
 
-  if (!process.env.ANTHROPIC_API_KEY) {
+  if (!process.env.OPENAI_API_KEY) {
     return {
       ok: false,
-      error: 'La clé ANTHROPIC_API_KEY n’est pas configurée sur le serveur.',
+      error: 'La clé OPENAI_API_KEY n’est pas configurée sur le serveur.',
     }
   }
   if (!/^https?:\/\//.test(imageUrl)) {
@@ -78,43 +81,42 @@ export async function analyzeProductImage(
     : 'Aucune catégorie n’est encore définie : renvoie null pour « category ».'
 
   try {
-    const client = new Anthropic()
-    const response = await client.messages.parse({
-      model: 'claude-opus-5',
-      max_tokens: 16000,
-      system: SYSTEM,
-      thinking: { type: 'adaptive' },
-      output_config: { format: zodOutputFormat(SuggestionSchema) },
-      messages: [
+    const client = new OpenAI()
+    const response = await client.responses.parse({
+      model: MODEL,
+      input: [
+        { role: 'system', content: SYSTEM },
         {
           role: 'user',
           content: [
-            { type: 'image', source: { type: 'url', url: imageUrl } },
+            { type: 'input_image', image_url: imageUrl, detail: 'auto' },
             {
-              type: 'text',
+              type: 'input_text',
               text: `Rédige la fiche produit correspondant à cette photo.\n\n${categoryList}`,
             },
           ],
         },
       ],
+      text: { format: zodTextFormat(SuggestionSchema, 'fiche_produit') },
     })
 
-    if (response.stop_reason === 'refusal') {
-      return { ok: false, error: 'L’analyse de cette image a été refusée. Essayez une autre photo.' }
+    // Le modèle peut refuser ou s'arrêter avant d'avoir produit le JSON.
+    if (response.status === 'incomplete') {
+      return { ok: false, error: 'L’analyse a été interrompue. Réessayez.' }
     }
-    if (!response.parsed_output) {
+    if (!response.output_parsed) {
       return { ok: false, error: 'L’analyse n’a rien renvoyé d’exploitable. Réessayez.' }
     }
 
-    return { ok: true, data: response.parsed_output }
+    return { ok: true, data: response.output_parsed }
   } catch (error) {
-    if (error instanceof Anthropic.AuthenticationError) {
-      return { ok: false, error: 'Clé ANTHROPIC_API_KEY invalide.' }
+    if (error instanceof OpenAI.AuthenticationError) {
+      return { ok: false, error: 'Clé OPENAI_API_KEY invalide.' }
     }
-    if (error instanceof Anthropic.RateLimitError) {
+    if (error instanceof OpenAI.RateLimitError) {
       return { ok: false, error: 'Trop de demandes d’analyse. Patientez quelques secondes.' }
     }
-    if (error instanceof Anthropic.APIError) {
+    if (error instanceof OpenAI.APIError) {
       return { ok: false, error: `L’analyse a échoué (erreur ${error.status}).` }
     }
     return { ok: false, error: 'L’analyse a échoué. Réessayez dans un instant.' }

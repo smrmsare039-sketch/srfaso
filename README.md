@@ -21,7 +21,8 @@ Tailwind CSS v4 · Supabase (PostgreSQL, Auth, Storage).
 | `DATABASE_URL` | *optionnel* — Supabase → Connect → Session pooler (remplacer `[YOUR-PASSWORD]`) |
 | `NEXT_PUBLIC_SITE_URL` | `https://srfaso.com` en production |
 | `ADMIN_EMAIL` / `ADMIN_PASSWORD` / `ADMIN_NAME` | compte administrateur à créer |
-| `ANTHROPIC_API_KEY` | console.anthropic.com → API keys — active l'analyse IA des photos produit |
+| `OPENAI_API_KEY` | platform.openai.com → API keys — active l'analyse IA des photos produit |
+| `OPENAI_MODEL` | *optionnel* — modèle de vision utilisé (défaut : `gpt-4o`) |
 
 ### b. Créer le schéma de base
 
