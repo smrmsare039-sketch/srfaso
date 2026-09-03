@@ -8,7 +8,7 @@ import { Card, Field, inputClass, textareaClass } from '@/components/admin/ui'
 import { useToast } from '@/components/toast'
 import { saveSettings } from '@/lib/actions/admin'
 import { HERO_BACKGROUNDS, HERO_TILES_MAX } from '@/lib/types'
-import type { HeroTile, SiteSettings } from '@/lib/types'
+import type { HeroBackground, HeroTile, SiteSettings } from '@/lib/types'
 
 function ImageField({
   label,
@@ -218,6 +218,8 @@ export function SettingsForm({ settings }: { settings: SiteSettings }) {
   const [ogImage, setOgImage] = useState(settings.og_image_url ?? '')
   const [heroImage, setHeroImage] = useState(settings.home_hero_image ?? '')
   const [heroVideo, setHeroVideo] = useState(settings.home_hero_video ?? '')
+  const [heroBg, setHeroBg] = useState<HeroBackground>(settings.home_hero_bg)
+  const [heroBgImage, setHeroBgImage] = useState(settings.home_hero_bg_image ?? '')
   const [heroTiles, setHeroTiles] = useState<HeroTile[]>(() =>
     Array.from({ length: HERO_TILES_MAX }, (_, i) => settings.home_hero_tiles[i] ?? EMPTY_TILE)
   )
@@ -373,11 +375,12 @@ export function SettingsForm({ settings }: { settings: SiteSettings }) {
             </Field>
             <Field
               label="Fond de la bannière"
-              hint="Le rouge de la marque est appliqué par défaut."
+              hint="Le rouge de la marque est appliqué par défaut. « Image de fond » utilise la photo ci-dessous."
             >
               <select
                 name="home_hero_bg"
-                defaultValue={settings.home_hero_bg}
+                value={heroBg}
+                onChange={(e) => setHeroBg(e.target.value as HeroBackground)}
                 className={inputClass}
               >
                 {Object.entries(HERO_BACKGROUNDS).map(([value, label]) => (
@@ -387,6 +390,18 @@ export function SettingsForm({ settings }: { settings: SiteSettings }) {
                 ))}
               </select>
             </Field>
+            <ImageField
+              label="Image de fond de la bannière"
+              name="home_hero_bg_image"
+              value={heroBgImage}
+              onChange={setHeroBgImage}
+              folder="accueil"
+              hint={
+                heroBg === 'image'
+                  ? 'Un voile sombre est appliqué par-dessus pour garder le texte lisible. Format paysage large recommandé.'
+                  : 'Sélectionnez « Image de fond » ci-dessus pour l’utiliser.'
+              }
+            />
             <ImageField
               label="Image de la bannière"
               name="home_hero_image"

@@ -24,11 +24,15 @@ export type HeroTile = {
 export const HERO_TILES_MAX = 4
 
 /** Fond de la bannière d'accueil : rouge de la marque (défaut) ou noir. */
-export type HeroBackground = 'brand' | 'dark'
+export type HeroBackground = 'brand' | 'dark' | 'image'
+
+/** Valeurs acceptées côté base (contrainte CHECK) et côté formulaire. */
+export const HERO_BACKGROUND_VALUES: HeroBackground[] = ['brand', 'dark', 'image']
 
 export const HERO_BACKGROUNDS: Record<HeroBackground, string> = {
   brand: 'Rouge SUPER & RESISTANT (par défaut)',
   dark: 'Noir',
+  image: 'Image de fond',
 }
 
 export type Category = {
@@ -245,6 +249,7 @@ export type SiteSettings = {
   home_hero_image: string | null
   home_hero_video: string | null
   home_hero_bg: HeroBackground
+  home_hero_bg_image: string | null
   home_hero_tiles: HeroTile[]
   home_brands_title: string | null
   home_brands_intro: string | null

@@ -5,8 +5,8 @@ import { createSupabaseAdminClient } from '@/lib/supabase/admin'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { getCurrentProfile } from '@/lib/auth'
 import { slugify } from '@/lib/utils'
-import { HERO_TILES_MAX, HOME_PROMO_PRODUCTS_MAX } from '@/lib/types'
-import type { HeroTile, MessageStatus, OrderStatus, Spec } from '@/lib/types'
+import { HERO_BACKGROUND_VALUES, HERO_TILES_MAX, HOME_PROMO_PRODUCTS_MAX } from '@/lib/types'
+import type { HeroBackground, HeroTile, MessageStatus, OrderStatus, Spec } from '@/lib/types'
 
 export type AdminResult<T = undefined> =
   | { ok: true; data?: T }
@@ -70,6 +70,14 @@ function heroTiles(form: FormData): HeroTile[] {
     })
   }
   return tiles
+}
+
+/** Fond de la bannière : seule une valeur connue est enregistrée (contrainte CHECK). */
+function heroBackground(form: FormData): HeroBackground {
+  const value = str(form, 'home_hero_bg', 20)
+  return HERO_BACKGROUND_VALUES.includes(value as HeroBackground)
+    ? (value as HeroBackground)
+    : 'brand'
 }
 
 function refreshPublic(paths: string[]) {
@@ -833,7 +841,8 @@ export async function saveSettings(form: FormData): Promise<AdminResult> {
     home_hero_subtitle: str(form, 'home_hero_subtitle', 500) || null,
     home_hero_image: str(form, 'home_hero_image', 600) || null,
     home_hero_video: str(form, 'home_hero_video', 600) || null,
-    home_hero_bg: str(form, 'home_hero_bg', 20) === 'dark' ? 'dark' : 'brand',
+    home_hero_bg: heroBackground(form),
+    home_hero_bg_image: str(form, 'home_hero_bg_image', 600) || null,
     home_hero_tiles: heroTiles(form),
     home_seo_content: str(form, 'home_seo_content', 8000) || null,
   })

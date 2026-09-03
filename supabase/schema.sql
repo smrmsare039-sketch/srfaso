@@ -386,7 +386,8 @@ create table if not exists public.site_settings (
   home_hero_image    text,
   home_hero_video    text,
   home_hero_bg       text not null default 'brand'
-                       check (home_hero_bg in ('brand', 'dark')),
+                       check (home_hero_bg in ('brand', 'dark', 'image')),
+  home_hero_bg_image text,
   home_hero_tiles    jsonb not null default '[]'::jsonb,
   home_brands_title  text,
   home_brands_intro  text,

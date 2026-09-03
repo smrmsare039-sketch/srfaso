@@ -2,7 +2,7 @@ import 'server-only'
 
 import { cache } from 'react'
 import { createSupabasePublicClient } from '@/lib/supabase/public'
-import { HERO_TILES_MAX, HOME_PROMO_PRODUCTS_MAX } from '@/lib/types'
+import { HERO_BACKGROUND_VALUES, HERO_TILES_MAX, HOME_PROMO_PRODUCTS_MAX } from '@/lib/types'
 import type {
   Category,
   DeliveryContent,
@@ -75,6 +75,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   home_hero_image: null,
   home_hero_video: null,
   home_hero_bg: 'brand',
+  home_hero_bg_image: null,
   home_hero_tiles: [],
   home_brands_title: 'Nos marques partenaires — avec SUPER & RESISTANT en référence',
   home_brands_intro:
@@ -91,7 +92,7 @@ export const getSettings = cache(async (): Promise<SiteSettings> => {
       ...DEFAULT_SETTINGS,
       ...data,
       home_hero_tiles: normalizeHeroTiles(data.home_hero_tiles),
-      home_hero_bg: data.home_hero_bg === 'dark' ? 'dark' : 'brand',
+      home_hero_bg: HERO_BACKGROUND_VALUES.includes(data.home_hero_bg) ? data.home_hero_bg : 'brand',
     }
   } catch {
     return DEFAULT_SETTINGS

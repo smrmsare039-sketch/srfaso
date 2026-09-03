@@ -132,26 +132,50 @@ export default async function HomePage() {
         href: `/produits/${p.slug}`,
       }))
 
-  // Fond de la bannière : rouge de la marque par défaut, noir en option.
-  const heroDark = settings.home_hero_bg === 'dark'
-  const heroTheme = heroDark
+  // Fond de la bannière : rouge de la marque par défaut, noir ou image au choix.
+  const heroImageBg =
+    settings.home_hero_bg === 'image' && settings.home_hero_bg_image
+      ? settings.home_hero_bg_image
+      : null
+  const heroTheme = heroImageBg
     ? {
         section: 'bg-ink-950 text-white',
-        subtitle: 'text-ink-300',
-        cta: 'bg-brand-600 text-white hover:bg-brand-700',
-        placeholder: 'border-white/10 text-ink-400',
-      }
-    : {
-        section: 'bg-brand-600 text-white',
         subtitle: 'text-white/85',
-        cta: 'bg-white text-brand-700 hover:bg-brand-50',
+        cta: 'bg-brand-600 text-white hover:bg-brand-700',
         placeholder: 'border-white/25 text-white/80',
       }
+    : settings.home_hero_bg === 'dark'
+      ? {
+          section: 'bg-ink-950 text-white',
+          subtitle: 'text-ink-300',
+          cta: 'bg-brand-600 text-white hover:bg-brand-700',
+          placeholder: 'border-white/10 text-ink-400',
+        }
+      : {
+          section: 'bg-brand-600 text-white',
+          subtitle: 'text-white/85',
+          cta: 'bg-white text-brand-700 hover:bg-brand-50',
+          placeholder: 'border-white/25 text-white/80',
+        }
 
   return (
     <>
       {/* Bannière principale */}
-      <section className={heroTheme.section}>
+      <section className={`relative isolate ${heroTheme.section}`}>
+        {heroImageBg && (
+          <>
+            <Image
+              src={heroImageBg}
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="-z-10 object-cover"
+            />
+            {/* Voile sombre : sans lui, le texte blanc devient illisible sur une photo claire. */}
+            <div className="absolute inset-0 -z-10 bg-ink-950/65" />
+          </>
+        )}
         <div className="container-page grid items-center gap-10 py-14 lg:grid-cols-[1.05fr_0.95fr] lg:py-20">
           <div>
             <h1 className="font-display text-4xl leading-[1.08] font-extrabold sm:text-5xl lg:text-[3.5rem]">
