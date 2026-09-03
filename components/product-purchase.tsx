@@ -79,7 +79,7 @@ export function ProductPurchase({
             type="button"
             onClick={() => setQuantity((q) => Math.max(1, q - 1))}
             aria-label="Diminuer la quantité"
-            className="grid h-full w-11 place-items-center text-ink-600 hover:text-brand-600"
+            className="grid h-full w-11 place-items-center text-ink-600 hover:text-brand-900"
           >
             <Minus className="size-4" />
           </button>
@@ -88,13 +88,13 @@ export function ProductPurchase({
             type="button"
             onClick={() => setQuantity((q) => Math.min(max, q + 1))}
             aria-label="Augmenter la quantité"
-            className="grid h-full w-11 place-items-center text-ink-600 hover:text-brand-600"
+            className="grid h-full w-11 place-items-center text-ink-600 hover:text-brand-900"
           >
             <Plus className="size-4" />
           </button>
         </div>
         {inStock && product.stock <= 5 && (
-          <span className="text-sm font-medium text-brand-600">
+          <span className="text-sm font-medium text-brand-800">
             Plus que {product.stock} en stock
           </span>
         )}
@@ -126,7 +126,7 @@ export function ProductPurchase({
           className={cx(
             'flex items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-[0.9375rem] font-bold transition-colors',
             inStock
-              ? 'bg-brand-600 text-white hover:bg-brand-700'
+              ? 'bg-brand-600 text-ink-900 hover:bg-brand-700'
               : 'cursor-not-allowed bg-ink-100 text-ink-400'
           )}
         >

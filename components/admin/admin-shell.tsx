@@ -147,7 +147,7 @@ export function AdminShell({
           type="button"
           onClick={toggle}
           aria-label={collapsed ? 'Déployer le menu' : 'Réduire le menu'}
-          className="ml-auto hidden size-8 shrink-0 place-items-center rounded-lg bg-brand-600/15 text-brand-500 transition-colors hover:bg-brand-600 hover:text-white lg:grid"
+          className="ml-auto hidden size-8 shrink-0 place-items-center rounded-lg bg-brand-600/15 text-brand-500 transition-colors hover:bg-brand-600 hover:text-ink-900 lg:grid"
         >
           <ChevronLeft className={cx('size-4 transition-transform', collapsed && 'rotate-180')} />
         </button>
@@ -180,7 +180,7 @@ export function AdminShell({
                   className={cx(
                     'flex h-11 items-center gap-3 rounded-xl px-3 text-sm font-medium transition-colors',
                     active
-                      ? 'bg-brand-600 text-white'
+                      ? 'bg-brand-600 text-ink-900'
                       : 'text-ink-300 hover:bg-white/10 hover:text-white',
                     collapsed && 'justify-center px-0'
                   )}
@@ -190,8 +190,8 @@ export function AdminShell({
                   {badge > 0 && !collapsed && (
                     <span
                       className={cx(
-                        'ml-auto grid min-w-5 place-items-center rounded-full bg-brand-500 px-1 text-[0.6875rem] font-bold text-white',
-                        active && 'bg-white text-brand-700'
+                        'ml-auto grid min-w-5 place-items-center rounded-full bg-brand-500 px-1 text-[0.6875rem] font-bold text-ink-900',
+                        active && 'bg-white text-brand-800'
                       )}
                     >
                       {badge > 99 ? '99+' : badge}
@@ -263,7 +263,7 @@ export function AdminShell({
                 <span className="block text-sm font-semibold text-ink-900">{fullName}</span>
                 <span className="block text-xs text-ink-400">{email}</span>
               </span>
-              <span className="grid size-10 shrink-0 place-items-center rounded-full bg-brand-600 text-sm font-bold text-white">
+              <span className="grid size-10 shrink-0 place-items-center rounded-full bg-brand-600 text-sm font-bold text-ink-900">
                 {fullName.slice(0, 2).toUpperCase()}
               </span>
               <ChevronDown
@@ -301,7 +301,7 @@ export function AdminShell({
                   role="menuitem"
                   onClick={signOut}
                   disabled={signingOut}
-                  className="flex h-11 w-full items-center gap-3 rounded-xl px-3 text-sm font-medium text-brand-600 transition-colors hover:bg-brand-50 disabled:opacity-60"
+                  className="flex h-11 w-full items-center gap-3 rounded-xl px-3 text-sm font-medium text-brand-800 transition-colors hover:bg-brand-50 disabled:opacity-60"
                 >
                   <LogOut className="size-[1.125rem] shrink-0" strokeWidth={1.8} aria-hidden />
                   {signingOut ? 'Déconnexion…' : 'Déconnexion'}

@@ -34,7 +34,7 @@ function BrandLogoPreview({
   }
   if (failed) {
     return (
-      <span className="px-1 text-center text-[10px] leading-tight font-bold text-brand-600 uppercase">
+      <span className="px-1 text-center text-[10px] leading-tight font-bold text-brand-800 uppercase">
         Logo introuvable
       </span>
     )
@@ -87,7 +87,7 @@ export function BrandsManager({
             setCreating(true)
             setLogoUrl('')
           }}
-          className="inline-flex h-11 items-center gap-2 rounded-xl bg-brand-600 px-5 text-sm font-bold text-white hover:bg-brand-700"
+          className="inline-flex h-11 items-center gap-2 rounded-xl bg-brand-600 px-5 text-sm font-bold text-ink-900 hover:bg-brand-700"
         >
           <Plus className="size-4" />
           Nouvelle marque
@@ -154,7 +154,7 @@ export function BrandsManager({
                   type="button"
                   onClick={() => setConfirmId(brand.id)}
                   title="Supprimer"
-                  className="grid size-9 place-items-center rounded-lg border border-ink-200 text-ink-500 hover:border-brand-400 hover:text-brand-600"
+                  className="grid size-9 place-items-center rounded-lg border border-ink-200 text-ink-500 hover:border-brand-400 hover:text-brand-900"
                 >
                   <Trash2 className="size-4" />
                 </button>
@@ -434,7 +434,7 @@ function BrandForm({
           <button
             type="submit"
             disabled={pending}
-            className="flex h-12 items-center justify-center gap-2 rounded-xl bg-brand-600 px-6 text-sm font-bold text-white hover:bg-brand-700 disabled:opacity-60 sm:h-11"
+            className="flex h-12 items-center justify-center gap-2 rounded-xl bg-brand-600 px-6 text-sm font-bold text-ink-900 hover:bg-brand-700 disabled:opacity-60 sm:h-11"
           >
             <Save className="size-4" />
             {pending ? 'Enregistrement…' : 'Enregistrer'}

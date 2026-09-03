@@ -56,7 +56,7 @@ export type TrendPoint = { label: string; value: number }
  */
 export function TrendChart({
   points,
-  color = '#e60d12',
+  color = '#c47c00',
   format = 'number',
   suffix,
   height = 220,
@@ -345,7 +345,7 @@ export function Delta({ value, className }: { value: number | null; className?: 
     <span
       className={cx(
         'text-xs font-semibold',
-        up ? 'text-green-600' : 'text-brand-600',
+        up ? 'text-green-600' : 'text-brand-800',
         className
       )}
     >

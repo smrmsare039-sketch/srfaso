@@ -1,16 +1,29 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-50: #fff1f1;
-  --color-brand-100: #ffdfdf;
-  --color-brand-200: #ffc5c5;
-  --color-brand-300: #ff9d9d;
-  --color-brand-400: #ff6464;
-  --color-brand-500: #f83232;
-  --color-brand-600: #e60d12;
-  --color-brand-700: #c20a0f;
-  --color-brand-800: #a00d11;
-  --color-brand-900: #841216;
+  --color-brand-50: #fff8e9;
+  --color-brand-100: #ffefc7;
+  --color-brand-200: #ffdf94;
+  --color-brand-300: #ffc95a;
+  --color-brand-400: #ffb62c;
+  --color-brand-500: #ffa90a;
+  --color-brand-600: #f59e00;
+  --color-brand-700: #d18500;
+  --color-brand-800: #a35f04;
+  --color-brand-900: #7d4708;
+
+  /* Rouge réservé aux états d'erreur : la marque étant orange, le rouge ne sert
+     plus d'accent et redevient un signal univoque (distinct de l'ambre d'alerte). */
+  --color-danger-50: #fff1f1;
+  --color-danger-100: #ffdfdf;
+  --color-danger-200: #ffc5c5;
+  --color-danger-300: #ff9d9d;
+  --color-danger-400: #ff6464;
+  --color-danger-500: #f83232;
+  --color-danger-600: #e60d12;
+  --color-danger-700: #c20a0f;
+  --color-danger-800: #a00d11;
+  --color-danger-900: #841216;
 
   --color-ink-50: #f6f6f7;
   --color-ink-100: #e9e9ec;

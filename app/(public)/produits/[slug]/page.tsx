@@ -103,7 +103,7 @@ export default async function ProductPage(props: PageProps<'/produits/[slug]'>) 
           {product.category && (
             <Link
               href={`/categories/${product.category.slug}`}
-              className="text-xs font-bold tracking-[0.14em] text-brand-600 uppercase"
+              className="text-xs font-bold tracking-[0.14em] text-brand-800 uppercase"
             >
               {product.category.name}
             </Link>
@@ -129,7 +129,7 @@ export default async function ProductPage(props: PageProps<'/produits/[slug]'>) 
           </dl>
 
           <div className="mt-6 flex flex-wrap items-baseline gap-3">
-            <span className="font-display text-4xl font-extrabold text-brand-600">
+            <span className="font-display text-4xl font-extrabold text-brand-800">
               {formatPrice(product.price)}
             </span>
             {product.old_price && Number(product.old_price) > Number(product.price) && (
@@ -138,7 +138,7 @@ export default async function ProductPage(props: PageProps<'/produits/[slug]'>) 
                   {formatPrice(product.old_price)}
                 </span>
                 {discount !== null && (
-                  <span className="rounded-full bg-brand-600 px-2.5 py-1 text-xs font-bold text-white">
+                  <span className="rounded-full bg-brand-600 px-2.5 py-1 text-xs font-bold text-ink-900">
                     -{discount}%
                   </span>
                 )}
@@ -169,11 +169,11 @@ export default async function ProductPage(props: PageProps<'/produits/[slug]'>) 
 
           <ul className="mt-7 grid gap-2.5 border-t border-ink-100 pt-6 sm:grid-cols-2">
             <li className="flex items-center gap-2.5 text-sm text-ink-600">
-              <Truck className="size-4 shrink-0 text-brand-600" aria-hidden />
+              <Truck className="size-4 shrink-0 text-brand-800" aria-hidden />
               {settings.delivery_text ?? 'Livraison partout au Burkina Faso'}
             </li>
             <li className="flex items-center gap-2.5 text-sm text-ink-600">
-              <Package className="size-4 shrink-0 text-brand-600" aria-hidden />
+              <Package className="size-4 shrink-0 text-brand-800" aria-hidden />
               Retrait gratuit en boutique à Ouagadougou
             </li>
           </ul>

@@ -238,7 +238,7 @@ export default async function AdminDashboard() {
               className={cx(
                 'grid size-11 shrink-0 place-items-center rounded-xl',
                 alert.tone === 'brand'
-                  ? 'bg-brand-50 text-brand-600'
+                  ? 'bg-brand-50 text-brand-800'
                   : alert.tone === 'warning'
                     ? 'bg-amber-50 text-amber-600'
                     : 'bg-ink-50 text-ink-400'
@@ -309,7 +309,7 @@ export default async function AdminDashboard() {
                       <td className="px-5 py-3 whitespace-nowrap">
                         <Link
                           href={`/admin/commandes/${order.id}`}
-                          className="font-semibold text-brand-600 hover:underline"
+                          className="font-semibold text-brand-800 hover:underline"
                         >
                           {order.reference}
                         </Link>
@@ -337,7 +337,7 @@ export default async function AdminDashboard() {
           )}
           <Link
             href="/admin/commandes"
-            className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 hover:underline"
+            className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-800 hover:underline"
           >
             Toutes les commandes <ArrowRight className="size-4" />
           </Link>
@@ -360,7 +360,7 @@ export default async function AdminDashboard() {
           )}
           <Link
             href="/admin/produits"
-            className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 hover:underline"
+            className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-800 hover:underline"
           >
             Tous les produits <ArrowRight className="size-4" />
           </Link>

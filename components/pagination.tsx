@@ -61,7 +61,7 @@ export function Pagination({
           className={cx(
             cell,
             n === page
-              ? 'border-brand-600 bg-brand-600 text-white'
+              ? 'border-brand-600 bg-brand-600 text-ink-900'
               : 'border-ink-200 hover:border-ink-900'
           )}
         >

@@ -99,7 +99,7 @@ export function CheckoutForm({
         <p className="mt-4 text-lg font-bold text-ink-900">Votre panier est vide.</p>
         <Link
           href="/produits"
-          className="mt-7 inline-block rounded-xl bg-brand-600 px-7 py-3 text-[0.9375rem] font-bold text-white hover:bg-brand-700"
+          className="mt-7 inline-block rounded-xl bg-brand-600 px-7 py-3 text-[0.9375rem] font-bold text-ink-900 hover:bg-brand-700"
         >
           Voir les produits
         </Link>
@@ -140,7 +140,7 @@ export function CheckoutForm({
           <span className="text-sm font-semibold text-ink-900">
             {lines.length} article{lines.length > 1 ? 's' : ''} — voir le détail
           </span>
-          <span className="font-display text-lg font-extrabold whitespace-nowrap text-brand-600">
+          <span className="font-display text-lg font-extrabold whitespace-nowrap text-brand-800">
             {formatPrice(subtotal)}
           </span>
         </summary>
@@ -178,7 +178,7 @@ export function CheckoutForm({
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
               <label htmlFor="last_name" className={label}>
-                Nom <span className="text-brand-600">*</span>
+                Nom <span className="text-brand-800">*</span>
               </label>
               <input
                 id="last_name"
@@ -193,7 +193,7 @@ export function CheckoutForm({
             </div>
             <div>
               <label htmlFor="first_name" className={label}>
-                Prénom <span className="text-brand-600">*</span>
+                Prénom <span className="text-brand-800">*</span>
               </label>
               <input
                 id="first_name"
@@ -210,7 +210,7 @@ export function CheckoutForm({
 
           <div>
             <label htmlFor="phone" className={label}>
-              Numéro WhatsApp <span className="text-brand-600">*</span>
+              Numéro WhatsApp <span className="text-brand-800">*</span>
             </label>
             <input
               id="phone"
@@ -232,7 +232,7 @@ export function CheckoutForm({
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
               <label htmlFor="city" className={label}>
-                Ville <span className="text-brand-600">*</span>
+                Ville <span className="text-brand-800">*</span>
               </label>
               <input
                 id="city"
@@ -316,7 +316,7 @@ export function CheckoutForm({
 
           <div className="flex items-baseline justify-between border-b border-ink-100 pb-4 lg:mt-5 lg:border-t lg:border-b-0 lg:pt-5 lg:pb-0">
             <span className="font-bold text-ink-900">Total</span>
-            <span className="font-display text-2xl font-extrabold text-brand-600">
+            <span className="font-display text-2xl font-extrabold text-brand-800">
               {formatPrice(subtotal)}
             </span>
           </div>
@@ -327,7 +327,7 @@ export function CheckoutForm({
           <button
             type="submit"
             disabled={pending}
-            className="mt-5 flex h-13 w-full items-center justify-center rounded-xl bg-brand-600 text-[0.9375rem] font-bold text-white transition-colors hover:bg-brand-700 disabled:opacity-60 sm:h-12"
+            className="mt-5 flex h-13 w-full items-center justify-center rounded-xl bg-brand-600 text-[0.9375rem] font-bold text-ink-900 transition-colors hover:bg-brand-700 disabled:opacity-60 sm:h-12"
           >
             {pending ? 'Envoi…' : 'Valider ma commande'}
           </button>

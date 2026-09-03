@@ -17,7 +17,7 @@ export function OrderHistory({ orders }: { orders: OrderWithItems[] }) {
         </p>
         <Link
           href="/produits"
-          className="mt-6 inline-flex h-11 items-center rounded-xl bg-brand-600 px-5 text-sm font-bold text-white transition-colors hover:bg-brand-700"
+          className="mt-6 inline-flex h-11 items-center rounded-xl bg-brand-600 px-5 text-sm font-bold text-ink-900 transition-colors hover:bg-brand-700"
         >
           Voir le catalogue
         </Link>
@@ -62,7 +62,7 @@ export function OrderHistory({ orders }: { orders: OrderWithItems[] }) {
                   {item.product_slug ? (
                     <Link
                       href={`/produits/${item.product_slug}`}
-                      className="block truncate text-sm font-medium text-ink-900 hover:text-brand-600"
+                      className="block truncate text-sm font-medium text-ink-900 hover:text-brand-900"
                     >
                       {item.product_name}
                     </Link>

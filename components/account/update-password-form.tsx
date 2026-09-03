@@ -112,7 +112,7 @@ export function UpdatePasswordForm() {
       <button
         type="submit"
         disabled={pending}
-        className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-brand-600 text-[0.9375rem] font-bold text-white transition-colors hover:bg-brand-700 disabled:opacity-60"
+        className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-brand-600 text-[0.9375rem] font-bold text-ink-900 transition-colors hover:bg-brand-700 disabled:opacity-60"
       >
         <KeyRound className="size-4" aria-hidden />
         {pending ? 'Enregistrement…' : 'Enregistrer le mot de passe'}

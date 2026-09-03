@@ -24,7 +24,7 @@ export function CartView({ whatsapp }: { whatsapp: string | null }) {
         </p>
         <Link
           href="/produits"
-          className="mt-7 inline-block rounded-xl bg-brand-600 px-7 py-3 text-[0.9375rem] font-bold text-white hover:bg-brand-700"
+          className="mt-7 inline-block rounded-xl bg-brand-600 px-7 py-3 text-[0.9375rem] font-bold text-ink-900 hover:bg-brand-700"
         >
           Voir les produits
         </Link>
@@ -65,7 +65,7 @@ export function CartView({ whatsapp }: { whatsapp: string | null }) {
               <div className="flex min-w-0 flex-1 flex-col">
                 <Link
                   href={`/produits/${line.slug}`}
-                  className="text-[0.9375rem] leading-snug font-semibold text-ink-900 hover:text-brand-600"
+                  className="text-[0.9375rem] leading-snug font-semibold text-ink-900 hover:text-brand-900"
                 >
                   {line.name}
                 </Link>
@@ -77,7 +77,7 @@ export function CartView({ whatsapp }: { whatsapp: string | null }) {
                       type="button"
                       onClick={() => setQuantity(line.productId, line.quantity - 1)}
                       aria-label={`Diminuer la quantité de ${line.name}`}
-                      className="grid h-full w-9 place-items-center text-ink-600 hover:text-brand-600"
+                      className="grid h-full w-9 place-items-center text-ink-600 hover:text-brand-900"
                     >
                       <Minus className="size-4" />
                     </button>
@@ -91,7 +91,7 @@ export function CartView({ whatsapp }: { whatsapp: string | null }) {
                         )
                       }
                       aria-label={`Augmenter la quantité de ${line.name}`}
-                      className="grid h-full w-9 place-items-center text-ink-600 hover:text-brand-600"
+                      className="grid h-full w-9 place-items-center text-ink-600 hover:text-brand-900"
                     >
                       <Plus className="size-4" />
                     </button>
@@ -107,7 +107,7 @@ export function CartView({ whatsapp }: { whatsapp: string | null }) {
                 type="button"
                 onClick={() => remove(line.productId)}
                 aria-label={`Retirer ${line.name} du panier`}
-                className="grid size-9 shrink-0 place-items-center self-start rounded-lg text-ink-400 hover:bg-brand-50 hover:text-brand-600"
+                className="grid size-9 shrink-0 place-items-center self-start rounded-lg text-ink-400 hover:bg-brand-50 hover:text-brand-900"
               >
                 <Trash2 className="size-4" />
               </button>
@@ -125,7 +125,7 @@ export function CartView({ whatsapp }: { whatsapp: string | null }) {
           <button
             type="button"
             onClick={() => clear()}
-            className="rounded-xl px-5 py-2.5 text-sm font-semibold text-ink-500 hover:text-brand-600"
+            className="rounded-xl px-5 py-2.5 text-sm font-semibold text-ink-500 hover:text-brand-900"
           >
             Vider le panier
           </button>
@@ -147,14 +147,14 @@ export function CartView({ whatsapp }: { whatsapp: string | null }) {
           </dl>
           <div className="mt-5 flex items-baseline justify-between border-t border-ink-100 pt-5">
             <span className="font-bold text-ink-900">Total</span>
-            <span className="font-display text-2xl font-extrabold text-brand-600">
+            <span className="font-display text-2xl font-extrabold text-brand-800">
               {formatPrice(subtotal)}
             </span>
           </div>
 
           <Link
             href="/commande"
-            className="mt-6 flex h-12 items-center justify-center rounded-xl bg-brand-600 text-[0.9375rem] font-bold text-white hover:bg-brand-700"
+            className="mt-6 flex h-12 items-center justify-center rounded-xl bg-brand-600 text-[0.9375rem] font-bold text-ink-900 hover:bg-brand-700"
           >
             Passer la commande
           </Link>

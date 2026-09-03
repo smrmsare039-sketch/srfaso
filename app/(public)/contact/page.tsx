@@ -88,20 +88,20 @@ export default async function ContactPage() {
             <ul className="mt-5 space-y-4 text-sm">
               {settings.phone_primary && (
                 <li className="flex gap-3">
-                  <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-600">
+                  <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-800">
                     <Phone className="size-4" aria-hidden />
                   </span>
                   <span className="flex flex-col gap-0.5 pt-1.5">
                     <a
                       href={telLink(settings.phone_primary)}
-                      className="font-semibold text-ink-900 hover:text-brand-600"
+                      className="font-semibold text-ink-900 hover:text-brand-900"
                     >
                       {settings.phone_primary}
                     </a>
                     {settings.phone_secondary && (
                       <a
                         href={telLink(settings.phone_secondary)}
-                        className="font-semibold text-ink-900 hover:text-brand-600"
+                        className="font-semibold text-ink-900 hover:text-brand-900"
                       >
                         {settings.phone_secondary}
                       </a>
@@ -111,12 +111,12 @@ export default async function ContactPage() {
               )}
               {settings.email && (
                 <li className="flex gap-3">
-                  <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-600">
+                  <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-800">
                     <Mail className="size-4" aria-hidden />
                   </span>
                   <a
                     href={`mailto:${settings.email}`}
-                    className="pt-2 font-semibold text-ink-900 hover:text-brand-600"
+                    className="pt-2 font-semibold text-ink-900 hover:text-brand-900"
                   >
                     {settings.email}
                   </a>
@@ -124,7 +124,7 @@ export default async function ContactPage() {
               )}
               {settings.address && (
                 <li className="flex gap-3">
-                  <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-600">
+                  <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-800">
                     <MapPin className="size-4" aria-hidden />
                   </span>
                   <span className="pt-2 text-ink-700">{settings.address}</span>
@@ -132,7 +132,7 @@ export default async function ContactPage() {
               )}
               {settings.hours && (
                 <li className="flex gap-3">
-                  <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-600">
+                  <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-800">
                     <Clock className="size-4" aria-hidden />
                   </span>
                   <span className="pt-2 text-ink-700">{settings.hours}</span>
@@ -160,7 +160,7 @@ export default async function ContactPage() {
                       href={s.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="rounded-full border border-ink-200 px-3.5 py-1.5 text-xs font-semibold text-ink-700 hover:border-brand-500 hover:text-brand-600"
+                      className="rounded-full border border-ink-200 px-3.5 py-1.5 text-xs font-semibold text-ink-700 hover:border-brand-500 hover:text-brand-900"
                     >
                       {s.label}
                     </a>
@@ -188,7 +188,7 @@ export default async function ContactPage() {
               </ul>
               <Link
                 href="/boutiques"
-                className="mt-5 inline-block text-sm font-semibold text-brand-600 hover:underline"
+                className="mt-5 inline-block text-sm font-semibold text-brand-800 hover:underline"
               >
                 Voir les boutiques et itinéraires →
               </Link>
@@ -199,7 +199,7 @@ export default async function ContactPage() {
         <section className="rounded-2xl border border-ink-100 p-6 sm:p-8">
           <h2 className="text-lg font-bold text-ink-900">Envoyez-nous un message</h2>
           <p className="mt-1.5 mb-6 text-sm text-ink-500">
-            Les champs marqués d’une <span className="text-brand-600">*</span> sont obligatoires.
+            Les champs marqués d’une <span className="text-brand-800">*</span> sont obligatoires.
           </p>
           <ContactForm />
         </section>
@@ -230,7 +230,7 @@ export default async function ContactPage() {
                   href={directionsUrl(place)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm font-semibold text-brand-600 hover:underline"
+                  className="text-sm font-semibold text-brand-800 hover:underline"
                 >
                   Itinéraire →
                 </a>

@@ -38,10 +38,10 @@ export function AccountButton() {
       href={initial ? '/compte' : '/connexion'}
       aria-label={initial ? 'Mon compte' : 'Se connecter à mon compte'}
       title="Mon compte"
-      className="grid size-12 shrink-0 place-items-center rounded-full border border-ink-200 text-ink-900 transition-colors hover:border-brand-500 hover:text-brand-600"
+      className="grid size-12 shrink-0 place-items-center rounded-full border border-ink-200 text-ink-900 transition-colors hover:border-brand-500 hover:text-brand-900"
     >
       {initial ? (
-        <span className="grid size-9 place-items-center rounded-full bg-brand-600 text-sm font-bold text-white uppercase">
+        <span className="grid size-9 place-items-center rounded-full bg-brand-600 text-sm font-bold text-ink-900 uppercase">
           {initial}
         </span>
       ) : (

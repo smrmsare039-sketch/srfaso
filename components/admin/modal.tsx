@@ -242,7 +242,7 @@ export function ConfirmModal({
             type="button"
             disabled={pending}
             onClick={onConfirm}
-            className="h-12 rounded-xl bg-brand-600 px-5 text-sm font-bold text-white transition-colors hover:bg-brand-700 disabled:opacity-60 sm:h-11"
+            className="h-12 rounded-xl bg-brand-600 px-5 text-sm font-bold text-ink-900 transition-colors hover:bg-brand-700 disabled:opacity-60 sm:h-11"
           >
             {pending ? 'Suppression…' : confirmLabel}
           </button>

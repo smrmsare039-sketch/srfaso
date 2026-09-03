@@ -95,9 +95,9 @@ const STYLES: Record<
   },
   error: {
     icon: XCircle,
-    ring: 'border-brand-200',
-    badge: 'bg-brand-50 text-brand-600',
-    bar: 'bg-brand-500',
+    ring: 'border-danger-200',
+    badge: 'bg-danger-50 text-danger-600',
+    bar: 'bg-danger-500',
   },
   warning: {
     icon: AlertTriangle,
@@ -443,7 +443,7 @@ function ToastCard({ toast, onDismiss }: { toast: ToastItem; onDismiss: () => vo
                   'inline-flex h-9 items-center justify-center rounded-xl px-3.5 text-sm font-bold transition-colors',
                   action.tone === 'neutral'
                     ? 'border border-ink-200 text-ink-800 hover:border-ink-900'
-                    : 'bg-brand-600 text-white hover:bg-brand-700'
+                    : 'bg-brand-600 text-ink-900 hover:bg-brand-700'
                 )
                 return action.href ? (
                   <Link

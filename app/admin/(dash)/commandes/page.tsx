@@ -96,7 +96,7 @@ export default async function AdminOrdersPage(props: PageProps<'/admin/commandes
                     <td className="px-4 py-3">
                       <Link
                         href={`/admin/commandes/${order.id}`}
-                        className="font-semibold text-brand-600 hover:underline"
+                        className="font-semibold text-brand-800 hover:underline"
                       >
                         {order.reference}
                       </Link>

@@ -61,7 +61,7 @@ export function StatCard({
 }) {
   const tones = {
     default: 'text-ink-900',
-    brand: 'text-brand-600',
+    brand: 'text-brand-800',
     warning: 'text-amber-600',
     success: 'text-green-600',
   }
@@ -104,7 +104,7 @@ export function Badge({
 }) {
   const tones = {
     neutral: 'bg-ink-100 text-ink-700',
-    brand: 'bg-brand-50 text-brand-700',
+    brand: 'bg-brand-50 text-brand-800',
     success: 'bg-green-50 text-green-700',
     warning: 'bg-amber-50 text-amber-700',
     info: 'bg-blue-50 text-blue-700',

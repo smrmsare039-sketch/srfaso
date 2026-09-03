@@ -37,7 +37,7 @@ export function ReceiptToolbar({
         <button
           type="button"
           onClick={() => window.print()}
-          className="inline-flex h-11 items-center gap-2 rounded-xl bg-brand-600 px-5 text-sm font-bold text-white transition-colors hover:bg-brand-700"
+          className="inline-flex h-11 items-center gap-2 rounded-xl bg-brand-600 px-5 text-sm font-bold text-ink-900 transition-colors hover:bg-brand-700"
         >
           <Printer className="size-4" aria-hidden />
           Imprimer

@@ -86,7 +86,7 @@ export default async function AdminProductsPage(props: PageProps<'/admin/produit
         action={
           <Link
             href="/admin/produits/nouveau"
-            className="inline-flex h-11 items-center gap-2 rounded-xl bg-brand-600 px-5 text-sm font-bold text-white hover:bg-brand-700"
+            className="inline-flex h-11 items-center gap-2 rounded-xl bg-brand-600 px-5 text-sm font-bold text-ink-900 hover:bg-brand-700"
           >
             <Plus className="size-4" />
             Nouveau produit
@@ -166,7 +166,7 @@ export default async function AdminProductsPage(props: PageProps<'/admin/produit
                           <span className="min-w-0">
                             <Link
                               href={`/admin/produits/${p.id}`}
-                              className="block max-w-xs truncate font-semibold text-ink-900 hover:text-brand-600"
+                              className="block max-w-xs truncate font-semibold text-ink-900 hover:text-brand-900"
                             >
                               {p.name}
                             </Link>
@@ -191,7 +191,7 @@ export default async function AdminProductsPage(props: PageProps<'/admin/produit
                         <span
                           className={
                             p.stock <= 0
-                              ? 'font-bold text-brand-600'
+                              ? 'font-bold text-brand-800'
                               : p.stock <= 5
                                 ? 'font-bold text-amber-600'
                                 : 'font-semibold text-ink-800'

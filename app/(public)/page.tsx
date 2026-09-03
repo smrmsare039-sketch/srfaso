@@ -141,20 +141,20 @@ export default async function HomePage() {
     ? {
         section: 'bg-ink-950 text-white',
         subtitle: 'text-white/85',
-        cta: 'bg-brand-600 text-white hover:bg-brand-700',
+        cta: 'bg-brand-600 text-ink-900 hover:bg-brand-700',
         placeholder: 'border-white/25 text-white/80',
       }
     : settings.home_hero_bg === 'dark'
       ? {
           section: 'bg-ink-950 text-white',
           subtitle: 'text-ink-300',
-          cta: 'bg-brand-600 text-white hover:bg-brand-700',
+          cta: 'bg-brand-600 text-ink-900 hover:bg-brand-700',
           placeholder: 'border-white/10 text-ink-400',
         }
       : {
           section: 'bg-brand-600 text-white',
           subtitle: 'text-white/85',
-          cta: 'bg-white text-brand-700 hover:bg-brand-50',
+          cta: 'bg-white text-brand-800 hover:bg-brand-50',
           placeholder: 'border-white/25 text-white/80',
         }
 
@@ -305,7 +305,7 @@ export default async function HomePage() {
                   href={`/categories/${c.slug}`}
                   className="group flex h-full flex-col items-center gap-3 rounded-2xl border border-ink-100 p-5 text-center transition-all hover:border-brand-200 hover:bg-brand-50/40"
                 >
-                  <span className="grid size-14 place-items-center rounded-2xl bg-ink-50 text-ink-800 transition-colors group-hover:bg-brand-600 group-hover:text-white">
+                  <span className="grid size-14 place-items-center rounded-2xl bg-ink-50 text-ink-800 transition-colors group-hover:bg-brand-600 group-hover:text-ink-900">
                     <CategoryIcon name={c.icon} className="size-7" />
                   </span>
                   <span className="text-sm leading-snug font-semibold text-ink-900">{c.name}</span>
@@ -402,7 +402,7 @@ export default async function HomePage() {
                 key={title}
                 className="flex gap-4 rounded-2xl border border-ink-100 bg-white p-5"
               >
-                <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-600">
+                <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-800">
                   <Icon className="size-5" strokeWidth={1.8} aria-hidden />
                 </span>
                 <span>
@@ -424,7 +424,7 @@ export default async function HomePage() {
               <article key={shop.id} className="rounded-2xl border border-ink-100 p-6">
                 <h3 className="text-lg font-bold text-ink-900">{shop.name}</h3>
                 <p className="mt-2 flex items-start gap-2 text-sm text-ink-500">
-                  <MapPin className="mt-0.5 size-4 shrink-0 text-brand-600" aria-hidden />
+                  <MapPin className="mt-0.5 size-4 shrink-0 text-brand-800" aria-hidden />
                   {shop.address}
                 </p>
                 {shop.hours && <p className="mt-1 text-sm text-ink-500">{shop.hours}</p>}
@@ -450,7 +450,7 @@ export default async function HomePage() {
                   )}
                   <Link
                     href="/boutiques"
-                    className="rounded-full bg-gradient-to-br from-brand-600 to-brand-800 transition-[background-image] hover:from-brand-500 hover:to-brand-700 px-4 py-2 text-sm font-semibold text-white"
+                    className="rounded-full bg-gradient-to-br from-brand-500 to-brand-700 transition-[background-image] hover:from-brand-400 hover:to-brand-600 px-4 py-2 text-sm font-semibold text-ink-900"
                   >
                     Itinéraire
                   </Link>

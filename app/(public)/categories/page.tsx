@@ -62,7 +62,7 @@ export default async function CategoriesPage() {
                 </span>
                 <span className="flex flex-1 flex-col p-5">
                   <span className="flex items-center gap-2.5">
-                    <CategoryIcon name={c.icon} className="size-5 text-brand-600" />
+                    <CategoryIcon name={c.icon} className="size-5 text-brand-800" />
                     <span className="text-lg font-bold text-ink-900">{c.name}</span>
                   </span>
                   {c.description && (
@@ -70,7 +70,7 @@ export default async function CategoriesPage() {
                       {c.description}
                     </span>
                   )}
-                  <span className="mt-4 flex items-center justify-between pt-1 text-sm font-semibold text-brand-600">
+                  <span className="mt-4 flex items-center justify-between pt-1 text-sm font-semibold text-brand-800">
                     Consulter
                     <span className="flex items-center gap-2">
                       {counts[c.id] ? (

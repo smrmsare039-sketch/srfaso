@@ -52,7 +52,7 @@ export function ForgotPasswordForm() {
         <button
           type="button"
           onClick={() => setSent(false)}
-          className="text-sm font-bold text-brand-600 hover:text-brand-700"
+          className="text-sm font-bold text-brand-800 hover:text-brand-900"
         >
           Utiliser une autre adresse
         </button>
@@ -80,14 +80,14 @@ export function ForgotPasswordForm() {
       <button
         type="submit"
         disabled={pending}
-        className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-brand-600 text-[0.9375rem] font-bold text-white transition-colors hover:bg-brand-700 disabled:opacity-60"
+        className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-brand-600 text-[0.9375rem] font-bold text-ink-900 transition-colors hover:bg-brand-700 disabled:opacity-60"
       >
         <Send className="size-4" aria-hidden />
         {pending ? 'Envoi…' : 'Recevoir le lien'}
       </button>
 
       <p className="text-center text-sm text-ink-500">
-        <Link href="/connexion" className="font-bold text-brand-600 hover:text-brand-700">
+        <Link href="/connexion" className="font-bold text-brand-800 hover:text-brand-900">
           Retour à la connexion
         </Link>
       </p>

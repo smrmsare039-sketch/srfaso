@@ -72,7 +72,7 @@ export default async function ShopsPage() {
       />
       <Breadcrumbs items={[{ label: 'Boutiques' }]} />
 
-      {/* Bandeau rouge */}
+      {/* Bandeau de marque */}
       <section className="overflow-hidden rounded-3xl bg-brand-600 text-white">
         <div className="grid items-center gap-8 p-7 sm:p-10 lg:grid-cols-[1.15fr_0.85fr]">
           <div>
@@ -170,7 +170,7 @@ export default async function ShopsPage() {
                     </h3>
                     <Link
                       href="/produits"
-                      className="mt-4 inline-flex h-10 items-center rounded-lg bg-brand-600 px-4 text-sm font-bold text-white transition-colors hover:bg-brand-700"
+                      className="mt-4 inline-flex h-10 items-center rounded-lg bg-brand-600 px-4 text-sm font-bold text-ink-900 transition-colors hover:bg-brand-700"
                     >
                       Voir les produits
                     </Link>
@@ -184,7 +184,7 @@ export default async function ShopsPage() {
 
                   <ul className="mt-5 space-y-3 text-sm">
                     <li className="flex gap-2.5">
-                      <MapPin className="mt-0.5 size-4 shrink-0 text-brand-600" aria-hidden />
+                      <MapPin className="mt-0.5 size-4 shrink-0 text-brand-800" aria-hidden />
                       <span className="text-ink-700">
                         {shop.address}
                         {shop.district ? ` — ${shop.district}` : ''}
@@ -193,14 +193,14 @@ export default async function ShopsPage() {
                     </li>
                     {shop.hours && (
                       <li className="flex gap-2.5">
-                        <Clock className="mt-0.5 size-4 shrink-0 text-brand-600" aria-hidden />
+                        <Clock className="mt-0.5 size-4 shrink-0 text-brand-800" aria-hidden />
                         <span className="text-ink-700">{shop.hours}</span>
                       </li>
                     )}
                     {shop.phone && (
                       <li className="flex gap-2.5">
-                        <Phone className="mt-0.5 size-4 shrink-0 text-brand-600" aria-hidden />
-                        <a href={telLink(shop.phone)} className="text-ink-700 hover:text-brand-600">
+                        <Phone className="mt-0.5 size-4 shrink-0 text-brand-800" aria-hidden />
+                        <a href={telLink(shop.phone)} className="text-ink-700 hover:text-brand-900">
                           {shop.phone}
                         </a>
                       </li>
@@ -232,7 +232,7 @@ export default async function ShopsPage() {
                       href={mapsUrl(shop)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 rounded-xl bg-gradient-to-br from-brand-600 to-brand-800 transition-[background-image] hover:from-brand-500 hover:to-brand-700 px-4 py-2.5 text-sm font-bold text-white"
+                      className="flex items-center gap-2 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 transition-[background-image] hover:from-brand-400 hover:to-brand-600 px-4 py-2.5 text-sm font-bold text-ink-900"
                     >
                       <Navigation className="size-4" aria-hidden />
                       Itinéraire

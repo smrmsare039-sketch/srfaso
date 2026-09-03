@@ -129,7 +129,7 @@ export function ImageUploader({
         type="button"
         disabled={busy}
         onClick={() => inputRef.current?.click()}
-        className="inline-flex h-11 items-center gap-2 rounded-xl border border-dashed border-ink-300 px-4 text-sm font-semibold text-ink-700 transition-colors hover:border-brand-500 hover:text-brand-600 disabled:opacity-60"
+        className="inline-flex h-11 items-center gap-2 rounded-xl border border-dashed border-ink-300 px-4 text-sm font-semibold text-ink-700 transition-colors hover:border-brand-500 hover:text-brand-900 disabled:opacity-60"
       >
         {busy ? (
           <Loader2 className="size-4 animate-spin" />

@@ -32,7 +32,7 @@ export function ProductCard({ product }: { product: ProductWithRelations }) {
 
         <span className="absolute top-2.5 left-2.5 flex flex-col items-start gap-1.5">
           {discount !== null && (
-            <span className="rounded-full bg-brand-600 px-2 py-0.5 text-[0.6875rem] font-bold text-white">
+            <span className="rounded-full bg-brand-600 px-2 py-0.5 text-[0.6875rem] font-bold text-ink-900">
               -{discount}%
             </span>
           )}
@@ -54,21 +54,21 @@ export function ProductCard({ product }: { product: ProductWithRelations }) {
         {product.category && (
           <Link
             href={`/categories/${product.category.slug}`}
-            className="text-[0.6875rem] font-semibold tracking-wide text-ink-400 uppercase transition-colors hover:text-brand-600"
+            className="text-[0.6875rem] font-semibold tracking-wide text-ink-400 uppercase transition-colors hover:text-brand-900"
           >
             {product.category.name}
           </Link>
         )}
 
         <h3 className="mt-1 text-[0.9375rem] leading-snug font-semibold text-ink-900">
-          <Link href={`/produits/${product.slug}`} className="line-clamp-2-safe hover:text-brand-600">
+          <Link href={`/produits/${product.slug}`} className="line-clamp-2-safe hover:text-brand-900">
             {product.name}
           </Link>
         </h3>
 
         <div className="mt-auto pt-3">
           <div className="flex items-baseline gap-2">
-            <span className="text-lg font-extrabold text-brand-600">
+            <span className="text-lg font-extrabold text-brand-800">
               {formatPrice(product.price)}
             </span>
             {product.old_price && Number(product.old_price) > Number(product.price) && (

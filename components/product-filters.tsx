@@ -55,7 +55,7 @@ export function ProductFilters({ categories, brands, counts, lockedCategory }: P
         <button
           type="button"
           onClick={() => router.push(pathname, { scroll: false })}
-          className="flex w-full items-center justify-center gap-2 rounded-xl border border-ink-200 py-2.5 text-sm font-semibold text-ink-700 hover:border-brand-500 hover:text-brand-600"
+          className="flex w-full items-center justify-center gap-2 rounded-xl border border-ink-200 py-2.5 text-sm font-semibold text-ink-700 hover:border-brand-500 hover:text-brand-900"
         >
           <X className="size-4" aria-hidden />
           Réinitialiser les filtres ({activeCount})
@@ -72,7 +72,7 @@ export function ProductFilters({ categories, brands, counts, lockedCategory }: P
                 onClick={() => setParam('categorie', null)}
                 className={cx(
                   'w-full rounded-lg px-2.5 py-2 text-left text-sm transition-colors',
-                  !activeCategory ? 'bg-brand-50 font-semibold text-brand-700' : 'hover:bg-ink-50'
+                  !activeCategory ? 'bg-brand-50 font-semibold text-brand-800' : 'hover:bg-ink-50'
                 )}
               >
                 Toutes les catégories
@@ -86,7 +86,7 @@ export function ProductFilters({ categories, brands, counts, lockedCategory }: P
                   className={cx(
                     'flex w-full items-center justify-between gap-2 rounded-lg px-2.5 py-2 text-left text-sm transition-colors',
                     activeCategory === c.slug
-                      ? 'bg-brand-50 font-semibold text-brand-700'
+                      ? 'bg-brand-50 font-semibold text-brand-800'
                       : 'hover:bg-ink-50'
                   )}
                 >
@@ -209,7 +209,7 @@ export function ProductFilters({ categories, brands, counts, lockedCategory }: P
             <button
               type="button"
               onClick={() => setOpenMobile(false)}
-              className="mt-6 h-12 w-full rounded-xl bg-brand-600 font-bold text-white"
+              className="mt-6 h-12 w-full rounded-xl bg-brand-600 font-bold text-ink-900"
             >
               Voir les résultats
             </button>

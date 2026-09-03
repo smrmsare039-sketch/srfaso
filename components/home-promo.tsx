@@ -93,7 +93,7 @@ export function HomePromoSection({
 
           <div>
             {promo.eyebrow && (
-              <p className="text-xs font-bold tracking-[0.18em] text-brand-600 uppercase">
+              <p className="text-xs font-bold tracking-[0.18em] text-brand-800 uppercase">
                 {promo.eyebrow}
               </p>
             )}
@@ -111,7 +111,7 @@ export function HomePromoSection({
             {promo.cta_href && (
               <Link
                 href={promo.cta_href}
-                className="mt-8 inline-flex h-11 items-center gap-1.5 rounded-lg bg-brand-600 px-5 text-sm font-bold text-white transition-colors hover:bg-brand-700"
+                className="mt-8 inline-flex h-11 items-center gap-1.5 rounded-lg bg-brand-600 px-5 text-sm font-bold text-ink-900 transition-colors hover:bg-brand-700"
               >
                 {promo.cta_label ?? 'Commander maintenant'}
                 <ChevronRight className="size-4" aria-hidden />
@@ -152,7 +152,7 @@ export function HomePromoSection({
                             {formatPrice(oldPrice)}
                           </span>
                         )}
-                        <span className="font-bold text-brand-600">
+                        <span className="font-bold text-brand-800">
                           {formatPrice(product.price)}
                         </span>
                       </span>

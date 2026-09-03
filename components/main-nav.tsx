@@ -21,7 +21,7 @@ export function MainNav() {
                 href={item.href}
                 className={cx(
                   'relative block rounded-lg px-3 py-2 text-[0.9375rem] font-semibold transition-colors',
-                  active ? 'text-brand-600' : 'text-ink-700 hover:text-brand-600'
+                  active ? 'text-brand-800' : 'text-ink-700 hover:text-brand-900'
                 )}
               >
                 {item.label}
@@ -83,7 +83,7 @@ export function MobileNav({
             <div className="flex h-16 items-center justify-between border-b border-ink-100 px-4">
               <span className="font-display text-lg font-extrabold">
                 <span className="text-ink-900">SUPER</span>
-                <span className="text-brand-600"> &amp; RESISTANT</span>
+                <span className="text-brand-800"> &amp; RESISTANT</span>
               </span>
               <button
                 type="button"
@@ -124,7 +124,7 @@ export function MobileNav({
                   href={whatsappLink(whatsapp)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 rounded-xl bg-brand-600 px-4 py-3 text-center text-sm font-bold text-white"
+                  className="flex items-center justify-center gap-2 rounded-xl bg-brand-600 px-4 py-3 text-center text-sm font-bold text-ink-900"
                 >
                   <WhatsAppIcon className="size-4" />
                   Discuter sur WhatsApp

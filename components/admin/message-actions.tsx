@@ -54,7 +54,7 @@ export function MessageActions({ id, status }: { id: string; status: MessageStat
         type="button"
         onClick={() => setConfirming(true)}
         title="Supprimer"
-        className="grid size-8 place-items-center rounded-lg border border-ink-200 text-ink-400 hover:border-brand-400 hover:text-brand-600"
+        className="grid size-8 place-items-center rounded-lg border border-ink-200 text-ink-400 hover:border-brand-400 hover:text-brand-900"
       >
         <Trash2 className="size-3.5" />
       </button>

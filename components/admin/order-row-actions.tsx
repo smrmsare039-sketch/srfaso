@@ -42,7 +42,7 @@ export function OrderRowActions({
         onClick={() => setViewing(true)}
         title="Voir la commande"
         aria-label={`Voir la commande ${order.reference}`}
-        className={`${action} hover:border-brand-400 hover:text-brand-600`}
+        className={`${action} hover:border-brand-400 hover:text-brand-900`}
       >
         <Eye className="size-4" aria-hidden />
       </button>
@@ -82,7 +82,7 @@ export function OrderRowActions({
         onClick={() => setConfirming(true)}
         title="Supprimer la commande"
         aria-label={`Supprimer la commande ${order.reference}`}
-        className={`${action} hover:border-brand-400 hover:text-brand-600`}
+        className={`${action} hover:border-brand-400 hover:text-brand-900`}
       >
         <Trash2 className="size-4" aria-hidden />
       </button>

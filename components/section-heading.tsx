@@ -16,7 +16,7 @@ export function SectionHeading({
     <div className="mb-6 flex items-end justify-between gap-4">
       <div>
         {eyebrow && (
-          <p className="mb-1 text-xs font-bold tracking-[0.16em] text-brand-600 uppercase">
+          <p className="mb-1 text-xs font-bold tracking-[0.16em] text-brand-800 uppercase">
             {eyebrow}
           </p>
         )}
@@ -25,7 +25,7 @@ export function SectionHeading({
       {href && (
         <Link
           href={href}
-          className="hidden shrink-0 items-center gap-1.5 text-sm font-semibold text-ink-600 transition-colors hover:text-brand-600 sm:flex"
+          className="hidden shrink-0 items-center gap-1.5 text-sm font-semibold text-ink-600 transition-colors hover:text-brand-900 sm:flex"
         >
           {linkLabel}
           <ArrowRight className="size-4" aria-hidden />

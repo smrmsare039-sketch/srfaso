@@ -117,7 +117,7 @@ export function DeliveryForm({ content }: { content: DeliveryContent | null }) {
       <button
         type="submit"
         disabled={pending}
-        className="flex h-12 items-center justify-center gap-2 rounded-xl bg-brand-600 px-8 text-sm font-bold text-white hover:bg-brand-700 disabled:opacity-60"
+        className="flex h-12 items-center justify-center gap-2 rounded-xl bg-brand-600 px-8 text-sm font-bold text-ink-900 hover:bg-brand-700 disabled:opacity-60"
       >
         <Save className="size-4" />
         {pending ? 'Enregistrement…' : 'Enregistrer'}

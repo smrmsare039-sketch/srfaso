@@ -72,7 +72,7 @@ export default async function AdminOrderPage(props: PageProps<'/admin/commandes/
                       <Link
                         href={`/produits/${item.product_slug}`}
                         target="_blank"
-                        className="block truncate font-semibold text-ink-900 hover:text-brand-600"
+                        className="block truncate font-semibold text-ink-900 hover:text-brand-900"
                       >
                         {item.product_name}
                       </Link>
@@ -103,7 +103,7 @@ export default async function AdminOrderPage(props: PageProps<'/admin/commandes/
               </div>
               <div className="flex justify-between border-t border-ink-100 pt-2.5 text-base">
                 <dt className="font-bold text-ink-900">Total</dt>
-                <dd className="font-display text-xl font-extrabold text-brand-600">
+                <dd className="font-display text-xl font-extrabold text-brand-800">
                   {formatPrice(order.total)}
                 </dd>
               </div>
@@ -132,21 +132,21 @@ export default async function AdminOrderPage(props: PageProps<'/admin/commandes/
 
             <ul className="mt-5 space-y-3 text-sm">
               <li className="flex gap-2.5">
-                <Phone className="mt-0.5 size-4 shrink-0 text-brand-600" />
-                <a href={telLink(order.phone)} className="text-ink-800 hover:text-brand-600">
+                <Phone className="mt-0.5 size-4 shrink-0 text-brand-800" />
+                <a href={telLink(order.phone)} className="text-ink-800 hover:text-brand-900">
                   {order.phone}
                 </a>
               </li>
               {order.email && (
                 <li className="flex gap-2.5">
-                  <Mail className="mt-0.5 size-4 shrink-0 text-brand-600" />
-                  <a href={`mailto:${order.email}`} className="text-ink-800 hover:text-brand-600">
+                  <Mail className="mt-0.5 size-4 shrink-0 text-brand-800" />
+                  <a href={`mailto:${order.email}`} className="text-ink-800 hover:text-brand-900">
                     {order.email}
                   </a>
                 </li>
               )}
               <li className="flex gap-2.5">
-                <MapPin className="mt-0.5 size-4 shrink-0 text-brand-600" />
+                <MapPin className="mt-0.5 size-4 shrink-0 text-brand-800" />
                 <span className="text-ink-800">
                   {order.city}
                   {order.district ? ` — ${order.district}` : ''}

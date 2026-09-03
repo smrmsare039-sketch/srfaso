@@ -22,7 +22,7 @@ export default async function ComptePage() {
     <div className="container-page py-14">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="mb-1 text-xs font-bold tracking-[0.16em] text-brand-600 uppercase">
+          <p className="mb-1 text-xs font-bold tracking-[0.16em] text-brand-800 uppercase">
             Mon espace
           </p>
           <h1 className="text-2xl font-extrabold text-ink-900 sm:text-[1.75rem]">
@@ -75,7 +75,7 @@ export default async function ComptePage() {
             {orders.length > 0 && (
               <Link
                 href="/compte/commandes"
-                className="flex shrink-0 items-center gap-1.5 text-sm font-semibold text-ink-600 transition-colors hover:text-brand-600"
+                className="flex shrink-0 items-center gap-1.5 text-sm font-semibold text-ink-600 transition-colors hover:text-brand-900"
               >
                 Tout l’historique
                 <ArrowRight className="size-4" aria-hidden />

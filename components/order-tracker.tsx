@@ -37,7 +37,7 @@ function Timeline({ status }: { status: OrderStatus }) {
               className={cx(
                 'grid size-7 shrink-0 place-items-center rounded-full border text-xs font-bold',
                 done
-                  ? 'border-brand-600 bg-brand-600 text-white'
+                  ? 'border-brand-600 bg-brand-600 text-ink-900'
                   : 'border-ink-200 text-ink-300'
               )}
             >
@@ -50,7 +50,7 @@ function Timeline({ status }: { status: OrderStatus }) {
               )}
             >
               {ORDER_STATUS_LABELS[step]}
-              {current && <span className="ml-2 text-xs font-semibold text-brand-600">en cours</span>}
+              {current && <span className="ml-2 text-xs font-semibold text-brand-800">en cours</span>}
             </span>
           </li>
         )
@@ -129,7 +129,7 @@ export function OrderTracker({
           {error && (
             <p
               role="alert"
-              className="rounded-xl bg-brand-50 px-4 py-3 text-sm font-medium text-brand-700"
+              className="rounded-xl bg-danger-50 px-4 py-3 text-sm font-medium text-danger-700"
             >
               {error}
             </p>
@@ -138,7 +138,7 @@ export function OrderTracker({
           <button
             type="submit"
             disabled={pending}
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-brand-600 text-[0.9375rem] font-bold text-white transition-colors hover:bg-brand-700 disabled:opacity-60"
+            className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-brand-600 text-[0.9375rem] font-bold text-ink-900 transition-colors hover:bg-brand-700 disabled:opacity-60"
           >
             <Search className="size-4" aria-hidden />
             {pending ? 'Recherche…' : 'Suivre ma commande'}
@@ -194,7 +194,7 @@ export function OrderTracker({
                     {item.product_slug ? (
                       <Link
                         href={`/produits/${item.product_slug}`}
-                        className="block truncate text-sm font-medium text-ink-900 hover:text-brand-600"
+                        className="block truncate text-sm font-medium text-ink-900 hover:text-brand-900"
                       >
                         {item.product_name}
                       </Link>

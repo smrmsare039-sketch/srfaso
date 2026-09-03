@@ -74,7 +74,7 @@ export function OrderDetailModal({
         {error && (
           <p
             role="alert"
-            className="rounded-xl bg-brand-50 px-4 py-3 text-sm font-medium text-brand-700"
+            className="rounded-xl bg-danger-50 px-4 py-3 text-sm font-medium text-danger-700"
           >
             {error}
           </p>
@@ -97,24 +97,24 @@ export function OrderDetailModal({
               </p>
               <ul className="mt-2.5 space-y-1.5 text-sm">
                 <li className="flex gap-2.5">
-                  <Phone className="mt-0.5 size-4 shrink-0 text-brand-600" aria-hidden />
-                  <a href={telLink(order.phone)} className="text-ink-800 hover:text-brand-600">
+                  <Phone className="mt-0.5 size-4 shrink-0 text-brand-800" aria-hidden />
+                  <a href={telLink(order.phone)} className="text-ink-800 hover:text-brand-900">
                     {order.phone}
                   </a>
                 </li>
                 {order.email && (
                   <li className="flex gap-2.5">
-                    <Mail className="mt-0.5 size-4 shrink-0 text-brand-600" aria-hidden />
+                    <Mail className="mt-0.5 size-4 shrink-0 text-brand-800" aria-hidden />
                     <a
                       href={`mailto:${order.email}`}
-                      className="text-ink-800 hover:text-brand-600"
+                      className="text-ink-800 hover:text-brand-900"
                     >
                       {order.email}
                     </a>
                   </li>
                 )}
                 <li className="flex gap-2.5">
-                  <MapPin className="mt-0.5 size-4 shrink-0 text-brand-600" aria-hidden />
+                  <MapPin className="mt-0.5 size-4 shrink-0 text-brand-800" aria-hidden />
                   <span className="text-ink-800">
                     {order.city}
                     {order.district ? ` — ${order.district}` : ''}

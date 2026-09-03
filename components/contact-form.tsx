@@ -56,13 +56,13 @@ export function ContactForm() {
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className={label}>
-            Nom complet <span className="text-brand-600">*</span>
+            Nom complet <span className="text-brand-800">*</span>
           </label>
           <input id="name" name="name" required maxLength={120} className={field} />
         </div>
         <div>
           <label htmlFor="phone" className={label}>
-            Téléphone <span className="text-brand-600">*</span>
+            Téléphone <span className="text-brand-800">*</span>
           </label>
           <input
             id="phone"
@@ -93,7 +93,7 @@ export function ContactForm() {
 
       <div>
         <label htmlFor="message" className={label}>
-          Message <span className="text-brand-600">*</span>
+          Message <span className="text-brand-800">*</span>
         </label>
         <textarea
           id="message"
@@ -118,7 +118,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={pending}
-        className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-brand-600 text-[0.9375rem] font-bold text-white transition-colors hover:bg-brand-700 disabled:opacity-60 sm:w-auto sm:px-8"
+        className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-brand-600 text-[0.9375rem] font-bold text-ink-900 transition-colors hover:bg-brand-700 disabled:opacity-60 sm:w-auto sm:px-8"
       >
         <Send className="size-4" aria-hidden />
         {pending ? 'Envoi…' : 'Envoyer le message'}

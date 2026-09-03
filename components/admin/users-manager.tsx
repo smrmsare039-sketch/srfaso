@@ -35,7 +35,7 @@ export function UsersManager({
           <button
             type="button"
             onClick={() => setCreating(true)}
-            className="inline-flex h-10 items-center gap-2 rounded-xl bg-brand-600 px-4 text-sm font-bold text-white hover:bg-brand-700"
+            className="inline-flex h-10 items-center gap-2 rounded-xl bg-brand-600 px-4 text-sm font-bold text-ink-900 hover:bg-brand-700"
           >
             <Plus className="size-4" />
             Nouvel administrateur
@@ -98,7 +98,7 @@ export function UsersManager({
                     type="button"
                     onClick={() => setConfirmId(user.id)}
                     title="Supprimer"
-                    className="grid size-9 place-items-center rounded-lg border border-ink-200 text-ink-500 hover:border-brand-400 hover:text-brand-600"
+                    className="grid size-9 place-items-center rounded-lg border border-ink-200 text-ink-500 hover:border-brand-400 hover:text-brand-900"
                   >
                     <Trash2 className="size-4" />
                   </button>
@@ -187,7 +187,7 @@ export function UsersManager({
               <button
                 type="submit"
                 disabled={pending}
-                className="flex h-12 items-center justify-center gap-2 rounded-xl bg-brand-600 px-6 text-sm font-bold text-white hover:bg-brand-700 disabled:opacity-60 sm:h-11"
+                className="flex h-12 items-center justify-center gap-2 rounded-xl bg-brand-600 px-6 text-sm font-bold text-ink-900 hover:bg-brand-700 disabled:opacity-60 sm:h-11"
               >
                 <Plus className="size-4" />
                 {pending ? 'Création…' : 'Créer le compte'}

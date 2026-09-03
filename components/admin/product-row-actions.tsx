@@ -106,7 +106,7 @@ export function ProductRowActions({
         type="button"
         title="Supprimer"
         onClick={() => setConfirming(true)}
-        className="grid size-9 place-items-center rounded-lg border border-ink-200 text-ink-500 transition-colors hover:border-brand-400 hover:text-brand-600"
+        className="grid size-9 place-items-center rounded-lg border border-ink-200 text-ink-500 transition-colors hover:border-brand-400 hover:text-brand-900"
       >
         <Trash2 className="size-4" />
       </button>

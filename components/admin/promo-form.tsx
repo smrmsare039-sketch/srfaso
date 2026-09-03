@@ -168,7 +168,7 @@ export function PromoForm({
                   <button
                     type="button"
                     onClick={() => setImage('')}
-                    className="h-11 rounded-xl border border-ink-200 px-4 text-sm font-semibold text-ink-600 hover:border-brand-400 hover:text-brand-600"
+                    className="h-11 rounded-xl border border-ink-200 px-4 text-sm font-semibold text-ink-600 hover:border-brand-400 hover:text-brand-900"
                   >
                     Retirer
                   </button>
@@ -214,7 +214,7 @@ export function PromoForm({
                       type="button"
                       onClick={() => toggle(id)}
                       aria-label="Retirer de la sélection"
-                      className="grid size-8 shrink-0 place-items-center rounded-lg text-ink-400 hover:bg-ink-50 hover:text-brand-600"
+                      className="grid size-8 shrink-0 place-items-center rounded-lg text-ink-400 hover:bg-ink-50 hover:text-brand-900"
                     >
                       <X className="size-4" />
                     </button>
@@ -270,7 +270,7 @@ export function PromoForm({
                       </span>
                     </span>
                     <span
-                      className={`shrink-0 text-xs font-bold ${active ? 'text-brand-600' : 'text-ink-400'}`}
+                      className={`shrink-0 text-xs font-bold ${active ? 'text-brand-800' : 'text-ink-400'}`}
                     >
                       {active ? 'Retirer' : 'Ajouter'}
                     </span>
@@ -287,7 +287,7 @@ export function PromoForm({
         <button
           type="submit"
           disabled={pending}
-          className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-brand-600 text-sm font-bold text-white hover:bg-brand-700 disabled:opacity-60"
+          className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-brand-600 text-sm font-bold text-ink-900 hover:bg-brand-700 disabled:opacity-60"
         >
           <Save className="size-4" />
           {pending ? 'Enregistrement…' : 'Enregistrer'}

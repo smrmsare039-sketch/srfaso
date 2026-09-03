@@ -85,7 +85,7 @@ export function WorkshopGallery({
     <section aria-labelledby="galerie-atelier" className="mt-4">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div className="max-w-2xl">
-          <p className="text-xs font-bold tracking-[0.18em] text-brand-600 uppercase">
+          <p className="text-xs font-bold tracking-[0.18em] text-brand-800 uppercase">
             L’atelier en images
           </p>
           <h2 id="galerie-atelier" className="mt-2 text-2xl font-extrabold text-ink-900 sm:text-3xl">
@@ -292,7 +292,7 @@ function Chip({
       className={cx(
         'h-10 shrink-0 rounded-full border px-4 text-sm font-semibold whitespace-nowrap transition-colors',
         active
-          ? 'border-brand-600 bg-brand-600 text-white'
+          ? 'border-brand-600 bg-brand-600 text-ink-900'
           : 'border-ink-200 bg-white text-ink-700 hover:border-ink-900'
       )}
     >

@@ -51,7 +51,7 @@ function ImageField({
           <button
             type="button"
             onClick={() => onChange('')}
-            className="h-11 rounded-xl border border-ink-200 px-4 text-sm font-semibold text-ink-600 hover:border-brand-400 hover:text-brand-600"
+            className="h-11 rounded-xl border border-ink-200 px-4 text-sm font-semibold text-ink-600 hover:border-brand-400 hover:text-brand-900"
           >
             Retirer
           </button>
@@ -103,7 +103,7 @@ function VideoField({
           <button
             type="button"
             onClick={() => onChange('')}
-            className="h-11 rounded-xl border border-ink-200 px-4 text-sm font-semibold text-ink-600 hover:border-brand-400 hover:text-brand-600"
+            className="h-11 rounded-xl border border-ink-200 px-4 text-sm font-semibold text-ink-600 hover:border-brand-400 hover:text-brand-900"
           >
             Retirer
           </button>
@@ -177,7 +177,7 @@ function HeroTilesField({
                 <button
                   type="button"
                   onClick={() => update(index, { ...EMPTY_TILE })}
-                  className="h-11 rounded-xl border border-ink-200 px-4 text-sm font-semibold text-ink-600 hover:border-brand-400 hover:text-brand-600"
+                  className="h-11 rounded-xl border border-ink-200 px-4 text-sm font-semibold text-ink-600 hover:border-brand-400 hover:text-brand-900"
                 >
                   Retirer
                 </button>
@@ -394,12 +394,19 @@ export function SettingsForm({ settings }: { settings: SiteSettings }) {
               label="Image de fond de la bannière"
               name="home_hero_bg_image"
               value={heroBgImage}
-              onChange={setHeroBgImage}
+              onChange={(url) => {
+                setHeroBgImage(url)
+                // Envoyer une image de fond, c'est vouloir l'utiliser : on bascule
+                // l'option pour éviter une image enregistrée mais jamais affichée.
+                if (url) setHeroBg('image')
+              }}
               folder="accueil"
               hint={
                 heroBg === 'image'
                   ? 'Un voile sombre est appliqué par-dessus pour garder le texte lisible. Format paysage large recommandé.'
-                  : 'Sélectionnez « Image de fond » ci-dessus pour l’utiliser.'
+                  : heroBgImage
+                    ? '⚠ Cette image est enregistrée mais non affichée : choisissez « Image de fond » ci-dessus.'
+                    : 'Sélectionnez « Image de fond » ci-dessus pour l’utiliser.'
               }
             />
             <ImageField
@@ -469,7 +476,7 @@ export function SettingsForm({ settings }: { settings: SiteSettings }) {
           <button
             type="submit"
             disabled={pending}
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-brand-600 text-sm font-bold text-white hover:bg-brand-700 disabled:opacity-60"
+            className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-brand-600 text-sm font-bold text-ink-900 hover:bg-brand-700 disabled:opacity-60"
           >
             <Save className="size-4" />
             {pending ? 'Enregistrement…' : 'Enregistrer les paramètres'}

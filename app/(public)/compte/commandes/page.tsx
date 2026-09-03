@@ -17,7 +17,7 @@ export default async function HistoriqueCommandesPage() {
     <div className="container-page py-14">
       <Link
         href="/compte"
-        className="mb-6 inline-flex items-center gap-1.5 text-sm font-semibold text-ink-500 transition-colors hover:text-brand-600"
+        className="mb-6 inline-flex items-center gap-1.5 text-sm font-semibold text-ink-500 transition-colors hover:text-brand-900"
       >
         <ArrowLeft className="size-4" aria-hidden />
         Mon compte

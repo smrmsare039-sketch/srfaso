@@ -83,7 +83,7 @@ export function SearchBox({ className }: { className?: string }) {
         <label htmlFor={listId} className="sr-only">
           Rechercher des produits
         </label>
-        <div className="flex h-12 items-center overflow-hidden rounded-lg border border-ink-200 bg-white transition-colors focus-within:border-brand-500">
+        <div className="flex h-12 items-center overflow-hidden rounded-full border border-ink-200 bg-white transition-colors focus-within:border-brand-500">
           <input
             id={listId}
             value={term}
@@ -92,13 +92,13 @@ export function SearchBox({ className }: { className?: string }) {
             onKeyDown={(e) => e.key === 'Escape' && setOpen(false)}
             placeholder="Rechercher des produits"
             autoComplete="off"
-            className="h-full min-w-0 flex-1 bg-transparent pr-3 pl-4 text-[0.9375rem] text-ink-900 outline-none placeholder:text-ink-400"
+            className="h-full min-w-0 flex-1 bg-transparent pr-3 pl-5 text-[0.9375rem] text-ink-900 outline-none placeholder:text-ink-400"
           />
           {loading && <Loader2 className="mr-2 size-4 animate-spin text-ink-400" aria-hidden />}
           <button
             type="submit"
             aria-label="Rechercher"
-            className="grid h-full w-12 shrink-0 place-items-center bg-brand-600 text-white transition-colors hover:bg-brand-700"
+            className="grid h-full w-14 shrink-0 place-items-center rounded-full bg-brand-600 text-ink-900 transition-colors hover:bg-brand-700"
           >
             <Search className="size-5" aria-hidden />
           </button>
@@ -125,7 +125,7 @@ export function SearchBox({ className }: { className?: string }) {
                   onClick={() => setOpen(false)}
                   className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm text-ink-700 hover:bg-ink-50"
                 >
-                  <Tag className="size-4 text-brand-600" aria-hidden />
+                  <Tag className="size-4 text-brand-800" aria-hidden />
                   {c.name}
                 </Link>
               ))}
@@ -163,7 +163,7 @@ export function SearchBox({ className }: { className?: string }) {
                       {p.category_name ?? p.reference ?? ''}
                     </span>
                   </span>
-                  <span className="shrink-0 text-sm font-bold text-brand-600">
+                  <span className="shrink-0 text-sm font-bold text-brand-800">
                     {formatPrice(p.price)}
                   </span>
                 </Link>
@@ -174,7 +174,7 @@ export function SearchBox({ className }: { className?: string }) {
                   setOpen(false)
                   router.push(`/produits?q=${encodeURIComponent(term.trim())}`)
                 }}
-                className="mt-1 w-full rounded-xl px-3 py-2.5 text-center text-sm font-semibold text-brand-600 hover:bg-brand-50"
+                className="mt-1 w-full rounded-xl px-3 py-2.5 text-center text-sm font-semibold text-brand-800 hover:bg-brand-50"
               >
                 Voir tous les résultats
               </button>

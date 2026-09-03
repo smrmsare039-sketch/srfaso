@@ -277,7 +277,7 @@ export function AuthForm({ mode }: { mode: 'connexion' | 'inscription' }) {
             <p className="mt-1.5 text-right">
               <Link
                 href="/mot-de-passe-oublie"
-                className="text-xs font-semibold text-ink-500 hover:text-brand-600"
+                className="text-xs font-semibold text-ink-500 hover:text-brand-900"
               >
                 Mot de passe oublié ?
               </Link>
@@ -288,7 +288,7 @@ export function AuthForm({ mode }: { mode: 'connexion' | 'inscription' }) {
         <button
           type="submit"
           disabled={pending}
-          className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-brand-600 text-[0.9375rem] font-bold text-white transition-colors hover:bg-brand-700 disabled:opacity-60"
+          className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-brand-600 text-[0.9375rem] font-bold text-ink-900 transition-colors hover:bg-brand-700 disabled:opacity-60"
         >
           {isSignup ? (
             <UserPlus className="size-4" aria-hidden />
@@ -307,7 +307,7 @@ export function AuthForm({ mode }: { mode: 'connexion' | 'inscription' }) {
               ? `/connexion?suivant=${encodeURIComponent(next)}`
               : `/inscription?suivant=${encodeURIComponent(next)}`
           }
-          className="font-bold text-brand-600 hover:text-brand-700"
+          className="font-bold text-brand-800 hover:text-brand-900"
         >
           {isSignup ? 'Se connecter' : 'Créer un compte'}
         </Link>

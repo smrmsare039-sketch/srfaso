@@ -98,7 +98,7 @@ export default async function CategoryPage(props: PageProps<'/categories/[slug]'
       <header className="mb-10 overflow-hidden rounded-3xl border border-ink-100">
         <div className="grid md:grid-cols-[1.4fr_1fr]">
           <div className="p-7 sm:p-10">
-            <span className="inline-flex size-12 items-center justify-center rounded-2xl bg-brand-50 text-brand-600">
+            <span className="inline-flex size-12 items-center justify-center rounded-2xl bg-brand-50 text-brand-800">
               <CategoryIcon name={category.icon} className="size-6" />
             </span>
             <h1 className="mt-4 text-3xl font-extrabold text-ink-900 sm:text-4xl">
@@ -132,7 +132,7 @@ export default async function CategoryPage(props: PageProps<'/categories/[slug]'
             <li key={c.id}>
               <a
                 href={`/categories/${c.slug}`}
-                className="rounded-full border border-ink-200 px-4 py-2 text-sm font-semibold text-ink-700 hover:border-brand-500 hover:text-brand-600"
+                className="rounded-full border border-ink-200 px-4 py-2 text-sm font-semibold text-ink-700 hover:border-brand-500 hover:text-brand-900"
               >
                 {c.name}
               </a>

@@ -62,7 +62,7 @@ export function ReceiptModal({
         {error && (
           <p
             role="alert"
-            className="rounded-xl bg-brand-50 px-4 py-3 text-sm font-medium text-brand-700"
+            className="rounded-xl bg-danger-50 px-4 py-3 text-sm font-medium text-danger-700"
           >
             {error}
           </p>
@@ -94,7 +94,7 @@ export function ReceiptModal({
               <button
                 type="button"
                 onClick={() => window.print()}
-                className="flex h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-brand-600 text-sm font-bold text-white transition-colors hover:bg-brand-700"
+                className="flex h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-brand-600 text-sm font-bold text-ink-900 transition-colors hover:bg-brand-700"
               >
                 <Printer className="size-4" aria-hidden />
                 Imprimer

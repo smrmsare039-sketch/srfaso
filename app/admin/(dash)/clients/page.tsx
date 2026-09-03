@@ -87,7 +87,7 @@ export default async function AdminCustomersPage(props: PageProps<'/admin/client
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2">
-                        <a href={telLink(customer.phone)} className="text-ink-700 hover:text-brand-600">
+                        <a href={telLink(customer.phone)} className="text-ink-700 hover:text-brand-900">
                           {customer.phone}
                         </a>
                         <a

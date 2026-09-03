@@ -104,7 +104,7 @@ export default async function AdminMessagesPage(props: PageProps<'/admin/message
               <div className="mt-4 flex flex-wrap items-center gap-4 border-t border-ink-50 pt-4">
                 <a
                   href={telLink(message.phone)}
-                  className="flex items-center gap-1.5 text-sm text-ink-600 hover:text-brand-600"
+                  className="flex items-center gap-1.5 text-sm text-ink-600 hover:text-brand-900"
                 >
                   <Phone className="size-4" />
                   {message.phone}
@@ -121,7 +121,7 @@ export default async function AdminMessagesPage(props: PageProps<'/admin/message
                 {message.email && (
                   <a
                     href={`mailto:${message.email}`}
-                    className="flex items-center gap-1.5 text-sm text-ink-600 hover:text-brand-600"
+                    className="flex items-center gap-1.5 text-sm text-ink-600 hover:text-brand-900"
                   >
                     <Mail className="size-4" />
                     {message.email}

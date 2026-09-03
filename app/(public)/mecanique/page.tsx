@@ -77,7 +77,7 @@ export default async function MechanicPage() {
                 </span>
               )}
               <div className="flex flex-1 flex-col p-6">
-                <span className="grid size-11 place-items-center rounded-xl bg-brand-50 text-brand-600">
+                <span className="grid size-11 place-items-center rounded-xl bg-brand-50 text-brand-800">
                   <CategoryIcon name={service.icon} className="size-5" />
                 </span>
                 <h2 className="mt-4 text-lg font-bold text-ink-900">{service.title}</h2>
@@ -88,7 +88,7 @@ export default async function MechanicPage() {
                   <p className="mt-3 text-sm leading-relaxed text-ink-500">{service.details}</p>
                 )}
                 {service.price_label && (
-                  <p className="mt-3 text-sm font-bold text-brand-600">{service.price_label}</p>
+                  <p className="mt-3 text-sm font-bold text-brand-800">{service.price_label}</p>
                 )}
 
                 <div className="mt-auto flex flex-wrap gap-2 pt-6">

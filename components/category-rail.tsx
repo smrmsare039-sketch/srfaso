@@ -64,7 +64,7 @@ export function CategoryRail({ categories }: { categories: Category[] }) {
           onClick={() => setPinned(true)}
           aria-label="Toutes les catégories"
           aria-expanded={false}
-          className="fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] left-4 z-40 flex items-center gap-2 rounded-full bg-brand-600 py-3 pr-5 pl-3 font-semibold text-white shadow-pop transition-transform hover:scale-105 lg:hidden"
+          className="fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] left-4 z-40 flex items-center gap-2 rounded-full bg-brand-600 py-3 pr-5 pl-3 font-semibold text-ink-900 shadow-pop transition-transform hover:scale-105 lg:hidden"
         >
           <Menu className="size-6 shrink-0" />
           <span className="text-sm">Catégories</span>
@@ -92,7 +92,7 @@ export function CategoryRail({ categories }: { categories: Category[] }) {
             onClick={() => setPinned((v) => !v)}
             aria-expanded={open}
             aria-label={pinned ? 'Fermer les catégories' : 'Toutes les catégories'}
-            className="grid size-11 shrink-0 place-items-center rounded-full bg-brand-600 text-white transition-colors hover:bg-brand-700"
+            className="grid size-11 shrink-0 place-items-center rounded-full bg-brand-600 text-ink-900 transition-colors hover:bg-brand-700"
           >
             {pinned ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
@@ -117,7 +117,7 @@ export function CategoryRail({ categories }: { categories: Category[] }) {
                 title={category.name}
                 className={cx(
                   'group flex h-12 items-center gap-3 px-3 transition-colors',
-                  active ? 'text-brand-600' : 'text-ink-700 hover:text-brand-600'
+                  active ? 'text-brand-800' : 'text-ink-700 hover:text-brand-900'
                 )}
               >
                 <span
@@ -145,7 +145,7 @@ export function CategoryRail({ categories }: { categories: Category[] }) {
           <Link
             href="/categories"
             className={cx(
-              'flex h-11 items-center gap-3 rounded-xl bg-ink-900 px-3 text-sm font-semibold text-white transition-colors hover:bg-brand-600',
+              'flex h-11 items-center gap-3 rounded-xl bg-brand-600 px-3 text-sm font-semibold text-ink-900 transition-colors hover:bg-brand-700',
               !open && 'justify-center px-0'
             )}
           >

@@ -36,7 +36,7 @@ export default async function DeliveryPage() {
 
       <div className="grid gap-6 lg:grid-cols-2">
         <section className="rounded-3xl border border-ink-100 p-7 sm:p-9">
-          <span className="grid size-12 place-items-center rounded-2xl bg-brand-50 text-brand-600">
+          <span className="grid size-12 place-items-center rounded-2xl bg-brand-50 text-brand-800">
             <Truck className="size-6" strokeWidth={1.7} aria-hidden />
           </span>
           <h2 className="mt-4 text-2xl font-extrabold text-ink-900">
@@ -52,7 +52,7 @@ export default async function DeliveryPage() {
         </section>
 
         <section className="rounded-3xl border border-ink-100 p-7 sm:p-9">
-          <span className="grid size-12 place-items-center rounded-2xl bg-brand-50 text-brand-600">
+          <span className="grid size-12 place-items-center rounded-2xl bg-brand-50 text-brand-800">
             <RotateCcw className="size-6" strokeWidth={1.7} aria-hidden />
           </span>
           <h2 className="mt-4 text-2xl font-extrabold text-ink-900">

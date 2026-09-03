@@ -30,7 +30,7 @@ export function ProductImagesManager({
   const toast = useToast()
 
   const iconButton =
-    'grid size-8 place-items-center rounded-lg bg-white/95 text-ink-700 shadow-sm transition-colors hover:text-brand-600 disabled:opacity-50'
+    'grid size-8 place-items-center rounded-lg bg-white/95 text-ink-700 shadow-sm transition-colors hover:text-brand-900 disabled:opacity-50'
 
   return (
     <Card
@@ -56,7 +56,7 @@ export function ProductImagesManager({
               />
 
               {img.is_primary && (
-                <span className="absolute top-2 left-2 rounded-full bg-brand-600 px-2 py-0.5 text-[0.6875rem] font-bold text-white">
+                <span className="absolute top-2 left-2 rounded-full bg-brand-600 px-2 py-0.5 text-[0.6875rem] font-bold text-ink-900">
                   Principale
                 </span>
               )}
@@ -149,7 +149,7 @@ export function ProductImagesManager({
                       router.refresh()
                     })
                   }
-                  className={cx(iconButton, 'hover:text-brand-600')}
+                  className={cx(iconButton, 'hover:text-brand-900')}
                 >
                   <Trash2 className="size-4" />
                 </button>

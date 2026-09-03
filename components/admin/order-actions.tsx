@@ -107,7 +107,7 @@ export function OrderActions({
             router.refresh()
           })
         }
-        className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-brand-600 text-sm font-bold text-white hover:bg-brand-700 disabled:opacity-60"
+        className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-brand-600 text-sm font-bold text-ink-900 hover:bg-brand-700 disabled:opacity-60"
       >
         <Save className="size-4" />
         {pending ? 'Enregistrement…' : 'Enregistrer'}
@@ -116,7 +116,7 @@ export function OrderActions({
       <button
         type="button"
         onClick={() => setConfirming(true)}
-        className="flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-ink-200 text-sm font-semibold text-ink-500 hover:border-brand-400 hover:text-brand-600"
+        className="flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-ink-200 text-sm font-semibold text-ink-500 hover:border-brand-400 hover:text-brand-900"
       >
         <Trash2 className="size-4" />
         Supprimer la commande
