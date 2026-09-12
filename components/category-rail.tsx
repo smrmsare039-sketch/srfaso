@@ -145,7 +145,7 @@ export function CategoryRail({ categories }: { categories: Category[] }) {
           <Link
             href="/categories"
             className={cx(
-              'flex h-11 items-center gap-3 rounded-xl bg-brand-600 px-3 text-sm font-semibold text-ink-900 transition-colors hover:bg-brand-700',
+              'flex h-11 items-center gap-3 rounded-xl bg-brand-800 px-3 text-sm font-semibold text-white transition-colors hover:bg-brand-900',
               !open && 'justify-center px-0'
             )}
           >

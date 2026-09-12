@@ -1,3 +1,4 @@
+import { AiChat } from '@/components/ai-chat'
 import { CartProvider } from '@/components/cart-provider'
 import { CategoryRail } from '@/components/category-rail'
 import { SiteFooter } from '@/components/site-footer'
@@ -47,6 +48,9 @@ export default async function PublicLayout({ children }: LayoutProps<'/'>) {
         <SiteFooter settings={settings} categories={categories} />
       </div>
       <WhatsAppFloat number={settings.whatsapp} message={settings.whatsapp_message} />
+      {/* L'assistant n'apparaît que si le webhook n8n est configuré :
+          pas de bouton mort en production. */}
+      {process.env.N8N_CHAT_WEBHOOK_URL && <AiChat companyName={settings.company_name} />}
     </CartProvider>
   )
 }
