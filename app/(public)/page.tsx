@@ -161,7 +161,7 @@ export default async function HomePage() {
   return (
     <>
       {/* Bannière principale */}
-      <section className={`relative isolate ${heroTheme.section}`}>
+      <section className={`relative isolate overflow-hidden ${heroTheme.section}`}>
         {heroImageBg && (
           <>
             <Image
@@ -177,7 +177,19 @@ export default async function HomePage() {
           </>
         )}
         <div className="container-page grid items-center gap-10 py-14 lg:grid-cols-[1.05fr_0.95fr] lg:py-20">
-          <div>
+          <div className="relative">
+            {/* Logo en filigrane derrière le texte : « multiply » fond son blanc dans le jaune. */}
+            {!heroImageBg && settings.home_hero_bg !== 'dark' && (
+              <Image
+                src="/srfaso.png"
+                alt=""
+                aria-hidden
+                width={479}
+                height={520}
+                priority
+                className="pointer-events-none absolute top-1/2 left-1/2 -z-10 h-[130%] w-auto max-w-none -translate-x-1/2 -translate-y-1/2 opacity-60 mix-blend-multiply select-none"
+              />
+            )}
             <h1 className="font-display text-4xl leading-[1.08] font-extrabold sm:text-5xl lg:text-[3.5rem]">
               {settings.home_hero_title ?? 'Toutes les pièces de votre moto, au même endroit'}
             </h1>
