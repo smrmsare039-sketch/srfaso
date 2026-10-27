@@ -1,12 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { Mail, MapPin, Phone } from 'lucide-react'
+import { MapPin, Phone } from 'lucide-react'
 import { AccountButton } from '@/components/account/account-button'
 import { AutoHideHeader } from '@/components/auto-hide-header'
 import { BrandLogo } from '@/components/brand-logo'
 import { CartButton } from '@/components/cart-button'
 import { MainNav, MobileNav } from '@/components/main-nav'
 import { SearchBox } from '@/components/search-box'
+import { FacebookIcon, TikTokIcon } from '@/components/social-icons'
 import type { SiteSettings } from '@/lib/types'
 import { telLink } from '@/lib/utils'
 
@@ -26,13 +27,26 @@ export function SiteHeader({ settings }: { settings: SiteSettings }) {
                 {settings.address}
               </span>
             )}
-            {settings.email && (
+            {settings.facebook_url && (
               <a
-                href={`mailto:${settings.email}`}
-                className="flex items-center gap-1.5 transition-colors hover:text-white"
+                href={settings.facebook_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="transition-colors hover:text-white"
               >
-                <Mail className="size-3.5 text-brand-500" aria-hidden />
-                {settings.email}
+                <FacebookIcon className="size-4" />
+              </a>
+            )}
+            {settings.tiktok_url && (
+              <a
+                href={settings.tiktok_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="TikTok"
+                className="transition-colors hover:text-white"
+              >
+                <TikTokIcon className="size-4" />
               </a>
             )}
           </div>

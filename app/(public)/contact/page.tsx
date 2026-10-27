@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { Clock, Mail, MapPin, Phone, Store } from 'lucide-react'
+import { Clock, MapPin, Phone, Store } from 'lucide-react'
 import { Breadcrumbs } from '@/components/breadcrumbs'
+import { FacebookIcon, TikTokIcon } from '@/components/social-icons'
 import { ContactForm } from '@/components/contact-form'
 import { MapEmbed } from '@/components/map-embed'
 import { getSettings, getShops } from '@/lib/data'
@@ -63,11 +64,9 @@ export default async function ContactPage() {
       : []
 
   const socials = [
-    { href: settings.facebook_url, label: 'Facebook' },
-    { href: settings.tiktok_url, label: 'TikTok' },
-    { href: settings.instagram_url, label: 'Instagram' },
-    { href: settings.youtube_url, label: 'YouTube' },
-  ].filter((s): s is { href: string; label: string } => Boolean(s.href))
+    { href: settings.facebook_url, label: 'Facebook', Icon: FacebookIcon },
+    { href: settings.tiktok_url, label: 'TikTok', Icon: TikTokIcon },
+  ].filter((s): s is typeof s & { href: string } => Boolean(s.href))
 
   return (
     <div className="container-page pb-16">
@@ -109,19 +108,6 @@ export default async function ContactPage() {
                   </span>
                 </li>
               )}
-              {settings.email && (
-                <li className="flex gap-3">
-                  <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-800">
-                    <Mail className="size-4" aria-hidden />
-                  </span>
-                  <a
-                    href={`mailto:${settings.email}`}
-                    className="pt-2 font-semibold text-ink-900 hover:text-brand-900"
-                  >
-                    {settings.email}
-                  </a>
-                </li>
-              )}
               {settings.address && (
                 <li className="flex gap-3">
                   <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-800">
@@ -154,15 +140,16 @@ export default async function ContactPage() {
 
             {socials.length > 0 && (
               <ul className="mt-4 flex flex-wrap gap-2">
-                {socials.map((s) => (
-                  <li key={s.label}>
+                {socials.map(({ href, label, Icon }) => (
+                  <li key={label}>
                     <a
-                      href={s.href}
+                      href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="rounded-full border border-ink-200 px-3.5 py-1.5 text-xs font-semibold text-ink-700 hover:border-brand-500 hover:text-brand-900"
+                      aria-label={label}
+                      className="grid size-10 place-items-center rounded-full border border-ink-200 text-ink-700 hover:border-brand-500 hover:text-brand-900"
                     >
-                      {s.label}
+                      <Icon className="size-4.5" />
                     </a>
                   </li>
                 ))}

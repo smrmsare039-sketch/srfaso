@@ -121,7 +121,7 @@ export function HomePromoSection({
         </div>
 
         {products.length > 0 && (
-          <ul className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-5">
+          <ul className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
             {products.map((product) => {
               const image = product.images?.[0]
               const oldPrice = Number(product.old_price ?? 0)

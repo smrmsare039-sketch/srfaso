@@ -1,6 +1,7 @@
 import Link from 'next/link'
-import { Clock, Mail, MapPin, Phone } from 'lucide-react'
+import { Clock, MapPin, Phone } from 'lucide-react'
 import { BrandLogo } from '@/components/brand-logo'
+import { FacebookIcon, TikTokIcon } from '@/components/social-icons'
 import { MAIN_NAV } from '@/lib/nav'
 import type { Category, SiteSettings } from '@/lib/types'
 import { telLink } from '@/lib/utils'
@@ -14,11 +15,9 @@ export function SiteFooter({
 }) {
   const year = new Date().getFullYear()
   const socials = [
-    { href: settings.facebook_url, label: 'Facebook' },
-    { href: settings.tiktok_url, label: 'TikTok' },
-    { href: settings.instagram_url, label: 'Instagram' },
-    { href: settings.youtube_url, label: 'YouTube' },
-  ].filter((s): s is { href: string; label: string } => Boolean(s.href))
+    { href: settings.facebook_url, label: 'Facebook', Icon: FacebookIcon },
+    { href: settings.tiktok_url, label: 'TikTok', Icon: TikTokIcon },
+  ].filter((s): s is typeof s & { href: string } => Boolean(s.href))
 
   return (
     <footer className="mt-20 bg-ink-950 text-ink-300">
@@ -33,15 +32,16 @@ export function SiteFooter({
           </p>
           {socials.length > 0 && (
             <ul className="mt-5 flex flex-wrap gap-2">
-              {socials.map((s) => (
-                <li key={s.label}>
+              {socials.map(({ href, label, Icon }) => (
+                <li key={label}>
                   <a
-                    href={s.href}
+                    href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-full border border-ink-800 px-3 py-1.5 text-xs font-semibold text-ink-200 transition-colors hover:border-brand-500 hover:text-white"
+                    aria-label={label}
+                    className="grid size-10 place-items-center rounded-full border border-ink-800 text-ink-200 transition-colors hover:border-brand-500 hover:text-white"
                   >
-                    {s.label}
+                    <Icon className="size-4.5" />
                   </a>
                 </li>
               ))}
@@ -105,14 +105,6 @@ export function SiteFooter({
                     </a>
                   )}
                 </span>
-              </li>
-            )}
-            {settings.email && (
-              <li className="flex gap-2.5">
-                <Mail className="mt-0.5 size-4 shrink-0 text-brand-500" aria-hidden />
-                <a href={`mailto:${settings.email}`} className="hover:text-brand-400">
-                  {settings.email}
-                </a>
               </li>
             )}
             {settings.hours && (

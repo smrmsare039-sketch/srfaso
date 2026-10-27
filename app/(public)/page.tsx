@@ -12,6 +12,7 @@ import {
   Wrench,
 } from 'lucide-react'
 import { BrandStrip } from '@/components/brand-strip'
+import { CategoryCarousel } from '@/components/category-carousel'
 import { CategoryIcon } from '@/components/category-icon'
 import { HomePromoSection } from '@/components/home-promo'
 import { ProductCard } from '@/components/product-card'
@@ -30,7 +31,7 @@ import {
   getSettings,
   getShops,
 } from '@/lib/data'
-import { formatNumber, telLink, whatsappLink } from '@/lib/utils'
+import { telLink, whatsappLink } from '@/lib/utils'
 import { WhatsAppIcon } from '@/components/whatsapp-icon'
 
 export const revalidate = 300
@@ -310,26 +311,7 @@ export default async function HomePage() {
             title="Catégories principales"
             href="/categories"
           />
-          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-            {categories.slice(0, 12).map((c) => (
-              <li key={c.id}>
-                <Link
-                  href={`/categories/${c.slug}`}
-                  className="group flex h-full flex-col items-center gap-3 rounded-2xl border border-ink-100 p-5 text-center transition-all hover:border-brand-200 hover:bg-brand-50/40"
-                >
-                  <span className="grid size-14 place-items-center rounded-2xl bg-ink-50 text-ink-800 transition-colors group-hover:bg-brand-600 group-hover:text-ink-900">
-                    <CategoryIcon name={c.icon} className="size-7" />
-                  </span>
-                  <span className="text-sm leading-snug font-semibold text-ink-900">{c.name}</span>
-                  {counts[c.id] ? (
-                    <span className="text-xs text-ink-400">
-                      {formatNumber(counts[c.id])} produit{counts[c.id] > 1 ? 's' : ''}
-                    </span>
-                  ) : null}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <CategoryCarousel categories={categories} counts={counts} />
         </section>
       )}
 
@@ -341,8 +323,8 @@ export default async function HomePage() {
             title="Nos produits populaires"
             href="/produits?tri=populaires"
           />
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-5">
-            {popular.slice(0, 10).map((p) => (
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+            {popular.slice(0, 8).map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}
           </div>
@@ -357,8 +339,8 @@ export default async function HomePage() {
             title="Nouveaux arrivages"
             href="/produits?nouveautes=1"
           />
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-5">
-            {news.slice(0, 10).map((p) => (
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+            {news.slice(0, 8).map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}
           </div>
@@ -374,8 +356,8 @@ export default async function HomePage() {
               title="Promotions en cours"
               href="/produits?promo=1"
             />
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-5">
-              {promos.slice(0, 10).map((p) => (
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+              {promos.slice(0, 8).map((p) => (
                 <ProductCard key={p.id} product={p} />
               ))}
             </div>
@@ -396,8 +378,8 @@ export default async function HomePage() {
             title="Notre sélection"
             href="/produits"
           />
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-5">
-            {featured.slice(0, 10).map((p) => (
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+            {featured.slice(0, 8).map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}
           </div>

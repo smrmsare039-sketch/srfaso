@@ -754,7 +754,7 @@ insert into public.site_settings (
   '+22660002220',
   'Bonjour SUPER & RESISTANT, je souhaite avoir des informations concernant ',
   'contact@srfaso.com',
-  'Rue 7.07, Samandin, Ouagadougou',
+  'Marché de cycles /Theatre populaire',
   'Lundi – Samedi : 07h30 – 19h00',
   'Livraison',
   'Partout au Faso',
@@ -844,7 +844,7 @@ on conflict (slug) do nothing;
 -- ---------------------------------------------------------------------
 insert into public.shops (name, slug, address, city, district, phone, whatsapp, hours, position, description)
 values
-  ('Boutique Principale', 'boutique-principale', 'Rue 7.07, Samandin, Ouagadougou',
+  ('Boutique Principale', 'boutique-principale', 'Marché de cycles /Theatre populaire',
    'Ouagadougou', 'Samandin', '+226 60 00 22 20', '+22660002220',
    'Lundi – Samedi : 07h30 – 19h00', 10,
    'Notre boutique principale, avec le stock le plus complet de pièces détachées et d''accessoires moto.'),

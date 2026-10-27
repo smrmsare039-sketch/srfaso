@@ -52,7 +52,7 @@ export default async function ProductPage(props: PageProps<'/produits/[slug]'>) 
   const [product, settings] = await Promise.all([getProductBySlug(slug), getSettings()])
   if (!product) notFound()
 
-  const related = await getRelatedProducts(product, 5)
+  const related = await getRelatedProducts(product, 4)
   const discount = discountPercent(Number(product.price), Number(product.old_price))
   const inStock = product.stock > 0
   const productUrl = `${SITE_URL}/produits/${product.slug}`
@@ -232,7 +232,7 @@ export default async function ProductPage(props: PageProps<'/produits/[slug]'>) 
       {related.length > 0 && (
         <section className="mt-16">
           <SectionHeading title="Produits similaires" href="/produits" />
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-5">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
             {related.map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}
